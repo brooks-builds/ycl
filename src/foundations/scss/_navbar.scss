@@ -1,0 +1,18 @@
+.brand-logo {
+    max-width: 200px;
+    width: 100%;
+}
+
+.navbar {
+    --bs-navbar-toggler-focus-width: 0.1rem;
+    --bs-navbar-toggler-padding-x: 0.5rem;
+}
+
+.navbar-toggler:focus {
+    --bs-navbar-color: var(--color-primary);
+}
+
+.navbar-toggler-icon {
+    height: 1.1em;
+    width: 1.1em;
+}
