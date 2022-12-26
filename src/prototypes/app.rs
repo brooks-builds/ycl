@@ -1,20 +1,17 @@
 use crate::{
-    elements::{
-        accordian_item::BBAccordianItem,
-        title::{BBTitle, BBTitleLevel},
-    },
+    elements::title::{BBTitle, BBTitleLevel},
     foundations::align_text::AlignText,
     modules::accordian::BBAccordian,
+    prototypes::titles::add_titles,
 };
 use yew::{function_component, html, Html};
 
 #[function_component(App)]
 pub fn component() -> Html {
-    let children = vec![html! {
-        <BBAccordianItem title="Title Level 1" title_level={BBTitleLevel::Two}>
-            <BBTitle level={BBTitleLevel::One}>{"Title Level 1"}</BBTitle>
-        </BBAccordianItem>
-    }];
+    let mut children = vec![];
+
+    add_titles(&mut children, "yew-components".to_owned());
+
     html! {
         <>
             <BBTitle
@@ -22,7 +19,7 @@ pub fn component() -> Html {
             align={AlignText::Center} >
                 {"Brooks Builds Yew Component Library"}
             </BBTitle>
-            <BBAccordian>
+            <BBAccordian id="yew-components">
                 {children}
             </BBAccordian>
         </>

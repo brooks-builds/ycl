@@ -1,29 +1,32 @@
 use ::yew::prelude::*;
 
-use super::title::{BBTitle, BBTitleLevel};
+use super::title::BBTitleLevel;
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
     pub title: String,
     pub title_level: BBTitleLevel,
     pub children: Children,
-    pub id: Option<String>,
+    pub id: String,
+    pub parent_id: String,
 }
 
 #[function_component(BBAccordianItem)]
 pub fn component(props: &Props) -> Html {
     html! {
+    <>
         <div class="accordion-item">
-            <BBTitle classes={classes!("accordion-header")} id={props.id.clone()} level={props.title_level}>
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    {props.title.clone()}
-                </button>
-            </BBTitle>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    {props.children.clone()}
-                </div>
+            <div class="accordion-header" id={props.id.clone()}>
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={format!("#{}", &props.id)} aria-expanded="false" aria-controls="collapseTwo">
+                {props.title.clone()}
+            </button>
+            </div>
+            <div id={props.id.clone()} class="accordion-collapse collapse" aria-labelledby={props.id.clone()} data-bs-parent={props.parent_id.clone()}>
+            <div class="accordion-body">
+                {props.children.clone()}
+            </div>
             </div>
         </div>
+    </>
     }
 }
