@@ -12,8 +12,11 @@
 
 - [x] Title
 - [x] Accordian Item
+- [x] navbar link
+- [x] icon
 
 ### Modules
 
 - [x] Accordian
-
+- [x] navbar
+- [x] Navbar links

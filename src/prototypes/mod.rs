@@ -1,4 +1,5 @@
 mod app;
+mod navbar;
 mod titles;
 
 use self::app::App;

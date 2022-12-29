@@ -1,6 +1,6 @@
 use ::yew::prelude::*;
 
-use super::title::BBTitleLevel;
+use super::title::{BBTitle, BBTitleLevel};
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
@@ -16,11 +16,11 @@ pub fn component(props: &Props) -> Html {
     html! {
     <>
         <div class="accordion-item">
-            <div class="accordion-header" id={props.id.clone()}>
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={format!("#{}", &props.id)} aria-expanded="false" aria-controls="collapseTwo">
-                {props.title.clone()}
-            </button>
-            </div>
+            <BBTitle classes={classes!("accordion-header")} id={props.id.clone()} level={props.title_level.clone()}>
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={format!("#{}", &props.id)} aria-expanded="false" aria-controls="collapseTwo">
+                    {props.title.clone()}
+                </button>
+            </BBTitle>
             <div id={props.id.clone()} class="accordion-collapse collapse" aria-labelledby={props.id.clone()} data-bs-parent={props.parent_id.clone()}>
             <div class="accordion-body">
                 {props.children.clone()}
