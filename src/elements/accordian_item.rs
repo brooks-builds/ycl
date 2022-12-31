@@ -16,8 +16,8 @@ pub fn component(props: &Props) -> Html {
     html! {
     <>
         <div class="accordion-item">
-            <BBTitle classes={classes!("accordion-header")} id={props.id.clone()} level={props.title_level.clone()}>
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={format!("#{}", &props.id)} aria-expanded="false" aria-controls="collapseTwo">
+            <BBTitle classes={classes!("accordion-header")} id={format!("{}-title", props.id.clone())} level={props.title_level.clone()}>
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={format!("#{}", &props.id)} aria-expanded="false" aria-controls={props.id.clone()}>
                     {props.title.clone()}
                 </button>
             </BBTitle>
