@@ -3,30 +3,41 @@ use stylist::{yew::styled_component, Style};
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
-    pub src: String,
-    pub alt: String,
-    pub width: Option<u8>,
-    pub height: Option<u8>,
+    pub icon_type: BBIconType,
 }
 
 #[styled_component(BBIcon)]
 pub fn component(props: &Props) -> Html {
-    let width = if let Some(width) = &props.width {
-        Some(Style::new(css!(r#"width: ${w}px;"#, w = width)).unwrap())
-    } else {
-        None
-    };
-
-    let height = if let Some(height) = &props.height {
-        Some(Style::new(css!(r#"height: ${h}px;"#, h = height)).unwrap())
-    } else {
-        None
-    };
+    let style = Style::new(css!(
+        r#"
+        width: 150px;
+    "#
+    ))
+    .unwrap();
 
     html! {
         <img
-            src={props.src.clone()}
-            alt={props.alt.clone()}
-            class={classes!("img-fluid", "img-thumbnail", width, height)} />
+            src={props.icon_type.src()}
+            alt={props.icon_type.alt()}
+            class={classes!("img-fluid", "img-thumbnail", style)} />
+    }
+}
+
+#[derive(PartialEq)]
+pub enum BBIconType {
+    Brand,
+}
+
+impl BBIconType {
+    pub fn src(&self) -> &'static str {
+        match self {
+            BBIconType::Brand => "/logo-bb-blue.svg",
+        }
+    }
+
+    pub fn alt(&self) -> &'static str {
+        match self {
+            BBIconType::Brand => "Brooks Builds Brand icon",
+        }
     }
 }
