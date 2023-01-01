@@ -4,3 +4,4 @@ pub mod card_list;
 pub mod hero;
 pub mod nav_links;
 pub mod navbar;
+pub mod section_header;

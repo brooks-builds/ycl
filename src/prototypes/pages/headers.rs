@@ -1,8 +1,14 @@
 use yew::prelude::*;
 
 use crate::{
-    elements::title::{BBTitle, BBTitleLevel},
-    modules::navbar::{BBNavbar, BBNavbarLink},
+    elements::{
+        icon::BBIconType,
+        title::{BBTitle, BBTitleLevel},
+    },
+    modules::{
+        navbar::{BBNavbar, BBNavbarLink},
+        section_header::BBSectionHeader,
+    },
     prototypes::router::Route,
 };
 
@@ -26,11 +32,18 @@ pub fn component(_props: &Props) -> Html {
     html! {
         <main>
             <BBTitle level={BBTitleLevel::One}>{"Headers"}</BBTitle>
+            <BBTitle level={BBTitleLevel::Two}>{"Main Nav Header"}</BBTitle>
             <BBNavbar<Route>
                 links={navbar_links}
                 is_authenticated={false}
                 login_route={Route::Home}
                 create_account_route={Route::Home} />
+            <BBTitle level={BBTitleLevel::Two}>{"Section Header with more to show"}</BBTitle>
+            <BBSectionHeader
+                title="Section Header"
+                title_level={BBTitleLevel::Three}
+                icon={BBIconType::Star}
+                more={true} />
         </main>
     }
 }

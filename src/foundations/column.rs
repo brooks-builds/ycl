@@ -3,15 +3,18 @@ use ::yew::prelude::*;
 #[derive(Properties, PartialEq)]
 pub struct Props {
     pub children: Children,
-    pub width: Option<BBColWidth>,
+    #[prop_or_else(|| BBColWidth::None)]
+    pub width: BBColWidth,
+    #[prop_or_default]
+    pub classes: Classes,
 }
 
 #[function_component(BBCol)]
 pub fn component(props: &Props) -> Html {
-    let class = props.width.clone().unwrap_or_default().class();
+    let class = props.width.class();
 
     html! {
-        <div {class}>
+        <div class={classes!(class, props.classes.clone())}>
             {props.children.clone()}
         </div>
     }

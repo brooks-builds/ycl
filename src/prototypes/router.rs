@@ -1,4 +1,4 @@
-use super::pages::{headers::PHeaders, heroes::PHeros, home::PHome};
+use super::pages::{features::PFeatures, headers::PHeaders, heroes::PHeros, home::PHome};
 use yew::prelude::*;
 use yew_router::prelude::*;
 
@@ -10,6 +10,8 @@ pub enum Route {
     Headers,
     #[at("/heroes")]
     Heroes,
+    #[at("/features")]
+    Features,
 }
 
 pub fn switch(routes: Route) -> Html {
@@ -17,5 +19,6 @@ pub fn switch(routes: Route) -> Html {
         Route::Home => html! { <PHome /> },
         Route::Headers => html! { <PHeaders /> },
         Route::Heroes => html! { <PHeros /> },
+        Route::Features => html! { <PFeatures /> },
     }
 }

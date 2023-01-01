@@ -6,7 +6,7 @@ use crate::{
         column::{BBCol, BBColWidth},
         row::BBRow,
     },
-    modules::card_list::{BBCardList, CardData},
+    modules::card_list::{BBCardData, BBCardList},
     prototypes::router::Route,
 };
 
@@ -15,42 +15,42 @@ pub struct Props {}
 
 #[function_component(PHome)]
 pub fn component(_props: &Props) -> Html {
-    let snippet_cards = vec![CardData::<Route> {
+    let snippet_cards = vec![BBCardData::<Route> {
         text: Some("Headers available for Brooks Builds projects".to_owned()),
         title: "Headers".to_owned(),
         link: Some(Route::Headers),
     },
-    CardData::<Route> {
+    BBCardData::<Route> {
         text: Some("Heroes and other major call to action sections available for Brooks Builds projects".to_owned()),
         title: "Heroes".to_owned(),
         link: Some(Route::Heroes)
     },
-    CardData::<Route> {
+    BBCardData::<Route> {
         text: Some("Showing off what features are available for products".to_owned()),
         title: "Features".to_owned(),
-        link: None
+        link: Some(Route::Features)
     },
-    CardData::<Route> {
+    BBCardData::<Route> {
         text: Some("Common navigation patterns ideal for offcanvas or multi-column layouts.".to_owned()),
         title: "Sidebars".to_owned(),
         link: None
     },
-    CardData::<Route> {
+    BBCardData::<Route> {
         text: Some("Finish every page strong with an awesome footer, big or small.".to_owned()),
         title: "Footers".to_owned(),
         link: None
     },
-    CardData::<Route> {
+    BBCardData::<Route> {
         text: Some("Enhance your dropdowns with filters, icons, custom styles, and more.".to_owned()),
         title: "Dropdowns".to_owned(),
         link: None
     },
-    CardData::<Route> {
+    BBCardData::<Route> {
         text: Some("Extend list groups with utilities and custom styles for any content.".to_owned()),
         title: "List groups".to_owned(),
         link: None
     },
-    CardData::<Route> {
+    BBCardData::<Route> {
         text: Some("Transform modals to serve any purpose, from feature tours to dialogs.".to_owned()),
         title: "Modals".to_owned(),
         link: None
