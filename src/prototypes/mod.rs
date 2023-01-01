@@ -1,8 +1,8 @@
 mod app;
-mod navbar;
-mod titles;
+mod pages;
+mod router;
 
-use self::app::App;
+use app::App;
 
 pub fn start_prototype() {
     yew::Renderer::<App>::new().render();
