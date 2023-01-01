@@ -338,7 +338,6 @@ h6,
 
 .container,
 .container-fluid {
-    container-type: inline-size;
     min-width: 180px;
 }
 
@@ -432,22 +431,12 @@ h6,
     .bi-clipboard-check-fill {
         top: 1px;
     }
-
-    @container (min-width: 480px) and (max-width: 739px) {
-        justify-content: flex-start;
-    }
-
-    @container (min-width: 740px) {
-        justify-content: flex-end;
-    }
 }
 
 // Course Tracker > courses.html
 
 .bb-course-tracker {
     overflow-y: auto;
-
-    th[scope="col"] {}
 
     th[scope="row"] {
         line-height: 1.1;
@@ -485,10 +474,6 @@ h6,
         height: 2.125rem;
         width: 2.125rem;
     }
-}
-
-p {
-    max-width: 72ch;
 }
 
 pre {

@@ -1,12 +1,12 @@
 use super::router::{switch, Route};
-use crate::foundations::contaner::BBContainer;
+use crate::foundations::container::BBContainer;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
 #[function_component(App)]
 pub fn component() -> Html {
     html! {
-        <BBContainer>
+        <BBContainer full_width={true}>
             <BrowserRouter>
                 <Switch<Route> render={switch} />
             </BrowserRouter>

@@ -23,7 +23,7 @@ pub fn component(_props: &Props) -> Html {
     CardData::<Route> {
         text: Some("Heroes and other major call to action sections available for Brooks Builds projects".to_owned()),
         title: "Heroes".to_owned(),
-        link: None
+        link: Some(Route::Heroes)
     },
     CardData::<Route> {
         text: Some("Showing off what features are available for products".to_owned()),
