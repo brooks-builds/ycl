@@ -12,14 +12,19 @@ use crate::{
 pub struct Props {
     pub title: AttrValue,
     pub text: AttrValue,
+    #[prop_or_else(|| BBTitleLevel::One)]
+    pub title_level: BBTitleLevel,
+    #[prop_or_default]
+    pub main: Children,
 }
 
 #[function_component(BBHero)]
 pub fn component(props: &Props) -> Html {
     html! {
         <div class="px-4 py-5 my-5 bg-secondary">
-            <BBTitle level={BBTitleLevel::One} align={AlignText::Center}>{props.title.clone()}</BBTitle>
+            <BBTitle level={props.title_level} align={AlignText::Center}>{props.title.clone()}</BBTitle>
             <BBText align={AlignText::Center}>{props.text.clone()}</BBText>
+            {props.main.clone()}
         </div>
     }
 }
