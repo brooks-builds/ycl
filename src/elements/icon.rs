@@ -22,6 +22,7 @@ pub fn component(props: &Props) -> Html {
 pub enum BBIconType {
     Brand,
     Star,
+    Heart,
 }
 
 impl BBIconType {
@@ -29,6 +30,7 @@ impl BBIconType {
         match self {
             BBIconType::Brand => "/logo-bb-blue.svg",
             BBIconType::Star => "/star.svg",
+            BBIconType::Heart => "/heart.svg",
         }
     }
 
@@ -36,18 +38,33 @@ impl BBIconType {
         match self {
             BBIconType::Brand => "Brooks Builds Brand icon",
             BBIconType::Star => "Star logo",
+            BBIconType::Heart => "Heart logo",
         }
     }
 
     pub fn css(&self, size: &BBIconSize) -> Classes {
-        let background = Style::new(css!(
-            r#"
-            background-color: inherit; 
-            border: none;
-            padding-bottom: 1rem;
-        "#
-        ))
-        .unwrap();
+        let background = match self {
+            Self::Star => Some(
+                Style::new(css!(
+                    r#"
+                        background-color: inherit; 
+                        border: none;
+                        padding-bottom: 1rem;
+                    "#
+                ))
+                .unwrap(),
+            ),
+            Self::Heart => Some(
+                Style::new(css!(
+                    r#"
+                        background-color: inherit; 
+                        border: none;
+                    "#
+                ))
+                .unwrap(),
+            ),
+            _ => None,
+        };
 
         classes!(background, size.css())
     }

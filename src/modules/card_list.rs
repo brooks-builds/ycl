@@ -23,6 +23,7 @@ where
     pub on_action: Callback<()>,
     #[prop_or_default]
     pub more: bool,
+    pub icon: Option<BBIconType>,
 }
 
 #[function_component(BBCardList)]
@@ -42,7 +43,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                 if props.title.is_some() {
                     Some(html! {
                         <BBSectionHeader
-                           icon={BBIconType::Star}
+                           icon={props.icon}
                            title={props.title.clone().unwrap()}
                            title_level={BBTitleLevel::Two}
                            action={props.action.clone()}

@@ -2,7 +2,10 @@ use gloo::console::log;
 use yew::prelude::*;
 
 use crate::{
-    elements::title::{BBTitle, BBTitleLevel},
+    elements::{
+        icon::BBIconType,
+        title::{BBTitle, BBTitleLevel},
+    },
     foundations::align_text::AlignText,
     modules::card_list::{BBCardData, BBCardList},
     prototypes::router::Route,
@@ -44,13 +47,15 @@ pub fn component(_props: &Props) -> Html {
                 title_level={BBTitleLevel::Two}
                 on_action={on_action.clone()}
                 action="Show all"
-                more={true} />
+                more={true}
+                icon={BBIconType::Star} />
             <BBCardList<Route>
                 card_data={some_card_data}
                 card_title_level={BBTitleLevel::Three}
                 title="Cards but this is it"
                 title_level={BBTitleLevel::Two}
-                {on_action} />
+                {on_action}
+                icon={BBIconType::Heart} />
         </main>
     }
 }
