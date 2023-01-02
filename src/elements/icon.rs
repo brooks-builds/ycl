@@ -23,6 +23,7 @@ pub enum BBIconType {
     Brand,
     Star,
     Heart,
+    Contact,
 }
 
 impl BBIconType {
@@ -31,6 +32,7 @@ impl BBIconType {
             BBIconType::Brand => "/logo-bb-blue.svg",
             BBIconType::Star => "/star.svg",
             BBIconType::Heart => "/heart.svg",
+            BBIconType::Contact => "/chat_bubble.svg",
         }
     }
 
@@ -39,6 +41,7 @@ impl BBIconType {
             BBIconType::Brand => "Brooks Builds Brand icon",
             BBIconType::Star => "Star logo",
             BBIconType::Heart => "Heart logo",
+            BBIconType::Contact => "Chat Bubble icon",
         }
     }
 
@@ -54,7 +57,7 @@ impl BBIconType {
                 ))
                 .unwrap(),
             ),
-            Self::Heart => Some(
+            Self::Heart | Self::Contact => Some(
                 Style::new(css!(
                     r#"
                         background-color: inherit; 

@@ -50,12 +50,19 @@ pub fn component(_props: &Props) -> Html {
                 more={true}
                 icon={BBIconType::Star} />
             <BBCardList<Route>
-                card_data={some_card_data}
+                card_data={some_card_data.clone()}
                 card_title_level={BBTitleLevel::Three}
                 title="Cards but this is it"
                 title_level={BBTitleLevel::Two}
-                {on_action}
+                on_action={on_action.clone()}
                 icon={BBIconType::Heart} />
+            <BBCardList<Route>
+                card_data={some_card_data.clone()}
+                card_title_level={BBTitleLevel::Three}
+                title="This one has a chat icon"
+                title_level={BBTitleLevel::Two}
+                on_action={on_action.clone()}
+                icon={BBIconType::Contact} />
         </main>
     }
 }
