@@ -35,6 +35,20 @@ pub fn component(_props: &Props) -> Html {
                         }
                     }
                     title_level={BBTitleLevel::Three} />
+                    <BBTitle level={BBTitleLevel::Two} align={AlignText::Left}>{"Section hero with left media"}</BBTitle>
+                    <BBHero
+                        title="This is a section"
+                        text="We can embed whatever we want in this!"
+                        main={
+                            html! {
+                                <BBYouTubeVideo
+                                    src="https://www.youtube-nocookie.com/embed/5PB9UDOIuGk"
+                                    title="Introduction to Yew Trailer"
+                                    align={AlignText::Center} />
+                            }
+                        }
+                        title_level={BBTitleLevel::Three}
+                        img="/code.png" />
             </BBRow>
         </BBContainer>
     }
