@@ -6,6 +6,8 @@ pub struct Props {
     pub icon_type: BBIconType,
     #[prop_or_else(|| BBIconSize::Normal)]
     pub size: BBIconSize,
+    #[prop_or_default]
+    pub classes: Classes,
 }
 
 #[styled_component(BBIcon)]
@@ -14,7 +16,7 @@ pub fn component(props: &Props) -> Html {
         <img
             src={props.icon_type.src()}
             alt={props.icon_type.alt()}
-            class={classes!("img-fluid", "img-thumbnail", props.icon_type.css(&props.size))} />
+            class={classes!("img-fluid", "img-thumbnail", props.icon_type.css(&props.size), props.classes.clone())} />
     }
 }
 
@@ -25,6 +27,9 @@ pub enum BBIconType {
     Heart,
     Contact,
     Mark,
+    Twitter,
+    Twitch,
+    YouTubeSmall,
 }
 
 impl BBIconType {
@@ -35,6 +40,9 @@ impl BBIconType {
             BBIconType::Heart => "/heart.svg",
             BBIconType::Contact => "/chat_bubble.svg",
             BBIconType::Mark => "/bb-logo-icon-blue.svg",
+            BBIconType::Twitter => "/twitter.svg",
+            BBIconType::Twitch => "/TwitchGlitchPurple.svg",
+            BBIconType::YouTubeSmall => "/youtube_social_squircle_red.png",
         }
     }
 
@@ -45,6 +53,9 @@ impl BBIconType {
             BBIconType::Heart => "Heart logo",
             BBIconType::Contact => "Chat Bubble icon",
             BBIconType::Mark => "Brooks Builds small brand icon",
+            BBIconType::Twitter => "Twitter logo",
+            BBIconType::Twitch => "Twitch logo",
+            BBIconType::YouTubeSmall => "YouTube logo",
         }
     }
 
@@ -60,7 +71,12 @@ impl BBIconType {
                 ))
                 .unwrap(),
             ),
-            Self::Heart | Self::Contact => Some(
+            Self::Heart
+            | Self::Contact
+            | Self::Twitter
+            | Self::Mark
+            | Self::Twitch
+            | Self::YouTubeSmall => Some(
                 Style::new(css!(
                     r#"
                         background-color: inherit; 

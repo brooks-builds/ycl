@@ -1,4 +1,4 @@
-use stylist::{css, style, Style};
+use stylist::style;
 use yew::prelude::*;
 
 use crate::{
