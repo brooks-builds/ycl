@@ -38,7 +38,7 @@ pub fn component(_props: &Props) -> Html {
     BBCardData::<Route> {
         text: Some("Finish every page strong with an awesome footer, big or small.".to_owned()),
         title: "Footers".to_owned(),
-        link: None
+        link: Some(Route::Footers)
     },
     BBCardData::<Route> {
         text: Some("Enhance your dropdowns with filters, icons, custom styles, and more.".to_owned()),

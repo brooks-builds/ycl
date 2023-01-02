@@ -24,6 +24,7 @@ pub enum BBIconType {
     Star,
     Heart,
     Contact,
+    Mark,
 }
 
 impl BBIconType {
@@ -33,6 +34,7 @@ impl BBIconType {
             BBIconType::Star => "/star.svg",
             BBIconType::Heart => "/heart.svg",
             BBIconType::Contact => "/chat_bubble.svg",
+            BBIconType::Mark => "/bb-logo-icon-blue.svg",
         }
     }
 
@@ -42,6 +44,7 @@ impl BBIconType {
             BBIconType::Star => "Star logo",
             BBIconType::Heart => "Heart logo",
             BBIconType::Contact => "Chat Bubble icon",
+            BBIconType::Mark => "Brooks Builds small brand icon",
         }
     }
 
