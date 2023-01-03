@@ -44,7 +44,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                             }
                         } else {
                             html! {
-                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <ul class="navbar-nav ml-0 mb-2 mb-lg-0">
                                     <li class="nav-item">
                                         <Link<T> to={props.login_route.clone()} classes="nav-link">{"Login"}</Link<T>>
                                     </li>

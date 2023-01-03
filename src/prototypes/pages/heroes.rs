@@ -15,7 +15,7 @@ pub struct Props {}
 #[function_component(PHeros)]
 pub fn component(_props: &Props) -> Html {
     html! {
-        <BBContainer full_width={true}>
+        <BBContainer>
             <BBTitle level={BBTitleLevel::One} align={AlignText::Center}>{"Heroes"}</BBTitle>
             <BBRow>
                <BBTitle level={BBTitleLevel::Two} align={AlignText::Left}>{"Billboard"}</BBTitle>

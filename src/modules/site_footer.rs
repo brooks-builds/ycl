@@ -11,7 +11,7 @@ pub struct Props {}
 #[function_component(BBSiteFooter)]
 pub fn component(_props: &Props) -> Html {
     html! {
-        <BBContainer full_width={true} classes="bg-secondary">
+        <BBContainer classes="bg-secondary">
            <BBRow>
               <BBCol classes="text-center">
                   <BBIcon icon_type={BBIconType::Mark} size={BBIconSize::Small} />

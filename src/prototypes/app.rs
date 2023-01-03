@@ -6,7 +6,7 @@ use yew_router::prelude::*;
 #[function_component(App)]
 pub fn component() -> Html {
     html! {
-        <BBContainer full_width={true}>
+        <BBContainer>
             <BrowserRouter>
                 <Switch<Route> render={switch} />
             </BrowserRouter>

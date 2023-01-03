@@ -38,7 +38,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     };
 
     html! {
-        <BBContainer full_width={true}>
+        <BBContainer>
             {
                 if props.title.is_some() {
                     Some(html! {
