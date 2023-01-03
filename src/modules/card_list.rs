@@ -1,3 +1,4 @@
+use gloo::console::log;
 use yew::prelude::*;
 use yew_router::Routable;
 
@@ -6,6 +7,8 @@ use crate::{
     foundations::{container::BBContainer, row::BBRow},
     modules::{card::BBCard, section_header::BBSectionHeader},
 };
+
+use super::card::BBCardType;
 
 #[derive(Properties, PartialEq)]
 pub struct Props<T>
@@ -24,6 +27,12 @@ where
     #[prop_or_default]
     pub more: bool,
     pub icon: Option<BBIconType>,
+    #[prop_or_default]
+    pub onclick: Callback<()>,
+    #[prop_or_default]
+    pub debug: bool,
+    #[prop_or_default]
+    pub debug_name: AttrValue,
 }
 
 #[function_component(BBCardList)]
@@ -57,12 +66,30 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
             <BBRow>
                 {
                     props.card_data.clone().into_iter().map(move |card_data| {
+                        let onclick = {
+                            let cb = card_data.onclick.unwrap_or_default();
+                            let debug = props.debug;
+                            let debug_name = props.debug_name.clone();
+
+                            Callback::from(move |_: ()| {
+                                if debug {
+                                    log!(format!("Card in card list clicked for {debug_name}"));
+                                }
+
+                                cb.emit(());
+                            })
+                        };
+
                         html! {
                             <BBCard<T>
                             {title_level}
                             title={card_data.title}
                             text={card_data.text}
-                            internal_link={card_data.link} />
+                            internal_link={card_data.link}
+                            card_type={card_data.card_type}
+                            {onclick}
+                            debug={props.debug}
+                            debug_name={props.debug_name.clone()} />
                         }
                     })
                     .collect::<Html>()
@@ -80,4 +107,6 @@ where
     pub title: String,
     pub text: Option<String>,
     pub link: Option<T>,
+    pub onclick: Option<Callback<()>>,
+    pub card_type: BBCardType,
 }

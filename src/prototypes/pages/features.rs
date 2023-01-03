@@ -16,21 +16,38 @@ pub struct Props {}
 
 #[function_component(PFeatures)]
 pub fn component(_props: &Props) -> Html {
+    let onclick = Callback::from(|_event| {
+        log!("call to action clicked");
+    });
+
     let some_card_data = vec![
         BBCardData::<Route> {
             link: None,
             text: Some("first".to_owned()),
             title: "first card".to_owned(),
+            onclick: None,
+            card_type: crate::modules::card::BBCardType::Simple,
         },
         BBCardData::<Route> {
             link: None,
             text: Some("second".to_owned()),
             title: "second card".to_owned(),
+            onclick: None,
+            card_type: crate::modules::card::BBCardType::Simple,
         },
         BBCardData::<Route> {
             link: None,
             text: Some("third".to_owned()),
             title: "third card".to_owned(),
+            onclick: None,
+            card_type: crate::modules::card::BBCardType::Simple,
+        },
+        BBCardData::<Route> {
+            link: None,
+            text: None,
+            title: "Request Course!".to_owned(),
+            onclick: Some(onclick),
+            card_type: crate::modules::card::BBCardType::CallToAction,
         },
     ];
     let on_action = Callback::from(|_event| {
@@ -62,7 +79,9 @@ pub fn component(_props: &Props) -> Html {
                 title="This one has a chat icon"
                 title_level={BBTitleLevel::Two}
                 on_action={on_action.clone()}
-                icon={BBIconType::Contact} />
+                icon={BBIconType::Contact}
+                debug={true}
+                debug_name="last card list" />
         </main>
     }
 }
