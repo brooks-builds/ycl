@@ -2,6 +2,7 @@ use ::yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
+    #[prop_or_default]
     pub children: Children,
     #[prop_or_else(|| BBColWidth::None)]
     pub width: BBColWidth,

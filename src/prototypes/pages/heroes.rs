@@ -2,11 +2,12 @@ use yew::prelude::*;
 
 use crate::{
     elements::{
+        image::BBImage,
         title::{BBTitle, BBTitleLevel},
         youtube_video::BBYouTubeVideo,
     },
     foundations::{align_text::AlignText, container::BBContainer, row::BBRow},
-    modules::hero::BBHero,
+    modules::hero::{BBHero, BBHeroLeftMedia},
 };
 
 #[derive(Properties, PartialEq)]
@@ -35,7 +36,7 @@ pub fn component(_props: &Props) -> Html {
                         }
                     }
                     title_level={BBTitleLevel::Three} />
-                    <BBTitle level={BBTitleLevel::Two} align={AlignText::Left}>{"Section hero with left media"}</BBTitle>
+                    <BBTitle level={BBTitleLevel::Two} align={AlignText::Left}>{"Section hero with left image"}</BBTitle>
                     <BBHero
                         title="This is a section"
                         text="We can embed whatever we want in this!"
@@ -48,7 +49,19 @@ pub fn component(_props: &Props) -> Html {
                             }
                         }
                         title_level={BBTitleLevel::Three}
-                        img="/code.png" />
+                        media={BBHeroLeftMedia::Image(html! { <BBImage src="/code.png" alt="Some code" /> })}
+                    />
+
+                    <BBTitle level={BBTitleLevel::Two} align={AlignText::Left}>{"Section hero with left video"}</BBTitle>
+                    <BBHero
+                        title="This is a section"
+                        text="Yay, we can have a video to the left!"
+                        title_level={BBTitleLevel::Three}
+                        media={BBHeroLeftMedia::Image(html! { <BBYouTubeVideo
+                                    src="https://www.youtube-nocookie.com/embed/5PB9UDOIuGk"
+                                    title="Introduction to Yew Trailer"
+                                    align={AlignText::Center} /> })}
+                    />
             </BBRow>
         </BBContainer>
     }
