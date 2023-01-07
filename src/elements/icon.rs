@@ -30,6 +30,7 @@ pub enum BBIconType {
     Twitter,
     Twitch,
     YouTubeSmall,
+    Check,
 }
 
 impl BBIconType {
@@ -43,6 +44,7 @@ impl BBIconType {
             BBIconType::Twitter => "/twitter.svg",
             BBIconType::Twitch => "/TwitchGlitchPurple.svg",
             BBIconType::YouTubeSmall => "/youtube_social_squircle_red.png",
+            BBIconType::Check => "/check.svg",
         }
     }
 
@@ -56,6 +58,7 @@ impl BBIconType {
             BBIconType::Twitter => "Twitter logo",
             BBIconType::Twitch => "Twitch logo",
             BBIconType::YouTubeSmall => "YouTube logo",
+            BBIconType::Check => "Checkmark",
         }
     }
 
@@ -76,7 +79,8 @@ impl BBIconType {
             | Self::Twitter
             | Self::Mark
             | Self::Twitch
-            | Self::YouTubeSmall => Some(
+            | Self::YouTubeSmall
+            | Self::Check => Some(
                 Style::new(css!(
                     r#"
                         background-color: inherit; 
@@ -97,6 +101,7 @@ pub enum BBIconSize {
     Small,
     Normal,
     Large,
+    Tiny,
 }
 
 impl BBIconSize {
@@ -105,6 +110,7 @@ impl BBIconSize {
             BBIconSize::Small => css!("width: 50px;"),
             BBIconSize::Normal => css!("width: 150px;"),
             BBIconSize::Large => css!("width: 300px;"),
+            BBIconSize::Tiny => css!("width: 25px;"),
         };
 
         Style::new(css).unwrap()

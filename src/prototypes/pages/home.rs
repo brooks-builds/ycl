@@ -39,7 +39,7 @@ pub fn component(_props: &Props) -> Html {
     BBCardData::<Route> {
         text: Some("Common navigation patterns ideal for offcanvas or multi-column layouts.".to_owned()),
         title: "Sidebars".to_owned(),
-        link: None,
+        link: Some(Route::Sidebars),
         onclick: None,
         card_type: crate::modules::card::BBCardType::Simple,
     },

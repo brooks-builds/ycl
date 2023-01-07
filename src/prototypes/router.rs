@@ -1,5 +1,6 @@
 use super::pages::{
     features::PFeatures, footers::PFooters, headers::PHeaders, heroes::PHeros, home::PHome,
+    sidebars::PSidebars,
 };
 use yew::prelude::*;
 use yew_router::prelude::*;
@@ -16,6 +17,8 @@ pub enum Route {
     Features,
     #[at("/footers")]
     Footers,
+    #[at("/sidebars")]
+    Sidebars,
 }
 
 pub fn switch(routes: Route) -> Html {
@@ -25,5 +28,6 @@ pub fn switch(routes: Route) -> Html {
         Route::Heroes => html! { <PHeros /> },
         Route::Features => html! { <PFeatures /> },
         Route::Footers => html! { <PFooters /> },
+        Route::Sidebars => html! { <PSidebars /> },
     }
 }

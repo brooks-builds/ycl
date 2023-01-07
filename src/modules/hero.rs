@@ -1,9 +1,7 @@
-use stylist::style;
 use yew::{prelude::*, virtual_dom::VNode};
 
 use crate::{
     elements::{
-        image::BBImage,
         text::BBText,
         title::{BBTitle, BBTitleLevel},
     },

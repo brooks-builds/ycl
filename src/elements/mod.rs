@@ -7,3 +7,5 @@ pub mod nav_link;
 pub mod text;
 pub mod title;
 pub mod youtube_video;
+pub mod course_nav_item;
+pub mod tooltip;
