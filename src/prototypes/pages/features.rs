@@ -5,6 +5,7 @@ use crate::{
     elements::{
         icon::BBIconType,
         title::{BBTitle, BBTitleLevel},
+        button::{BBButton, BBButtonType},
     },
     foundations::align_text::AlignText,
     modules::card_list::{BBCardData, BBCardList},
@@ -82,6 +83,8 @@ pub fn component(_props: &Props) -> Html {
                 icon={BBIconType::Contact}
                 debug={true}
                 debug_name="last card list" />
+            <BBTitle level={BBTitleLevel::Two}>{"Action Button"}</BBTitle>
+            <BBButton action_icon={BBIconType::Discord} button_type={BBButtonType::PrimaryLight}>{"Button with an action logo"}</BBButton>
         </main>
     }
 }

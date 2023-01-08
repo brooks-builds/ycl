@@ -31,6 +31,7 @@ pub enum BBIconType {
     Twitch,
     YouTubeSmall,
     Check,
+    Discord,
 }
 
 impl BBIconType {
@@ -45,6 +46,7 @@ impl BBIconType {
             BBIconType::Twitch => "/TwitchGlitchPurple.svg",
             BBIconType::YouTubeSmall => "/youtube_social_squircle_red.png",
             BBIconType::Check => "/check.svg",
+            BBIconType::Discord => "/discord_logo.svg",
         }
     }
 
@@ -59,6 +61,7 @@ impl BBIconType {
             BBIconType::Twitch => "Twitch logo",
             BBIconType::YouTubeSmall => "YouTube logo",
             BBIconType::Check => "Checkmark",
+            BBIconType::Discord => "Discord logo",
         }
     }
 
@@ -80,7 +83,8 @@ impl BBIconType {
             | Self::Mark
             | Self::Twitch
             | Self::YouTubeSmall
-            | Self::Check => Some(
+            | Self::Check 
+            | Self::Discord => Some(
                 Style::new(css!(
                     r#"
                         background-color: inherit; 
@@ -98,19 +102,21 @@ impl BBIconType {
 
 #[derive(PartialEq, Clone, Copy)]
 pub enum BBIconSize {
+    Tiny,
+    Smaller,
     Small,
     Normal,
     Large,
-    Tiny,
 }
 
 impl BBIconSize {
     pub fn css(&self) -> Style {
         let css = match self {
+            BBIconSize::Tiny => css!("width: 25px;"),
+            BBIconSize::Smaller => css!("width: 35px;"),
             BBIconSize::Small => css!("width: 50px;"),
             BBIconSize::Normal => css!("width: 150px;"),
             BBIconSize::Large => css!("width: 300px;"),
-            BBIconSize::Tiny => css!("width: 25px;"),
         };
 
         Style::new(css).unwrap()

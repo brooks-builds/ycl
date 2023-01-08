@@ -1,6 +1,8 @@
 use gloo::console::log;
 use yew::prelude::*;
 
+use super::icon::{BBIconType, BBIcon, BBIconSize};
+
 #[derive(Properties, PartialEq)]
 pub struct Props {
     pub children: Children,
@@ -12,6 +14,7 @@ pub struct Props {
     pub debug: bool,
     #[prop_or_default]
     pub debug_name: AttrValue,
+    pub action_icon: Option<BBIconType>
 }
 
 #[function_component(BBButton)]
@@ -32,7 +35,22 @@ pub fn component(props: &Props) -> Html {
     };
 
     html! {
-        <button {class} {onclick}>{props.children.clone()}</button>
+        <button {class} {onclick}>
+            {
+                props
+                    .action_icon
+                    .clone()
+                    .map(|icon_type| {
+                        html! {
+                            <BBIcon 
+                                {icon_type}
+                                size={BBIconSize::Smaller} 
+                                classes="me-2" />
+                        }
+                    })
+            }
+            {props.children.clone()}
+        </button>
     }
 }
 
