@@ -8,3 +8,4 @@ pub mod navbar;
 pub mod section_header;
 pub mod site_footer;
 pub mod course_nav;
+pub mod course_content;

@@ -8,7 +8,7 @@ use crate::{
         button::{BBButton, BBButtonType},
     },
     foundations::align_text::AlignText,
-    modules::card_list::{BBCardData, BBCardList},
+    modules::{card_list::{BBCardData, BBCardList}, course_content::BBCourseContent},
     prototypes::router::Route,
 };
 
@@ -55,6 +55,18 @@ pub fn component(_props: &Props) -> Html {
         log!("Show all link clicked");
     });
 
+    let course_markdown = r#"
+# This is a title
+
+## subtitle
+
+Some text
+
+```
+let variable_name = 55;
+```
+        "#;
+
     html! {
         <main>
             <BBTitle level={BBTitleLevel::One} align={AlignText::Center}>{"Features"}</BBTitle>
@@ -85,6 +97,8 @@ pub fn component(_props: &Props) -> Html {
                 debug_name="last card list" />
             <BBTitle level={BBTitleLevel::Two}>{"Action Button"}</BBTitle>
             <BBButton action_icon={BBIconType::Discord} button_type={BBButtonType::PrimaryLight}>{"Button with an action logo"}</BBButton>
+            <BBTitle level={BBTitleLevel::Two}>{"Markdown Course"}</BBTitle>
+            <BBCourseContent course={course_markdown} />
         </main>
     }
 }
