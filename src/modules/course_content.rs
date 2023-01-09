@@ -1,13 +1,19 @@
+use crate::elements::button::{BBButton, BBButtonType};
+use crate::foundations::column::{BBCol, BBColWidth};
+use crate::foundations::container::BBContainer;
+use crate::foundations::row::BBRow;
 use std::ops::Deref;
-
 use wasm_bindgen::{prelude::wasm_bindgen, JsCast};
 use web_sys::HtmlElement;
-use yew::{function_component, html, use_effect, use_state, AttrValue, Html, Properties};
+use yew::{function_component, html, use_effect, use_state, AttrValue, Callback, Html, Properties};
 
 #[wasm_bindgen]
 extern "C" {
     #[wasm_bindgen(js_namespace = marked)]
     fn parse(markdown: &str) -> String;
+
+    #[wasm_bindgen(js_namespace = Prism, js_name = highlightAll)]
+    fn highlight_all();
 }
 
 #[derive(Properties, PartialEq)]
@@ -15,6 +21,8 @@ pub struct Props {
     #[prop_or_else(|| true)]
     pub have_access: bool,
     pub course: AttrValue,
+    #[prop_or_default]
+    pub onclick_purchase: Callback<()>,
 }
 
 #[function_component(BBCourseContent)]
@@ -39,15 +47,38 @@ pub fn component(props: &Props) -> Html {
 
                 html_element.set_inner_html(&parse(course.deref()));
                 mounted.set(true);
+
+                highlight_all();
             }
         }
 
         return_closure
     });
 
-    html! {
-        <div id="course-content">
+    let onclick_purchase = props.onclick_purchase.clone();
+    let onclick = Callback::from(move |()| {
+        onclick_purchase.emit(());
+    });
 
-        </div>
+    html! {
+        <BBContainer>
+            <BBRow classes="ms-auto">
+                <BBCol width={BBColWidth::Ten}></BBCol>
+                <BBCol width={BBColWidth::Two}>
+                    {
+                        if !props.have_access {
+                            Some(html! {
+                                <BBButton button_type={BBButtonType::PrimaryLight} {onclick}>{"Purchase to Access"}</BBButton>
+                            })
+                        } else {
+                            None
+                        }
+                    }
+                </BBCol>
+            </BBRow>
+            <BBRow>
+                <div id="course-content"></div>
+            </BBRow>
+        </BBContainer>
     }
 }

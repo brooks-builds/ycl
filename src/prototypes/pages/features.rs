@@ -47,7 +47,7 @@ pub fn component(_props: &Props) -> Html {
             link: None,
             text: None,
             title: "Request Course!".to_owned(),
-            onclick: Some(onclick),
+            onclick: Some(onclick.clone()),
             card_type: crate::modules::card::BBCardType::CallToAction,
         },
     ];
@@ -62,7 +62,7 @@ pub fn component(_props: &Props) -> Html {
 
 Some text
 
-```
+```rust
 let variable_name = 55;
 ```
         "#;
@@ -98,7 +98,7 @@ let variable_name = 55;
             <BBTitle level={BBTitleLevel::Two}>{"Action Button"}</BBTitle>
             <BBButton action_icon={BBIconType::Discord} button_type={BBButtonType::PrimaryLight}>{"Button with an action logo"}</BBButton>
             <BBTitle level={BBTitleLevel::Two}>{"Markdown Course"}</BBTitle>
-            <BBCourseContent course={course_markdown} />
+            <BBCourseContent course={course_markdown} have_access={false} onclick_purchase={onclick.clone()} />
         </main>
     }
 }
