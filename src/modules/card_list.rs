@@ -110,3 +110,62 @@ where
     pub onclick: Option<Callback<()>>,
     pub card_type: BBCardType,
 }
+
+#[derive(PartialEq, Clone)]
+pub struct BBCardDataBuilder<T>
+where
+    T: Routable + 'static,
+{
+    pub title: String,
+    pub text: Option<String>,
+    pub link: Option<T>,
+    pub onclick: Option<Callback<()>>,
+    pub card_type: BBCardType,
+}
+
+impl<T: Routable> BBCardDataBuilder<T> {
+    pub fn new() -> Self {
+        Self {
+            title: String::new(),
+            text: None,
+            link: None,
+            onclick: None,
+            card_type: BBCardType::Simple,
+        }
+    }
+
+    pub fn title(mut self, title: impl Into<String>) -> Self {
+        self.title = title.into();
+        self
+    }
+
+    pub fn text(mut self, text: impl Into<String>) -> Self {
+        self.text = Some(text.into());
+        self
+    }
+
+    pub fn link(mut self, link: T) -> Self {
+        self.link = Some(link);
+        self
+    }
+
+    pub fn onclick(mut self, onclick: Callback<()>) -> Self {
+        self.onclick = Some(onclick);
+        self
+    }
+
+    pub fn card_type(mut self, card_type: BBCardType) -> Self {
+        self.card_type = card_type;
+        self
+    }
+
+    pub fn build(self) -> BBCardData<T> {
+        BBCardData {
+            title: self.title,
+            text: self.text,
+            link: self.link,
+            onclick: self.onclick,
+            card_type: self.card_type,
+        }
+    }
+}
