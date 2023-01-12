@@ -25,7 +25,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <div class="mx-auto"></div>
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav auto mb-2 mb-lg-0">
                         {
                             props.links.clone().into_iter().map(|link| {
                                 html! {

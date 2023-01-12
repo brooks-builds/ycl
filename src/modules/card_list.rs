@@ -82,14 +82,14 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
 
                         html! {
                             <BBCard<T>
-                            {title_level}
-                            title={card_data.title}
-                            text={card_data.text}
-                            internal_link={card_data.link}
-                            card_type={card_data.card_type}
-                            {onclick}
-                            debug={props.debug}
-                            debug_name={props.debug_name.clone()} />
+                                {title_level}
+                                title={card_data.title}
+                                text={card_data.text}
+                                internal_link={card_data.link}
+                                card_type={card_data.card_type}
+                                {onclick}
+                                debug={props.debug}
+                                debug_name={props.debug_name.clone()} />
                         }
                     })
                     .collect::<Html>()

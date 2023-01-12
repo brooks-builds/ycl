@@ -8,7 +8,7 @@ use yew::prelude::*;
 #[function_component(Home)]
 pub fn component() -> Html {
     let card_data = vec![
-        BBCardDataBuilder::new().title("Site Header").build(),
+        BBCardDataBuilder::new().title("Site Header").link(Route::SiteHeader).build(),
         BBCardDataBuilder::new().title("Hero").build(),
     ];
     html! {
