@@ -1,7 +1,7 @@
 use gloo::console::log;
 use yew::prelude::*;
 use yew_router::Routable;
-
+use crate::foundations::tags::Tags;
 use crate::{
     elements::{icon::BBIconType, title::BBTitleLevel},
     foundations::{container::BBContainer, row::BBRow},
@@ -109,6 +109,7 @@ where
     pub link: Option<T>,
     pub onclick: Option<Callback<()>>,
     pub card_type: BBCardType,
+    pub tag: Option<Tags>,
 }
 
 #[derive(PartialEq, Clone)]
@@ -121,6 +122,7 @@ where
     pub link: Option<T>,
     pub onclick: Option<Callback<()>>,
     pub card_type: BBCardType,
+    pub tags: Option<Tags>
 }
 
 impl<T: Routable> BBCardDataBuilder<T> {
@@ -131,6 +133,7 @@ impl<T: Routable> BBCardDataBuilder<T> {
             link: None,
             onclick: None,
             card_type: BBCardType::Simple,
+            tags: None,
         }
     }
 
@@ -159,6 +162,11 @@ impl<T: Routable> BBCardDataBuilder<T> {
         self
     }
 
+    pub fn tag(mut self, tag: Tags) -> Self {
+    self.tags = Some(tag);
+        self
+    }
+
     pub fn build(self) -> BBCardData<T> {
         BBCardData {
             title: self.title,
@@ -166,6 +174,7 @@ impl<T: Routable> BBCardDataBuilder<T> {
             link: self.link,
             onclick: self.onclick,
             card_type: self.card_type,
+            tag: self.tags
         }
     }
 }

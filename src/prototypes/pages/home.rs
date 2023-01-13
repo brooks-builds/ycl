@@ -10,7 +10,7 @@ pub fn component() -> Html {
     let card_data = vec![
         BBCardDataBuilder::new().title("Site Header").link(Route::SiteHeader).build(),
         BBCardDataBuilder::new().title("Hero").link(Route::Hero).build(),
-        BBCardDataBuilder::new().title("Featured Courses").build(),
+        BBCardDataBuilder::new().title("Featured Courses").link(Route::FeaturedCourses).build(),
     ];
     html! {
         <BBContainer margin={BBContainerMargin::Normal}>

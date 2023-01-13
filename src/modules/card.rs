@@ -3,11 +3,11 @@ use stylist::{style, yew::styled_component};
 use yew::prelude::*;
 use yew_router::prelude::*;
 
-use crate::elements::{
+use crate::{elements::{
     button::{BBButton, BBButtonType},
     text::BBText,
     title::{BBTitle, BBTitleLevel},
-};
+}, foundations::tags::Tags};
 
 #[derive(Properties, PartialEq)]
 pub struct Props<T>
@@ -26,6 +26,8 @@ where
     pub debug: bool,
     #[prop_or_default]
     pub debug_name: AttrValue,
+    #[prop_or_default]
+    pub classes: Classes,
 }
 
 #[styled_component(BBCard)]
@@ -39,7 +41,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     let card_type = props.card_type;
 
     html! {
-        <div class={classes!("card", class, "mx-1", "my-1")}>
+        <div class={classes!("card", class, "mx-1", "my-1", props.classes.clone())}>
             {
                 card_type.render(props)
             }
@@ -63,7 +65,7 @@ impl BBCardType {
 
     fn simple<T: Routable + 'static>(&self, props: &Props<T>) -> Html {
         html! {
-            <div class="card-body">
+            <div class="card-body mt-5 me-5">
                 {
                     if props.internal_link.is_some() {
                         html! {
@@ -111,3 +113,4 @@ impl BBCardType {
         }
     }
 }
+

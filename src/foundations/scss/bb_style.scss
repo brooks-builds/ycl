@@ -54,6 +54,8 @@
     --color-rust-red-dark: #a04739;
     --color-javascript-yellow: #ead03a;
     --color-javascript-yellow-dark: #c9b232;
+	--color-node: #5fa04e;
+	--color-node-two: #ffffff;
 
     // fonts
 
@@ -406,6 +408,11 @@ h6,
 
 .text-bg-javascript {
     background-image: linear-gradient(-45deg, var(--color-javascript-yellow-dark) 0%, var(--color-javascript-yellow) 80%) !important;
+}
+
+.text-bg-node {
+    background-image: linear-gradient(45deg, var(--color-node) 0%, var(--color-node-two) 150%) !important;
+    color: var(--color-dark);
 }
 
 .logo {
