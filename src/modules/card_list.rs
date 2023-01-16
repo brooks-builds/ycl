@@ -80,6 +80,8 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                             })
                         };
 
+                        let classes = classes!(card_data.tag.map(|tag| tag_class(tag)));
+
                         html! {
                             <BBCard<T>
                                 {title_level}
@@ -89,7 +91,9 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                                 card_type={card_data.card_type}
                                 {onclick}
                                 debug={props.debug}
-                                debug_name={props.debug_name.clone()} />
+                                debug_name={props.debug_name.clone()} 
+                                {classes}
+                            />
                         }
                     })
                     .collect::<Html>()
@@ -111,6 +115,14 @@ where
     pub card_type: BBCardType,
     pub tag: Option<Tags>,
 }
+
+    pub fn tag_class(tag: Tags) -> &'static str {
+            match tag {
+                Tags::NodeJS => "text-bg-node",
+                Tags::Yew => "text-bg-yew",
+                Tags::Rust => "text-bg-rust",
+            }
+    }
 
 #[derive(PartialEq, Clone)]
 pub struct BBCardDataBuilder<T>

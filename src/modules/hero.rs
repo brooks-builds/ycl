@@ -28,7 +28,7 @@ pub struct Props {
 #[function_component(BBHero)]
 pub fn component(props: &Props) -> Html {
     html! {
-        <BBContainer classes="px-4 my-5 bg-secondary py-4">
+        <BBContainer classes="px-4 bg-secondary py-4">
             <BBRow>
                 {
                     props.media.render()

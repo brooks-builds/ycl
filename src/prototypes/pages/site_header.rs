@@ -29,12 +29,6 @@ pub fn component() -> Html {
 
     html! {
         <BBContainer>
-            <BBTitle
-                level={BBTitleLevel::One}
-                align={AlignText::Center}
-            >
-                {"Site Headers"}
-            </BBTitle>
             <BBNavbar<Route>
                 create_account_route={Route::Home}
                 is_authenticated={false}
