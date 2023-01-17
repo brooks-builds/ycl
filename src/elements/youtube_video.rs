@@ -17,24 +17,8 @@ pub struct Props {
 
 #[styled_component(BBYouTubeVideo)]
 pub fn component(props: &Props) -> Html {
-    let style = Style::new(css!(
-        r#"
-        position: relative;
-        padding-bottom: 56.25%; /* 16:9 */
-        height: 0;
-
-        iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-    "#
-    ))
-    .unwrap();
     html! {
-        <div class={classes!(props.align.class(), style)}>
+        <div class={classes!(props.align.class())}>
             <iframe
                 width={format!("{}", props.width)}
                 height={format!("{}", props.height)}

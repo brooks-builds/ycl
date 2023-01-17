@@ -11,6 +11,7 @@ pub fn component() -> Html {
         BBCardDataBuilder::new().title("Site Header").link(Route::SiteHeader).build(),
         BBCardDataBuilder::new().title("Hero").link(Route::Hero).build(),
         BBCardDataBuilder::new().title("Featured Courses").link(Route::FeaturedCourses).build(),
+        BBCardDataBuilder::new().title("LMS Promo").link(Route::LmsPromo).build(),
     ];
     html! {
         <BBContainer margin={BBContainerMargin::Normal}>
