@@ -14,12 +14,17 @@ pub struct Props {
     pub debug: bool,
     #[prop_or_default]
     pub debug_name: AttrValue,
-    pub action_icon: Option<BBIconType>
+    pub action_icon: Option<BBIconType>,
+    #[prop_or_default]
+    pub classes: Classes,
 }
 
 #[function_component(BBButton)]
 pub fn component(props: &Props) -> Html {
-    let class = props.button_type.class();
+    let class = classes!(
+        props.button_type.class(),
+        props.classes.clone(),
+    );
     let onclick = {
         let prop_onclick = props.onclick.clone();
         let debug = props.debug;

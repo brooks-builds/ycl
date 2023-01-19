@@ -28,7 +28,7 @@ pub struct Props {
 #[function_component(BBHero)]
 pub fn component(props: &Props) -> Html {
     html! {
-        <BBContainer classes="px-4 bg-secondary py-4">
+        <BBContainer classes="bg-secondary py-4">
             <BBRow>
                 {
                     props.media.render()
@@ -56,7 +56,7 @@ impl BBHeroLeftMedia {
         match self {
             BBHeroLeftMedia::None => html! {},
             BBHeroLeftMedia::Image(image) => html! {
-                <BBCol width={BBColWidth::Six} classes="py-1">
+                <BBCol width={BBColWidth::Six} classes={AlignText::Center.class()}>
                     {
                         image.clone()
                     }

@@ -1,6 +1,6 @@
 use super::pages::{
     featured_courses::FeaturedCourses, hero::Hero, home::Home, lms_promo::LmsPromo,
-    site_header::SiteHeader,
+    site_header::SiteHeader, community_banner::CommunityBanner,
 };
 use yew::prelude::*;
 use yew_router::prelude::*;
@@ -17,6 +17,8 @@ pub enum Route {
     FeaturedCourses,
     #[at("/lms_promo")]
     LmsPromo,
+    #[at("/community_banner")]
+    CommunityBanner,
 }
 
 pub fn switch(routes: Route) -> Html {
@@ -26,5 +28,6 @@ pub fn switch(routes: Route) -> Html {
         Route::Hero => html! { <Hero /> },
         Route::FeaturedCourses => html! { <FeaturedCourses /> },
         Route::LmsPromo => html! { <LmsPromo /> },
+        Route::CommunityBanner => html! { <CommunityBanner /> },
     }
 }
