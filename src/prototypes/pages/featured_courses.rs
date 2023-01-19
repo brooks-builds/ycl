@@ -15,16 +15,19 @@ pub fn component() -> Html {
         .title("Node JS")
         .text("Learn how to build web api's and server side code using JavaScript on the backend.")
         .tag(Tags::NodeJS)
+        .link(Route::Home)
         .build(),
     BBCardDataBuilder::new()
         .title("Rust")
         .text("Learn how to program in Rust, all you need is some programming experience in any language.")
         .tag(Tags::Rust)
+        .link(Route::Home)
         .build(),
     BBCardDataBuilder::new()
         .title("Yew")
         .text("Learn how to build frontend applications using Rust and web Assembly.")
         .tag(Tags::Yew)
+        .link(Route::Home)
         .build(),
     ];
 

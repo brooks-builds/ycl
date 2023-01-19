@@ -1,13 +1,16 @@
 use gloo::console::log;
 use stylist::{style, yew::styled_component};
-use yew::prelude::*;
+use yew::{prelude::*, virtual_dom::VNode};
 use yew_router::prelude::*;
 
-use crate::{elements::{
-    button::{BBButton, BBButtonType},
-    text::BBText,
-    title::{BBTitle, BBTitleLevel},
-}, foundations::tags::Tags};
+use crate::{
+    elements::{
+        button::{BBButton, BBButtonType},
+        text::BBText,
+        title::{BBTitle, BBTitleLevel},
+    },
+    foundations::tags::Tags,
+};
 
 #[derive(Properties, PartialEq)]
 pub struct Props<T>
@@ -35,17 +38,25 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     let class = style!(
         r#"
         width: 18rem;
+        height: 14rem;
     "#
     )
     .unwrap();
     let card_type = props.card_type;
 
     html! {
-        <div class={classes!("card", class, "mx-1", "my-1", props.classes.clone())}>
-            {
-                card_type.render(props)
-            }
-        </div>
+        {
+            wrap_in_link(
+                props.internal_link.clone(),
+                html! {
+                    <div class={classes!("card", class, "mx-1", "my-1", props.classes.clone())}>
+                        {
+                            card_type.render(props)
+                        }
+                    </div>
+                }
+            )
+        }
     }
 }
 
@@ -66,19 +77,7 @@ impl BBCardType {
     fn simple<T: Routable + 'static>(&self, props: &Props<T>) -> Html {
         html! {
             <div class="card-body mt-5 me-5">
-                {
-                    if props.internal_link.is_some() {
-                        html! {
-                            <Link<T> to={props.internal_link.clone().unwrap()}>
-                                <BBTitle level={props.title_level} classes={classes!("card-title")}>{props.title.clone()}</BBTitle>
-                            </Link<T>>
-                        }
-                    } else {
-                        html! {
-                            <BBTitle level={props.title_level} classes={classes!("card-title")}>{props.title.clone()}</BBTitle>
-                        }
-                    }
-                }
+                <BBTitle level={props.title_level} classes={classes!("card-title")}>{props.title.clone()}</BBTitle>
                 <BBText classes="card-text">{props.text.clone()}</BBText>
             </div>
         }
@@ -114,3 +113,16 @@ impl BBCardType {
     }
 }
 
+fn wrap_in_link<T: Routable + 'static>(link: Option<T>, children: VNode) -> Html {
+    if let Some(link) = link {
+        html! {
+            <Link<T> to={link} classes="card-link">
+                {children}
+            </Link<T>>
+        }
+    } else {
+        html! {
+            {children}
+        }
+    }
+}
