@@ -30,7 +30,7 @@ pub fn component(props: &Props) -> Html {
     html! {
         <header>
             <BBRow classes="align-items-center">
-                <BBCol width={BBColWidth::Eleven}>
+                <BBCol>
                     <BBTitle level={props.title_level.clone()}>
                         {
                             if props.icon.is_some() {
@@ -44,7 +44,7 @@ pub fn component(props: &Props) -> Html {
                         {props.title.clone()}
                     </BBTitle>
                 </BBCol>
-                <BBCol width={BBColWidth::One}>
+                <BBCol classes="align-right">
                     {
                         if props.more {
                             Some(html! {

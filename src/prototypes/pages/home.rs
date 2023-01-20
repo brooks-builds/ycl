@@ -9,10 +9,8 @@ use yew::prelude::*;
 pub fn component() -> Html {
     let card_data = vec![
         BBCardDataBuilder::new().title("Site Header").link(Route::SiteHeader).build(),
-        BBCardDataBuilder::new().title("Hero").link(Route::Hero).build(),
-        BBCardDataBuilder::new().title("Featured Courses").link(Route::FeaturedCourses).build(),
-        BBCardDataBuilder::new().title("LMS Promo").link(Route::LmsPromo).build(),
-        BBCardDataBuilder::new().title("Community Banner").link(Route::CommunityBanner).build(),
+        BBCardDataBuilder::new().title("Hero").link(Route::Heros).build(),
+        BBCardDataBuilder::new().title("Cards").link(Route::Cards).build(),
     ];
     html! {
         <BBContainer margin={BBContainerMargin::Normal}>

@@ -362,6 +362,10 @@ h6,
     background: var(--color-gray-3);
 }
 
+.align-right {
+	direction: rtl;
+}
+
 // Icons
 
 .icon {
@@ -400,6 +404,11 @@ h6,
 .card-link {
 	text-decoration: none;
 	width: fit-content;
+	color: var(--color-dark);
+}
+
+.card-link:hover {
+	color: var(--color-dark);
 }
 
 // Course Cards

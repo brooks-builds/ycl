@@ -17,7 +17,8 @@ pub struct Props {
     pub level: BBTitleLevel,
     pub children: Children,
     pub align: Option<AlignText>,
-    pub classes: Option<Classes>,
+    #[prop_or_default]
+    pub classes: Classes,
     pub id: Option<String>,
 }
 

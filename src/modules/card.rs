@@ -37,8 +37,7 @@ where
 pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     let class = style!(
         r#"
-        width: 18rem;
-        height: 14rem;
+        width: 19rem;
     "#
     )
     .unwrap();
