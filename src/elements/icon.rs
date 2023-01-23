@@ -81,15 +81,25 @@ impl BBIconType {
             | Self::Contact
             | Self::Twitter
             | Self::Mark
-            | Self::Twitch
             | Self::YouTubeSmall
-            | Self::Check 
+            | Self::Check
             | Self::Discord => Some(
                 Style::new(css!(
                     r#"
                         background-color: inherit; 
                         border: none;
                     "#
+                ))
+                .unwrap(),
+            ),
+            Self::Twitch => Some(
+                Style::new(css!(
+                    r#"
+                            background-color: inherit;
+                            border: none;
+                            position: relative;
+                            top: 4px;
+                        "#
                 ))
                 .unwrap(),
             ),
