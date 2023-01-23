@@ -35,6 +35,18 @@ pub fn component() -> Html {
                 main={main_section()}
                 media={BBHeroLeftMedia::Image(hero_image())}
             />
+            <BBTitle level={BBTitleLevel::Two}>{"Contact Banner"}</BBTitle>
+            <BBHero 
+                text="Contact us to learn if our method of online education is right for you."
+                title="Get in Touch"
+                main={
+                    html! {
+                        <BBContainer classes={AlignText::Center.class()}>
+                            <BBButton button_type={BBButtonType::PrimaryLight}>{"Contact Brooks"}</BBButton>
+                        </BBContainer>
+                    }
+                }
+            />
         </BBContainer>
     }
 }
