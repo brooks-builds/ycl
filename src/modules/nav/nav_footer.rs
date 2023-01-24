@@ -1,3 +1,4 @@
+use super::navbar_link::BBNavbarLink;
 use crate::{
     elements::nav::BBNav,
     foundations::container::{BBContainer, BBContainerMargin},
@@ -5,14 +6,12 @@ use crate::{
 use yew::prelude::*;
 use yew_router::{prelude::Link, Routable};
 
-use super::navbar::BBNavbarLink;
-
 #[derive(Properties, PartialEq)]
 pub struct Props<T>
 where
     T: Routable + 'static,
 {
-    pub links: Vec<BBNavbarLink<T>>,
+    pub left_links: Vec<BBNavbarLink<T>>,
     pub right_links: Vec<BBNavbarLink<T>>,
 }
 
@@ -20,7 +19,7 @@ where
 pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     html! {
         <BBNav>
-            <BBContainer margin={BBContainerMargin::Fluid}>
+            <BBContainer margin={BBContainerMargin::Normal}>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -28,7 +27,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         {
                             props
-                                .links
+                                .left_links
                                 .clone()
                                 .into_iter()
                                 .map(|link| {

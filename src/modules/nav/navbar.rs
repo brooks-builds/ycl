@@ -1,7 +1,7 @@
+use super::navbar_link::BBNavbarLink;
+use crate::elements::icon::{BBIcon, BBIconType};
 use ::yew::prelude::*;
 use yew_router::{prelude::Link, Routable};
-
-use crate::elements::icon::{BBIcon, BBIconType};
 
 #[derive(Properties, PartialEq)]
 pub struct Props<T>
@@ -12,6 +12,7 @@ where
     pub is_authenticated: bool,
     pub login_route: T,
     pub create_account_route: T,
+    pub show_brand: Option<bool>,
 }
 
 #[function_component(BBNavbar)]
@@ -19,7 +20,13 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     html! {
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <BBIcon icon_type={BBIconType::Brand} />
+                {
+                    props.show_brand.clone().map(|_brand| {
+                        html! {
+                            <BBIcon icon_type={BBIconType::Brand} />
+                        }
+                    })
+                }
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -58,26 +65,5 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                 </div>
             </div>
         </nav>
-    }
-}
-
-#[derive(PartialEq, Clone, Copy)]
-pub struct BBNavbarLink<T>
-where
-    T: Routable + 'static,
-{
-    pub to: T,
-    pub label: &'static str,
-    pub active: bool,
-}
-
-impl<T> BBNavbarLink<T>
-where
-    T: Routable + 'static,
-{
-    pub fn classes(&self) -> Classes {
-        let active = if self.active { Some("active") } else { None };
-
-        classes!("nav-link", active)
     }
 }

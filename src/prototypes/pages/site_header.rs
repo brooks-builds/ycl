@@ -1,9 +1,6 @@
-use crate::elements::title::{BBTitle, BBTitleLevel};
-use crate::foundations::{
-    align_text::AlignText,
-    container::{BBContainer, BBContainerMargin},
-};
-use crate::modules::navbar::{BBNavbar, BBNavbarLink};
+use crate::foundations::container::BBContainer;
+use crate::modules::nav::navbar::BBNavbar;
+use crate::modules::nav::navbar_link::BBNavbarLink;
 use crate::prototypes::router::Route;
 use yew::prelude::*;
 
@@ -34,6 +31,7 @@ pub fn component() -> Html {
                 is_authenticated={false}
                 links={navbar_links}
                 login_route={Route::Home}
+                show_brand={true}
             />
         </BBContainer>
     }
