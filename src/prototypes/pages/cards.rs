@@ -2,6 +2,7 @@ use crate::elements::icon::BBIconType;
 use crate::elements::title::BBTitleLevel;
 use crate::foundations::container::{BBContainer, BBContainerMargin};
 use crate::foundations::tags::Tags;
+use crate::modules::card::BBCardType;
 use crate::{
     modules::card_list::{BBCardData, BBCardDataBuilder, BBCardList},
     prototypes::router::Route,
@@ -11,6 +12,11 @@ use yew::prelude::*;
 
 #[function_component(Cards)]
 pub fn component() -> Html {
+
+    let on_action = Callback::from(|_event: ()| {
+        log!("The action button was pressed");
+    });
+
     let featured_course_cards = vec![BBCardDataBuilder::new()
         .title("Node JS")
         .text("Learn how to build web api's and server side code using JavaScript on the backend.")
@@ -65,10 +71,79 @@ pub fn component() -> Html {
         .build(),
     ];
 
-
-    let on_action = Callback::from(|_event: ()| {
-        log!("The action button was pressed");
-    });
+    let featured_course_cards_2 = vec![
+    BBCardDataBuilder::new()
+        .title("Node JS")
+        .text("Learn how to build web api's and server side code using JavaScript on the backend.")
+        .tag(Tags::NodeJS)
+        .link(Route::Home)
+        .build(),
+    BBCardDataBuilder::new()
+        .title("Rust")
+        .text("Learn how to program in Rust, all you need is some programming experience in any language.")
+        .tag(Tags::Rust)
+        .link(Route::Home)
+        .build(),
+    BBCardDataBuilder::new()
+        .title("Yew")
+        .text("Learn how to build frontend applications using Rust and web Assembly.")
+        .tag(Tags::Yew)
+        .link(Route::Home)
+        .build(),
+    BBCardDataBuilder::new()
+        .title("Node JS")
+        .text("Learn how to build web api's and server side code using JavaScript on the backend.")
+        .tag(Tags::NodeJS)
+        .link(Route::Home)
+        .build(),
+    BBCardDataBuilder::new()
+        .title("Rust")
+        .text("Learn how to program in Rust, all you need is some programming experience in any language.")
+        .tag(Tags::Rust)
+        .link(Route::Home)
+        .build(),
+    BBCardDataBuilder::new()
+        .title("Yew")
+        .text("Learn how to build frontend applications using Rust and web Assembly.")
+        .tag(Tags::Yew)
+        .link(Route::Home)
+        .build(),
+    BBCardDataBuilder::new()
+        .title("Yew")
+        .text("Learn how to build frontend applications using Rust and web Assembly.")
+        .tag(Tags::Yew)
+        .link(Route::Home)
+        .build(),
+    BBCardDataBuilder::new()
+        .title("Node JS")
+        .text("Learn how to build web api's and server side code using JavaScript on the backend.")
+        .tag(Tags::NodeJS)
+        .link(Route::Home)
+        .build(),
+    BBCardDataBuilder::new()
+        .title("Rust")
+        .text("Learn how to program in Rust, all you need is some programming experience in any language.")
+        .tag(Tags::Rust)
+        .link(Route::Home)
+        .build(),
+    BBCardDataBuilder::new()
+        .title("Yew")
+        .text("Learn how to build frontend applications using Rust and web Assembly.")
+        .tag(Tags::Yew)
+        .link(Route::Home)
+        .build(),
+    BBCardDataBuilder::new()
+        .title("Yew")
+        .text("Learn how to build frontend applications using Rust and web Assembly.")
+        .tag(Tags::Yew)
+        .link(Route::Home)
+        .build(),
+    BBCardDataBuilder::new()
+        .title("Request Course")
+        .onclick(on_action.clone())
+        .card_type(BBCardType::CallToAction)
+        .build(),
+    ];
 
     html! {
         <BBContainer margin={BBContainerMargin::Normal}>
@@ -97,6 +172,15 @@ pub fn component() -> Html {
                 more={true}
                 on_action={on_action.clone()}
                 action="Features"
+            />
+            <BBCardList<Route>
+                card_data={featured_course_cards_2}
+                card_title_level={BBTitleLevel::Two}
+                icon={BBIconType::Star}
+                title="Featured Courses"
+                more={true}
+                on_action={on_action.clone()}
+                action="Request Course"
             />
         </BBContainer>
     }

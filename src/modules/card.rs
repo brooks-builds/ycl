@@ -1,8 +1,3 @@
-use gloo::console::log;
-use stylist::{style, yew::styled_component};
-use yew::{prelude::*, virtual_dom::VNode};
-use yew_router::prelude::*;
-
 use crate::{
     elements::{
         button::{BBButton, BBButtonType},
@@ -11,6 +6,10 @@ use crate::{
     },
     foundations::tags::Tags,
 };
+use gloo::console::log;
+use stylist::{css, style, yew::styled_component, Style};
+use yew::{prelude::*, virtual_dom::VNode};
+use yew_router::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct Props<T>
@@ -37,7 +36,7 @@ where
 pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     let class = style!(
         r#"
-        width: 19rem;
+        width: 18rem;
     "#
     )
     .unwrap();
@@ -99,7 +98,7 @@ impl BBCardType {
 
         html! {
             <div class="card-body text-center">
-                <div class="h-25"></div>
+                <div class={Style::new(css!("height: 4rem;")).unwrap()}></div>
                 <BBButton
                     {onclick}
                     button_type={BBButtonType::PrimaryLight}
