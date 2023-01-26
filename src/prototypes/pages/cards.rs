@@ -12,7 +12,6 @@ use yew::prelude::*;
 
 #[function_component(Cards)]
 pub fn component() -> Html {
-
     let on_action = Callback::from(|_event: ()| {
         log!("The action button was pressed");
     });
@@ -165,7 +164,7 @@ pub fn component() -> Html {
                 action="Meet Community"
             />
             <BBCardList<Route>
-                card_data={learner_support_cards}
+                card_data={learner_support_cards.clone()}
                 card_title_level={BBTitleLevel::Two}
                 icon={BBIconType::Contact}
                 title="Learner Support"
@@ -181,6 +180,11 @@ pub fn component() -> Html {
                 more={true}
                 on_action={on_action.clone()}
                 action="Request Course"
+            />
+            <BBCardList<Route>
+                card_data={learner_support_cards}
+                card_title_level={BBTitleLevel::Two}
+                title="Learner Support"
             />
         </BBContainer>
     }
