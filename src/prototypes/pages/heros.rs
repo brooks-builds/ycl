@@ -33,7 +33,7 @@ pub fn component() -> Html {
                 text="Courses built to be completed, and with a community."
                 title="Built for People"
                 main={main_section()}
-                media={BBHeroLeftMedia::Image(hero_image())}
+                media={BBHeroLeftMedia::LeftMedia(hero_image())}
             />
             <BBTitle level={BBTitleLevel::Two}>{"Contact Banner"}</BBTitle>
             <BBHero 
@@ -46,6 +46,15 @@ pub fn component() -> Html {
                         </BBContainer>
                     }
                 }
+                subtitle="This is a subtitle"
+            />
+            <BBTitle level={BBTitleLevel::Two}>{"Course Details"}</BBTitle>
+            <BBHero 
+                text="Learn how to build web applications using the frontend framework Yew.rs. This framework is modeled after React, so should be familiar if you've done web programming before. Comes with the benefit of not needing to use JavaScript"
+                title="$99"
+                main={main_section()}
+                media={BBHeroLeftMedia::LeftMedia(media())}
+                subtitle="Web Development with Yew.rs"
             />
         </BBContainer>
     }
@@ -81,3 +90,5 @@ fn hero_image() -> Html {
         <BBImage src="/code.png" alt="Some code we found on the internet" />
     }
 }
+
+

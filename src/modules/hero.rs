@@ -8,7 +8,7 @@ use crate::{
     foundations::{
         align_text::AlignText,
         column::{BBCol, BBColWidth},
-        container::BBContainer,
+        container::{BBContainer, BBContainerMargin},
         row::BBRow,
     },
 };
@@ -23,6 +23,7 @@ pub struct Props {
     pub main: Children,
     #[prop_or_else(|| BBHeroLeftMedia::None)]
     pub media: BBHeroLeftMedia,
+    pub subtitle: Option<AttrValue>,
 }
 
 #[function_component(BBHero)]
@@ -34,11 +35,16 @@ pub fn component(props: &Props) -> Html {
                     props.media.render()
                 }
                 <BBCol width={props.media.main_width()} classes="my-auto">
-                    <div>
-                        <BBTitle level={props.title_level} align={AlignText::Center}>{props.title.clone()}</BBTitle>
+                    <BBContainer margin={BBContainerMargin::Normal}>
+                        <hgroup class={AlignText::Center.class()}>
+                            <BBTitle level={props.title_level} align={AlignText::Center}>{props.title.clone()}</BBTitle>
+                            {
+                                props.subtitle.clone().map(|subtitle| html! { <p>{subtitle}</p> })
+                            }
+                        </hgroup>
                         <BBText align={AlignText::Center}>{props.text.clone()}</BBText>
                         {props.main.clone()}
-                    </div>
+                    </BBContainer>
                 </BBCol>
             </BBRow>
         </BBContainer>
@@ -48,14 +54,14 @@ pub fn component(props: &Props) -> Html {
 #[derive(PartialEq, Clone)]
 pub enum BBHeroLeftMedia {
     None,
-    Image(VNode),
+    LeftMedia(VNode),
 }
 
 impl BBHeroLeftMedia {
     pub fn render(&self) -> Html {
         match self {
             BBHeroLeftMedia::None => html! {},
-            BBHeroLeftMedia::Image(image) => html! {
+            BBHeroLeftMedia::LeftMedia(image) => html! {
                 <BBCol width={BBColWidth::Six} classes={AlignText::Center.class()}>
                     {
                         image.clone()
@@ -68,7 +74,7 @@ impl BBHeroLeftMedia {
     pub fn main_width(&self) -> BBColWidth {
         match self {
             BBHeroLeftMedia::None => BBColWidth::None,
-            BBHeroLeftMedia::Image(_) => BBColWidth::Six,
+            BBHeroLeftMedia::LeftMedia(_) => BBColWidth::Six,
         }
     }
 
