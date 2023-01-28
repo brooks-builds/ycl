@@ -24,6 +24,10 @@ pub fn component() -> Html {
             .title("Footers")
             .link(Route::Footers)
             .build(),
+        BBCardDataBuilder::new()
+            .title("Navigations")
+            .link(Route::Navs)
+            .build(),
     ];
     html! {
         <BBContainer margin={BBContainerMargin::Normal}>

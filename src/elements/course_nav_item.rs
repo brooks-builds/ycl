@@ -1,6 +1,6 @@
 use crate::elements::icon::{BBIcon, BBIconSize, BBIconType};
 use crate::elements::tooltip::BBTooltip;
-use crate::modules::course_nav::{BBCourseNav, BBCourseNavArticle};
+use crate::modules::nav::course_nav::{BBCourseNav, BBCourseNavArticle};
 use stylist::{css, yew::styled_component, Style};
 use yew::prelude::*;
 

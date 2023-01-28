@@ -1,14 +1,14 @@
-use crate::elements::title::{BBTitle, BBTitleLevel};
-use crate::foundations::align_text::AlignText;
-use crate::foundations::container::BBContainer;
-use crate::modules::hero::{BBHero, BBHeroLeftMedia};
-use yew::prelude::*;
-use crate::modules::lms_promo::BBLmsPromo;
-use crate::elements::youtube_video::BBYouTubeVideo;
-use crate::elements::image::BBImage;
 use crate::elements::button::{BBButton, BBButtonType};
-use crate::foundations::row::BBRow;
+use crate::elements::image::BBImage;
+use crate::elements::title::{BBTitle, BBTitleLevel};
+use crate::elements::youtube_video::BBYouTubeVideo;
+use crate::foundations::align_text::AlignText;
 use crate::foundations::column::BBCol;
+use crate::foundations::container::BBContainer;
+use crate::foundations::row::BBRow;
+use crate::modules::hero::{BBHero, BBHeroLeftMedia};
+use crate::modules::lms_promo::BBLmsPromo;
+use yew::prelude::*;
 
 #[function_component(Heros)]
 pub fn component() -> Html {
@@ -22,21 +22,21 @@ pub fn component() -> Html {
                 title_level={BBTitleLevel::Three}
             />
             <BBTitle level={BBTitleLevel::Two}>{"LMS Promo"}</BBTitle>
-            <BBLmsPromo 
+            <BBLmsPromo
                 title="Learning Management"
                 title_level={BBTitleLevel::Three}
                 description="The Brooks Builds Learning Management System is a custom platform to help you learn the skills that you need to learn to get to where you want to go in your engineering career."
                 media={media()}
             />
             <BBTitle level={BBTitleLevel::Two}>{"Community Banner"}</BBTitle>
-            <BBHero 
+            <BBHero
                 text="Courses built to be completed, and with a community."
                 title="Built for People"
                 main={main_section()}
                 media={BBHeroLeftMedia::LeftMedia(hero_image())}
             />
             <BBTitle level={BBTitleLevel::Two}>{"Contact Banner"}</BBTitle>
-            <BBHero 
+            <BBHero
                 text="Contact us to learn if our method of online education is right for you."
                 title="Get in Touch"
                 main={
@@ -46,10 +46,10 @@ pub fn component() -> Html {
                         </BBContainer>
                     }
                 }
-                subtitle="This is a subtitle"
+                subtitle="This is a subtitl"
             />
             <BBTitle level={BBTitleLevel::Two}>{"Course Details"}</BBTitle>
-            <BBHero 
+            <BBHero
                 text="Learn how to build web applications using the frontend framework Yew.rs. This framework is modeled after React, so should be familiar if you've done web programming before. Comes with the benefit of not needing to use JavaScript"
                 title="$99"
                 main={main_section()}
@@ -90,5 +90,3 @@ fn hero_image() -> Html {
         <BBImage src="/code.png" alt="Some code we found on the internet" />
     }
 }
-
-
