@@ -1151,6 +1151,7 @@ dependencies = [
  "chrono",
  "gloo",
  "stylist",
+ "thiserror",
  "wasm-bindgen",
  "web-sys",
  "yew",

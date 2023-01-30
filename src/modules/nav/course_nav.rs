@@ -1,17 +1,24 @@
-use crate::elements::course_nav_item::{BBCourseNavItem, BBCourseNavItemState, _Props::completed};
+use crate::{
+    elements::course_nav_item::{BBCourseNavItem, BBCourseNavItemState, _Props::completed},
+    foundations::errors::BBError,
+};
 use stylist::yew::styled_component;
 use yew::prelude::*;
+use yew_router::prelude::*;
 
 #[derive(Properties, PartialEq)]
-pub struct Props {
-    pub articles: Vec<BBCourseNavArticle>,
+pub struct Props<R>
+where
+    R: Routable + 'static,
+{
+    pub articles: Vec<BBCourseNavArticle<R>>,
     #[prop_or_default]
     pub classes: Classes,
 }
 
 #[styled_component(BBCourseNav)]
-pub fn component(props: &Props) -> Html {
-    let class = classes!(props.classes.clone(), "list-group",);
+pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
+    let class = classes!(props.classes.clone(), "list-group", "course-nav");
 
     html! {
         <ul {class}>
@@ -22,12 +29,14 @@ pub fn component(props: &Props) -> Html {
                     .into_iter()
                     .map(|article| {
                         html! {
-                            <BBCourseNavItem
-                                completed={article.completed}
-                                title={article.title}
-                                current={article.current}
-                                children={article.children}
-                                state={article.state} />
+                            <Link<R> to={article.to}>
+                                <BBCourseNavItem<R>
+                                    completed={article.completed}
+                                    title={article.title}
+                                    current={article.current}
+                                    children={article.children}
+                                    state={article.state} />
+                            </Link<R>>
                         }
                     })
                     .collect::<Html>()
@@ -37,15 +46,19 @@ pub fn component(props: &Props) -> Html {
 }
 
 #[derive(PartialEq, Clone)]
-pub struct BBCourseNavArticle {
+pub struct BBCourseNavArticle<R>
+where
+    R: Routable + 'static,
+{
     pub completed: bool,
     pub title: AttrValue,
     pub current: bool,
-    pub children: Option<Vec<BBCourseNavArticle>>,
+    pub children: Option<Vec<BBCourseNavArticle<R>>>,
     pub state: BBCourseNavItemState,
+    pub to: R,
 }
 
-impl BBCourseNavArticle {
+impl<R: Routable + 'static> BBCourseNavArticle<R> {
     pub fn active_class(&self) -> Option<&'static str> {
         if self.current {
             Some("active")
@@ -55,15 +68,19 @@ impl BBCourseNavArticle {
     }
 }
 
-pub struct BBCourseNavArticleBuilder {
+pub struct BBCourseNavArticleBuilder<R>
+where
+    R: Routable + 'static,
+{
     completed: bool,
     title: Option<AttrValue>,
     current: bool,
-    children: Option<Vec<BBCourseNavArticle>>,
+    children: Option<Vec<BBCourseNavArticle<R>>>,
     state: BBCourseNavItemState,
+    to: Option<R>,
 }
 
-impl BBCourseNavArticleBuilder {
+impl<R: Routable + 'static> BBCourseNavArticleBuilder<R> {
     pub fn new() -> Self {
         Self {
             completed: false,
@@ -71,6 +88,7 @@ impl BBCourseNavArticleBuilder {
             current: false,
             children: None,
             state: BBCourseNavItemState::Available,
+            to: None,
         }
     }
 
@@ -89,7 +107,7 @@ impl BBCourseNavArticleBuilder {
         self
     }
 
-    pub fn children(mut self, new_children: Vec<BBCourseNavArticle>) -> Self {
+    pub fn children(mut self, new_children: Vec<BBCourseNavArticle<R>>) -> Self {
         self.children = Some(new_children);
         self
     }
@@ -99,15 +117,23 @@ impl BBCourseNavArticleBuilder {
         self
     }
 
-    pub fn build(self) -> Option<BBCourseNavArticle> {
-        self.title.map(|title| {
-            BBCourseNavArticle {
-                completed: self.completed,
-                title: title,
-                current: self.current,
-                children: self.children,
-                state: self.state,
-            }
+    pub fn to(mut self, to: R) -> Self {
+        self.to = Some(to);
+        self
+    }
+
+    pub fn build(self) -> Result<BBCourseNavArticle<R>, BBError> {
+        Ok(BBCourseNavArticle {
+            completed: self.completed,
+            title: self
+                .title
+                .ok_or_else(|| BBError::CourseNavItemArticleBuilder("missing title"))?,
+            current: self.current,
+            children: self.children,
+            state: self.state,
+            to: self
+                .to
+                .ok_or_else(|| BBError::CourseNavItemArticleBuilder("missing link to"))?,
         })
     }
 }
