@@ -3,6 +3,8 @@ use crate::foundations::column::{BBCol, BBColWidth};
 use crate::foundations::container::BBContainer;
 use crate::foundations::row::BBRow;
 use std::ops::Deref;
+use stylist::yew::styled_component;
+use stylist::Style;
 use wasm_bindgen::{prelude::wasm_bindgen, JsCast};
 use web_sys::HtmlElement;
 use yew::{function_component, html, use_effect, use_state, AttrValue, Callback, Html, Properties};
@@ -25,7 +27,7 @@ pub struct Props {
     pub onclick_purchase: Callback<()>,
 }
 
-#[function_component(BBCourseContent)]
+#[styled_component(BBCourseContent)]
 pub fn component(props: &Props) -> Html {
     let course = props.course.clone();
     let mounted = use_state(|| false);
@@ -63,18 +65,15 @@ pub fn component(props: &Props) -> Html {
     html! {
         <BBContainer>
             <BBRow classes="ms-auto">
-                <BBCol width={BBColWidth::Ten}></BBCol>
-                <BBCol width={BBColWidth::Two}>
-                    {
-                        if !props.have_access {
-                            Some(html! {
-                                <BBButton button_type={BBButtonType::PrimaryLight} {onclick}>{"Purchase to Access"}</BBButton>
-                            })
-                        } else {
-                            None
-                        }
+                {
+                    if !props.have_access {
+                        Some(html! {
+                            <BBButton button_type={BBButtonType::PrimaryLight} {onclick}>{"Purchase to Access"}</BBButton>
+                        })
+                    } else {
+                        None
                     }
-                </BBCol>
+                }
             </BBRow>
             <BBRow>
                 <div id="course-content"></div>

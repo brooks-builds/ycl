@@ -1,5 +1,6 @@
 use super::pages::{
-    cards::Cards, footers::Footers, heros::Heros, home::Home, site_header::SiteHeader, navs::Navs,
+    cards::Cards, content::Content, footers::Footers, heros::Heros, home::Home, navs::Navs,
+    site_header::SiteHeader,
 };
 use yew::prelude::*;
 use yew_router::prelude::*;
@@ -18,6 +19,8 @@ pub enum Route {
     Footers,
     #[at("/navs")]
     Navs,
+    #[at("/content")]
+    Content,
 }
 
 pub fn switch(routes: Route) -> Html {
@@ -28,5 +31,6 @@ pub fn switch(routes: Route) -> Html {
         Route::Cards => html! { <Cards /> },
         Route::Footers => html! { <Footers /> },
         Route::Navs => html! { <Navs /> },
+        Route::Content => html! { <Content /> },
     }
 }
