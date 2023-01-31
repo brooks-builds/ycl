@@ -1,5 +1,8 @@
 use crate::{
-    elements::course_nav_item::{BBCourseNavItem, BBCourseNavItemState, _Props::completed},
+    elements::{
+        course_nav_item::{BBCourseNavItem, BBCourseNavItemState, _Props::completed},
+        route_or_not::BBRouteOrNot,
+    },
     foundations::errors::BBError,
 };
 use stylist::yew::styled_component;
@@ -29,19 +32,25 @@ pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
                     .into_iter()
                     .map(|article| {
                         html! {
-                            <Link<R> to={article.to}>
-                                <BBCourseNavItem<R>
-                                    completed={article.completed}
-                                    title={article.title}
-                                    current={article.current}
-                                    children={article.children}
-                                    state={article.state} />
-                            </Link<R>>
+                            <BBRouteOrNot<R> to={article.get_to()}>
+                                {create_course_nav_item(article)}
+                            </BBRouteOrNot<R>>
                         }
                     })
                     .collect::<Html>()
             }
         </ul>
+    }
+}
+
+fn create_course_nav_item<R: Routable + 'static>(article: BBCourseNavArticle<R>) -> Html {
+    html! {
+        <BBCourseNavItem<R>
+            completed={article.completed}
+            title={article.title}
+            current={article.current}
+            children={article.children}
+            state={article.state} />
     }
 }
 
@@ -64,6 +73,13 @@ impl<R: Routable + 'static> BBCourseNavArticle<R> {
             Some("active")
         } else {
             None
+        }
+    }
+
+    pub fn get_to(&self) -> Option<R> {
+        match self.state {
+            BBCourseNavItemState::Available => Some(self.to.clone()),
+            _ => None,
         }
     }
 }
