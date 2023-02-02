@@ -5,7 +5,7 @@ pub struct Props {
     pub children: Children,
     pub current: Option<bool>,
     pub aria_current: Option<String>,
-    pub href: String,
+    pub href: AttrValue,
 }
 
 #[function_component(BBNavLink)]

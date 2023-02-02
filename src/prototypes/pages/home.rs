@@ -32,6 +32,10 @@ pub fn component() -> Html {
             .title("Content")
             .link(Route::Content)
             .build(),
+        BBCardDataBuilder::new()
+            .title("Auth")
+            .link(Route::Auth)
+            .build(),
     ];
     html! {
         <BBContainer margin={BBContainerMargin::Normal}>
