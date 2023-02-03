@@ -1,6 +1,7 @@
 pub mod accordian_item;
 pub mod button;
 pub mod course_nav_item;
+pub mod external_link;
 pub mod icon;
 pub mod image;
 pub mod nav;

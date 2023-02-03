@@ -1,20 +1,20 @@
-use yew::prelude::*;
-
 use crate::{
     elements::{
+        button::{BBButton, BBButtonType},
+        external_link::BBLink,
         icon::{BBIcon, BBIconSize, BBIconType},
         nav_link::BBNavLink,
         text::BBText,
         title::{BBTitle, BBTitleLevel},
     },
     foundations::{align_text::AlignText, column::BBCol, container::BBContainer, row::BBRow},
+    modules::icons_row::{BBIconsRow, BBIconsRowList},
 };
+use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
-    pub discord: Option<AttrValue>,
-    pub twitch: Option<AttrValue>,
-    pub youtube: Option<AttrValue>,
+    pub auth_icons: Vec<BBIconsRowList>,
     pub username_password: Option<AttrValue>,
     #[prop_or_else(|| BBTitleLevel::One)]
     pub title_level: BBTitleLevel,
@@ -55,17 +55,18 @@ pub fn component(props: &Props) -> Html {
                     </BBText>
                 </BBCol>
             </BBRow>
+            <BBIconsRow icons={props.auth_icons.clone()} />
             <BBRow>
-                <BBCol classes="d-flex justify-content-center mx-3">
-                    {
-                        props.discord.clone().map(|href| icon_link(BBIconType::Discord, href))
-                    }
-                    {
-                        props.twitch.clone().map(|href| icon_link(BBIconType::Twitch, href))
-                    }
-                    {
-                        props.youtube.clone().map(|href| icon_link(BBIconType::YouTubeSmall, href))
-                    }
+                <BBCol>
+                    <BBText align={AlignText::Center}>{"OR"}</BBText>
+                </BBCol>
+            </BBRow>
+
+            <BBRow>
+                <BBCol
+                    classes={classes!(AlignText::Center.class())}
+                >
+                    <BBLink href="https://twitch.tv/brookzerker" button={true}>{"Username / Password"}</BBLink>
                 </BBCol>
             </BBRow>
         </BBContainer>

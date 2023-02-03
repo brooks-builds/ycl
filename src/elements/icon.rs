@@ -98,7 +98,7 @@ impl BBIconType {
                             background-color: inherit;
                             border: none;
                             position: relative;
-                            top: -4px;
+                            transform: translateY(3px);
                         "#
                 ))
                 .unwrap(),

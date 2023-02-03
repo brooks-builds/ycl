@@ -1,5 +1,6 @@
 use super::nav::nav_footer::BBNavFooter;
 use super::nav::navbar_link::BBNavbarLink;
+use crate::modules::icons_row::{BBIconsRow, BBIconsRowList};
 use crate::{
     elements::icon::{BBIcon, BBIconSize, BBIconType},
     foundations::{column::BBCol, container::BBContainer, row::BBRow},
@@ -22,6 +23,14 @@ where
 pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     let now = Utc::now();
     let year = now.year();
+    let icons = vec![
+        BBIconsRowList::new(BBIconType::Twitter, "https://twitter.com/brooks_patton"),
+        BBIconsRowList::new(BBIconType::Twitch, "https://twitch.tv/brookzerker"),
+        BBIconsRowList::new(
+            BBIconType::YouTubeSmall,
+            "https://www.youtube.com/@BrooksBuilds",
+        ),
+    ];
 
     html! {
         <BBContainer classes={classes!("bg-secondary", Style::new(css!("margin: 1rem 0;")).unwrap())}>
@@ -35,25 +44,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                 {format!("©{year} Brooks Builds LLC. All rights reserved")}
               </BBCol>
             </BBRow>
-            <BBRow classes="text-center pb-5">
-                <BBCol>
-                    <a href="https://twitter.com/brooks_patton" >
-                        <BBIcon icon_type={BBIconType::Twitter} size={BBIconSize::Small} />
-                    </a>
-                    <a
-                        href="https://twitch.tv/brookzerker"
-                        class={
-                            Style::new(css!(
-                                    r#"position: relative;"#)).unwrap()
-                        }
-                    >
-                        <BBIcon icon_type={BBIconType::Twitch} size={BBIconSize::Small} />
-                    </a>
-                    <a href="https://www.youtube.com/channel/UCT1-XRVnJA-wws2bfbLbFcQ" >
-                        <BBIcon icon_type={BBIconType::YouTubeSmall} size={BBIconSize::Small} />
-                    </a>
-                </BBCol>
-           </BBRow>
+            <BBIconsRow {icons}/>
            <BBRow>
                 <BBNavFooter<T>
                     left_links={props.left_links.clone()}
