@@ -34,7 +34,7 @@ pub fn component() -> Html {
         As you can see above, the route is simply an enum. Enums make sense because we can only be visiting one page at a time as far as the app is concerned.
     "};
 
-    let onclick_purchase = Callback::from(|event| {
+    let onclick_purchase = Callback::from(|_event| {
         gloo::console::log!("the purchase button was clicked");
     });
 

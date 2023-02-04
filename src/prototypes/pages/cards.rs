@@ -4,7 +4,7 @@ use crate::foundations::container::{BBContainer, BBContainerMargin};
 use crate::foundations::tags::Tags;
 use crate::modules::card::BBCardType;
 use crate::{
-    modules::card_list::{BBCardData, BBCardDataBuilder, BBCardList},
+    modules::card_list::{BBCardDataBuilder, BBCardList},
     prototypes::router::Route,
 };
 use gloo::console::log;

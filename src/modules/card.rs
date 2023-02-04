@@ -1,10 +1,7 @@
-use crate::{
-    elements::{
-        button::{BBButton, BBButtonType},
-        text::BBText,
-        title::{BBTitle, BBTitleLevel},
-    },
-    foundations::tags::Tags,
+use crate::elements::{
+    button::{BBButton, BBButtonType},
+    text::BBText,
+    title::{BBTitle, BBTitleLevel},
 };
 use gloo::console::log;
 use stylist::{css, style, yew::styled_component, Style};

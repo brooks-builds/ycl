@@ -1,8 +1,8 @@
 use crate::{
     elements::icon::{BBIcon, BBIconSize, BBIconType},
-    foundations::{align_text::AlignText, container::BBContainer},
+    foundations::align_text::AlignText,
 };
-use yew::{prelude::*, virtual_dom::VNode};
+use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct Props {

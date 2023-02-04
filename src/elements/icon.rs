@@ -38,17 +38,17 @@ pub enum BBIconType {
 impl BBIconType {
     pub fn src(&self) -> &'static str {
         match self {
-            BBIconType::Brand => "/logo-bb-blue.svg",
-            BBIconType::Star => "/star.svg",
-            BBIconType::Heart => "/heart.svg",
-            BBIconType::Contact => "/chat_bubble.svg",
-            BBIconType::Mark => "/bb-logo-icon-blue.svg",
-            BBIconType::Twitter => "/twitter.svg",
-            BBIconType::Twitch => "/TwitchGlitchPurple.svg",
-            BBIconType::YouTubeSmall => "/youtube_social_squircle_red.png",
-            BBIconType::Check => "/check.svg",
-            BBIconType::Discord => "/discord_logo.svg",
-            BBIconType::Warning => "/warning_icon.svg",
+            BBIconType::Brand => "/images/logo-bb-blue.svg",
+            BBIconType::Star => "/images/star.svg",
+            BBIconType::Heart => "/images/heart.svg",
+            BBIconType::Contact => "/images/chat_bubble.svg",
+            BBIconType::Mark => "/images/bb-logo-icon-blue.svg",
+            BBIconType::Twitter => "/images/twitter.svg",
+            BBIconType::Twitch => "/images/TwitchGlitchPurple.svg",
+            BBIconType::YouTubeSmall => "/images/youtube_social_squircle_red.png",
+            BBIconType::Check => "/images/check.svg",
+            BBIconType::Discord => "/images/discord_logo.svg",
+            BBIconType::Warning => "/images/warning_icon.svg",
         }
     }
 

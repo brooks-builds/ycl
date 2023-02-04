@@ -1,6 +1,6 @@
 use crate::{
     elements::{
-        course_nav_item::{BBCourseNavItem, BBCourseNavItemState, _Props::completed},
+        course_nav_item::{BBCourseNavItem, BBCourseNavItemState},
         route_or_not::BBRouteOrNot,
     },
     foundations::errors::BBError,

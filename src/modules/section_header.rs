@@ -6,10 +6,7 @@ use crate::{
         icon::{BBIcon, BBIconSize, BBIconType},
         title::{BBTitle, BBTitleLevel},
     },
-    foundations::{
-        column::{BBCol, BBColWidth},
-        row::BBRow,
-    },
+    foundations::{column::BBCol, row::BBRow},
 };
 
 #[derive(Properties, PartialEq)]

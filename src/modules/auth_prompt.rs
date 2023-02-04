@@ -1,9 +1,6 @@
 use crate::{
     elements::{
-        button::{BBButton, BBButtonType},
         external_link::BBLink,
-        icon::{BBIcon, BBIconSize, BBIconType},
-        nav_link::BBNavLink,
         text::BBText,
         title::{BBTitle, BBTitleLevel},
     },
@@ -70,13 +67,5 @@ pub fn component(props: &Props) -> Html {
                 </BBCol>
             </BBRow>
         </BBContainer>
-    }
-}
-
-fn icon_link(icon_type: BBIconType, href: AttrValue) -> Html {
-    html! {
-        <a {href} class="mx-2">
-            <BBIcon {icon_type} size={BBIconSize::Small} />
-        </a>
     }
 }

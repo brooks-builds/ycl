@@ -3,7 +3,6 @@ use crate::elements::tooltip::BBTooltip;
 use crate::modules::nav::course_nav::{BBCourseNav, BBCourseNavArticle};
 use stylist::{css, yew::styled_component, Style};
 use yew::prelude::*;
-use yew_router::prelude::Link;
 use yew_router::Routable;
 
 #[derive(PartialEq, Properties)]

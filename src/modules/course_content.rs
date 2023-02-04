@@ -1,13 +1,11 @@
 use crate::elements::button::{BBButton, BBButtonType};
-use crate::foundations::column::{BBCol, BBColWidth};
 use crate::foundations::container::BBContainer;
 use crate::foundations::row::BBRow;
 use std::ops::Deref;
 use stylist::yew::styled_component;
-use stylist::Style;
 use wasm_bindgen::{prelude::wasm_bindgen, JsCast};
 use web_sys::HtmlElement;
-use yew::{function_component, html, use_effect, use_state, AttrValue, Callback, Html, Properties};
+use yew::{html, use_effect, use_state, AttrValue, Callback, Html, Properties};
 
 #[wasm_bindgen]
 extern "C" {

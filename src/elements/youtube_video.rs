@@ -1,4 +1,4 @@
-use stylist::{yew::styled_component, Style};
+use stylist::yew::styled_component;
 use yew::prelude::*;
 
 use crate::foundations::align_text::AlignText;
