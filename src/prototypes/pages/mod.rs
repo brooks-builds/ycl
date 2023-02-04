@@ -1,4 +1,5 @@
 pub mod auth;
+pub mod banners;
 pub mod cards;
 pub mod content;
 pub mod footers;

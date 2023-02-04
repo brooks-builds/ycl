@@ -32,6 +32,7 @@ pub enum BBIconType {
     YouTubeSmall,
     Check,
     Discord,
+    Warning,
 }
 
 impl BBIconType {
@@ -47,6 +48,7 @@ impl BBIconType {
             BBIconType::YouTubeSmall => "/youtube_social_squircle_red.png",
             BBIconType::Check => "/check.svg",
             BBIconType::Discord => "/discord_logo.svg",
+            BBIconType::Warning => "/warning_icon.svg",
         }
     }
 
@@ -62,6 +64,7 @@ impl BBIconType {
             BBIconType::YouTubeSmall => "YouTube logo",
             BBIconType::Check => "Checkmark",
             BBIconType::Discord => "Discord logo",
+            BBIconType::Warning => "Warning logo",
         }
     }
 
@@ -83,7 +86,8 @@ impl BBIconType {
             | Self::Mark
             | Self::YouTubeSmall
             | Self::Check
-            | Self::Discord => Some(
+            | Self::Discord
+            | Self::Warning => Some(
                 Style::new(css!(
                     r#"
                         background-color: inherit; 

@@ -1,5 +1,6 @@
 pub mod accordian;
 pub mod auth_prompt;
+pub mod banner;
 pub mod card;
 pub mod card_list;
 pub mod course_content;
