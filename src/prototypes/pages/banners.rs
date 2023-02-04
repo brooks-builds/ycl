@@ -1,21 +1,27 @@
-use yew::prelude::*;
-
 use crate::{
-    elements::title::{BBTitle, BBTitleLevel},
+    elements::{
+        icon::BBIconType,
+        title::{BBTitle, BBTitleLevel},
+    },
     foundations::{align_text::AlignText, container::BBContainer},
     modules::banner::{BBBanner, BBBannerType},
 };
+use yew::prelude::*;
 
 #[function_component(Banners)]
 pub fn component() -> Html {
+    let onclick = Callback::from(|_| {
+        gloo::console::log!("banner was clicked");
+    });
+
     html! {
         <BBContainer>
             <BBTitle level={BBTitleLevel::One} align={AlignText::Center}>{"Banners"}</BBTitle>
             <BBTitle level={BBTitleLevel::Two}>{"Discord Banner"}</BBTitle>
-            <BBBanner banner_type={BBBannerType::Discord} text="Join the Community" />
+            <BBBanner banner_type={BBBannerType::CallToAction} text="Join the Community" icon={BBIconType::Discord} {onclick} />
 
             <BBTitle level={BBTitleLevel::Two}>{"Warning Banner"}</BBTitle>
-            <BBBanner banner_type={BBBannerType::Error} text="There was a problem getting your course" />
+            <BBBanner banner_type={BBBannerType::Error} text="There was a problem getting your course" icon={BBIconType::Warning} />
         </BBContainer>
     }
 }

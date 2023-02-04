@@ -8,6 +8,9 @@ use yew::{prelude::*, virtual_dom::VNode};
 pub struct Props {
     pub text: AttrValue,
     pub banner_type: BBBannerType,
+    pub icon: BBIconType,
+    #[prop_or_default]
+    pub onclick: Callback<MouseEvent>,
 }
 
 #[function_component(BBBanner)]
@@ -23,8 +26,10 @@ pub fn component(props: &Props) -> Html {
 
     html! {
         <div {class} role="alert">
-            { props.banner_type.icon() }
-            {props.text.clone()}
+            <span onclick={props.onclick.clone()}>
+                <BBIcon icon_type={props.icon} size={BBIconSize::Tiny} />
+                {props.text.clone()}
+            </span>
             <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
@@ -33,25 +38,14 @@ pub fn component(props: &Props) -> Html {
 #[derive(PartialEq, Clone, Copy)]
 pub enum BBBannerType {
     Error,
-    Discord,
+    CallToAction,
 }
 
 impl BBBannerType {
     pub fn class(&self) -> Classes {
         match self {
             Self::Error => classes!("alert-danger"),
-            Self::Discord => classes!("alert-info"),
-        }
-    }
-
-    pub fn icon(&self) -> VNode {
-        match self {
-            Self::Error => {
-                html! { <BBIcon icon_type={BBIconType::Warning} size={BBIconSize::Tiny} /> }
-            }
-            Self::Discord => {
-                html! { <BBIcon icon_type={BBIconType::Discord} size={BBIconSize::Tiny} /> }
-            }
+            Self::CallToAction => classes!("alert-info"),
         }
     }
 }
