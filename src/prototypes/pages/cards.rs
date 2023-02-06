@@ -46,11 +46,6 @@ pub fn component() -> Html {
         .text("Live stream every Friday is open office time, bring your questions and problems with the course and we'll work on them together")
         .link(Route::Home)
         .build(),
-    BBCardDataBuilder::new()
-        .title("Shared Resources")
-        .text("Shared and starter code for your projects after you complete the courses")
-        .link(Route::Home)
-        .build(),
     ];
 
     let learner_support_cards = vec![BBCardDataBuilder::new()

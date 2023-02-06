@@ -27,6 +27,9 @@ where
     pub debug_name: AttrValue,
     #[prop_or_default]
     pub classes: Classes,
+    pub href: Option<AttrValue>,
+    #[prop_or_else(|| "check it out".into())]
+    pub href_text: AttrValue,
 }
 
 #[styled_component(BBCard)]
@@ -70,10 +73,15 @@ impl BBCardType {
     }
 
     fn simple<T: Routable + 'static>(&self, props: &Props<T>) -> Html {
+        let href_text = props.href_text.clone();
+
         html! {
             <div class="card-body mt-5 me-5">
                 <BBTitle level={props.title_level} classes={classes!("card-title")}>{props.title.clone()}</BBTitle>
                 <BBText classes="card-text">{props.text.clone()}</BBText>
+                {
+                    props.href.clone().map(move |href| html! { <a {href} target="_blank">{href_text}</a>})
+                }
             </div>
         }
     }

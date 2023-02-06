@@ -19,7 +19,7 @@ where
 pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     html! {
         <BBNav>
-            <BBContainer margin={BBContainerMargin::Normal}>
+            <BBContainer margin={BBContainerMargin::Fluid}>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

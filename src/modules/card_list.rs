@@ -1,12 +1,12 @@
-use gloo::console::log;
-use yew::prelude::*;
-use yew_router::Routable;
 use crate::foundations::tags::Tags;
 use crate::{
     elements::{icon::BBIconType, title::BBTitleLevel},
     foundations::{container::BBContainer, row::BBRow},
     modules::{card::BBCard, section_header::BBSectionHeader},
 };
+use gloo::console::log;
+use yew::prelude::*;
+use yew_router::Routable;
 
 use super::card::BBCardType;
 
@@ -63,7 +63,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                     None
                 }
             }
-            <BBRow>
+            <BBRow classes="d-flex justify-content-evenly">
                 {
                     props.card_data.clone().into_iter().map(move |card_data| {
                         let onclick = {
@@ -91,8 +91,10 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                                 card_type={card_data.card_type}
                                 {onclick}
                                 debug={props.debug}
-                                debug_name={props.debug_name.clone()} 
+                                debug_name={props.debug_name.clone()}
                                 {classes}
+                                href={card_data.href}
+                                href_text={card_data.href_text}
                             />
                         }
                     })
@@ -114,15 +116,17 @@ where
     pub onclick: Option<Callback<()>>,
     pub card_type: BBCardType,
     pub tag: Option<Tags>,
+    pub href: Option<AttrValue>,
+    pub href_text: AttrValue,
 }
 
-    pub fn tag_class(tag: Tags) -> &'static str {
-            match tag {
-                Tags::NodeJS => "text-bg-node",
-                Tags::Yew => "text-bg-yew",
-                Tags::Rust => "text-bg-rust",
-            }
+pub fn tag_class(tag: Tags) -> &'static str {
+    match tag {
+        Tags::NodeJS => "text-bg-node",
+        Tags::Yew => "text-bg-yew",
+        Tags::Rust => "text-bg-rust",
     }
+}
 
 #[derive(PartialEq, Clone)]
 pub struct BBCardDataBuilder<T>
@@ -134,7 +138,9 @@ where
     pub link: Option<T>,
     pub onclick: Option<Callback<()>>,
     pub card_type: BBCardType,
-    pub tags: Option<Tags>
+    pub tags: Option<Tags>,
+    pub href: Option<AttrValue>,
+    pub href_text: AttrValue,
 }
 
 impl<T: Routable> BBCardDataBuilder<T> {
@@ -146,6 +152,8 @@ impl<T: Routable> BBCardDataBuilder<T> {
             onclick: None,
             card_type: BBCardType::Simple,
             tags: None,
+            href: None,
+            href_text: "".into(),
         }
     }
 
@@ -175,7 +183,17 @@ impl<T: Routable> BBCardDataBuilder<T> {
     }
 
     pub fn tag(mut self, tag: Tags) -> Self {
-    self.tags = Some(tag);
+        self.tags = Some(tag);
+        self
+    }
+
+    pub fn href(mut self, href: impl Into<AttrValue>) -> Self {
+        self.href = Some(href.into());
+        self
+    }
+
+    pub fn href_text(mut self, href_text: impl Into<AttrValue>) -> Self {
+        self.href_text = href_text.into();
         self
     }
 
@@ -186,7 +204,9 @@ impl<T: Routable> BBCardDataBuilder<T> {
             link: self.link,
             onclick: self.onclick,
             card_type: self.card_type,
-            tag: self.tags
+            tag: self.tags,
+            href: self.href,
+            href_text: self.href_text,
         }
     }
 }
