@@ -18,7 +18,7 @@ where
 #[function_component(BBNavbar)]
 pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     html! {
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" role="navigation">
             <div class="container-fluid">
                 {
                     props.show_brand.clone().map(|_brand| {

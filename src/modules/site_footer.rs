@@ -33,7 +33,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     ];
 
     html! {
-        <BBContainer classes={classes!("bg-secondary", Style::new(css!("margin: 1rem 0;")).unwrap())}>
+        <footer class={classes!("bg-secondary", Style::new(css!("margin: 1rem 0;")).unwrap())} role="contentinfo">
            <BBRow classes="pt-5">
               <BBCol classes="text-center">
                   <BBIcon icon_type={BBIconType::Mark} size={BBIconSize::Small} />
@@ -51,6 +51,6 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                     right_links={props.right_links.clone()}
                 />
            </BBRow>
-        </BBContainer>
+        </footer>
     }
 }
