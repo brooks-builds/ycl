@@ -1,6 +1,6 @@
 use std::{fmt::Display, ops::Deref};
 
-use stylist::yew::styled_component;
+use stylist::{yew::styled_component, Style};
 use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
@@ -17,14 +17,16 @@ pub struct Props {
 
 #[styled_component(BBInput)]
 pub fn component(props: &Props) -> Html {
-    todo!("set error message in dom when invalid");
     let value = use_state(|| String::new());
+    let is_valid = use_state(|| true);
+
     let onchange = {
         let value = value.clone();
+        let is_valid = is_valid.clone();
+
         Callback::from(move |event: Event| {
             let input_element = event.target().unwrap().unchecked_into::<HtmlInputElement>();
-            let is_valid = input_element.check_validity();
-            gloo::console::log!("is valid", is_valid);
+            is_valid.set(input_element.check_validity());
             value.set(input_element.value());
         })
     };
@@ -38,13 +40,16 @@ pub fn component(props: &Props) -> Html {
                 class="form-control"
                 id={props.id.clone()}
                 required={props.required}
+                value={value.deref().clone()}
                 {onchange}
             />
             {
-                error_message(&*value, props.required)
+                create_error_message(props.input_type, props.required, *is_valid)
                     .map(|error_message| {
+                        let class = Style::new(css!("color: red;")).unwrap();
+
                         html! {
-                            <div id={format!("{}-help", &props.id)} class="form-text">{error_message}</div>
+                            <div id={format!("{}-help", &props.id)} class={classes!("form-text", class)}>{error_message}</div>
                         }
                     })
             }
@@ -52,7 +57,29 @@ pub fn component(props: &Props) -> Html {
     }
 }
 
-#[derive(PartialEq)]
+fn create_error_message(input_type: BBInputType, required: bool, is_valid: bool) -> Option<String> {
+    let mut error_messages = vec![];
+
+    if !is_valid {
+        let type_error_message = match input_type {
+            BBInputType::Email => "must be an email",
+            _ => "",
+        };
+
+        error_messages.push(type_error_message);
+
+        if required {
+            error_messages.push("required");
+        }
+
+        let error_message = error_messages.join(" and ");
+        Some(error_message)
+    } else {
+        None
+    }
+}
+
+#[derive(PartialEq, Clone, Copy)]
 pub enum BBInputType {
     Email,
     Password,

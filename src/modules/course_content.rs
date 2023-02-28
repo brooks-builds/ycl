@@ -1,4 +1,4 @@
-use crate::elements::button::{BBButton, BBButtonType};
+use crate::elements::button::{BBButton, BBButtonStyle};
 use crate::foundations::container::BBContainer;
 use crate::foundations::row::BBRow;
 use std::ops::Deref;
@@ -66,7 +66,7 @@ pub fn component(props: &Props) -> Html {
                 {
                     if !props.have_access {
                         Some(html! {
-                            <BBButton button_type={BBButtonType::PrimaryLight} {onclick}>{"Purchase to Access"}</BBButton>
+                            <BBButton button_style={BBButtonStyle::PrimaryLight} {onclick}>{"Purchase to Access"}</BBButton>
                         })
                     } else {
                         None

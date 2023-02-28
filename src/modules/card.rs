@@ -1,5 +1,5 @@
 use crate::elements::{
-    button::{BBButton, BBButtonType},
+    button::{BBButton, BBButtonStyle},
     text::BBText,
     title::{BBTitle, BBTitleLevel},
 };
@@ -106,7 +106,7 @@ impl BBCardType {
                 <div class={Style::new(css!("height: 4rem;")).unwrap()}></div>
                 <BBButton
                     {onclick}
-                    button_type={BBButtonType::PrimaryLight}
+                    button_style={BBButtonStyle::PrimaryLight}
                     debug={props.debug}
                     debug_name={props.debug_name.clone()} >
                     {props.title.clone()}

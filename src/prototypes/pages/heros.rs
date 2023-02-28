@@ -1,4 +1,4 @@
-use crate::elements::button::{BBButton, BBButtonType};
+use crate::elements::button::{BBButton, BBButtonStyle};
 use crate::elements::image::BBImage;
 use crate::elements::title::{BBTitle, BBTitleLevel};
 use crate::elements::youtube_video::BBYouTubeVideo;
@@ -42,7 +42,7 @@ pub fn component() -> Html {
                 main={
                     html! {
                         <BBContainer classes={AlignText::Center.class()}>
-                            <BBButton button_type={BBButtonType::PrimaryLight}>{"Contact Brooks"}</BBButton>
+                            <BBButton button_style={BBButtonStyle::PrimaryLight}>{"Contact Brooks"}</BBButton>
                         </BBContainer>
                     }
                 }
@@ -77,8 +77,8 @@ fn main_section() -> Html {
         <BBContainer>
             <BBRow>
                 <BBCol classes={AlignText::Center.class()}>
-                    <BBButton button_type={BBButtonType::PrimaryLight} classes="me-1">{"Get Started"}</BBButton>
-                    <BBButton button_type={BBButtonType::PrimaryLight}>{"Course Docs"}</BBButton>
+                    <BBButton button_style={BBButtonStyle::PrimaryLight} classes="me-1">{"Get Started"}</BBButton>
+                    <BBButton button_style={BBButtonStyle::PrimaryLight}>{"Course Docs"}</BBButton>
                 </BBCol>
             </BBRow>
         </BBContainer>
