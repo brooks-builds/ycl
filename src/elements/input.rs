@@ -13,16 +13,17 @@ pub struct Props {
     pub input_type: BBInputType,
     #[prop_or_default]
     pub required: bool,
+    pub name: AttrValue,
 }
 
 #[styled_component(BBInput)]
 pub fn component(props: &Props) -> Html {
-    let value = use_state(|| String::new());
     let is_valid = use_state(|| true);
+    let value = use_state(|| String::new());
 
     let onchange = {
-        let value = value.clone();
         let is_valid = is_valid.clone();
+        let value = value.clone();
 
         Callback::from(move |event: Event| {
             let input_element = event.target().unwrap().unchecked_into::<HtmlInputElement>();
@@ -41,6 +42,7 @@ pub fn component(props: &Props) -> Html {
                 id={props.id.clone()}
                 required={props.required}
                 value={value.deref().clone()}
+                name={props.name.clone()}
                 {onchange}
             />
             {

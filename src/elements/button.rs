@@ -31,7 +31,7 @@ pub fn component(props: &Props) -> Html {
         let debug = props.debug;
         let debug_name = props.debug_name.clone();
 
-        Callback::from(move |event: MouseEvent| {
+        Callback::from(move |_event: MouseEvent| {
             if debug {
                 log!(format!("Button {debug_name} clicked"));
             }

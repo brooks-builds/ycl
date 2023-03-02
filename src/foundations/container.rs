@@ -20,9 +20,9 @@ pub fn component(props: &Props) -> Html {
     let class = classes!(container_class, props.classes.clone());
 
     html! {
-        <section {class}>
+        <div {class}>
             {props.children.clone()}
-        </section>
+        </div>
     }
 }
 

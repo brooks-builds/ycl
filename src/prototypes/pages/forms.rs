@@ -1,3 +1,4 @@
+use web_sys::FormData;
 use yew::prelude::*;
 
 use crate::{
@@ -15,9 +16,20 @@ use crate::{
 
 #[function_component(PForms)]
 pub fn component() -> Html {
-    let create_account_onsubmit = Callback::from(|_| {
-        gloo::console::log!("form submitted");
-    });
+    let email = use_state(|| String::new());
+    let password = use_state(|| String::new());
+    let create_account_onsubmit = {
+        let email_state = email.clone();
+        let password_state = password.clone();
+
+        Callback::from(move |form_data: FormData| {
+            let email = form_data.get("email").as_string().unwrap();
+            let password = form_data.get("password").as_string().unwrap();
+
+            email_state.set(email);
+            password_state.set(password);
+        })
+    };
 
     html! {
         <BBContainer>
@@ -35,16 +47,21 @@ pub fn component() -> Html {
                         id="email"
                         input_type={BBInputType::Email}
                         required={true}
+                        name="email"
                     />
                     <BBInput
                         label="Password"
                         id="password"
                         input_type={BBInputType::Password}
                         required={true}
+                        name="password"
                     />
-                    <button type="submit" class="btn">{"create account"}</button>
-                    <BBButton button_type={BBButtonType::Submit}>{"other create account button"}</BBButton>
+                    <BBButton button_type={BBButtonType::Submit}>{"Create Account"}</BBButton>
                 </BBForm>
+                <BBContainer>
+                    <p>{format!("email: {}", &*email)}</p>
+                    <p>{format!("password: {}", &*password)}</p>
+                </BBContainer>
             </BBContainer>
         </BBContainer>
     }
