@@ -14,6 +14,8 @@ pub struct Props {
     #[prop_or_default]
     pub required: bool,
     pub name: AttrValue,
+    #[prop_or_default]
+    pub message: AttrValue,
 }
 
 #[styled_component(BBInput)]
@@ -45,6 +47,7 @@ pub fn component(props: &Props) -> Html {
                 name={props.name.clone()}
                 {onchange}
             />
+            <div id={format!("{}-message", &props.id)} class="form-text">{props.message.clone()}</div>
             {
                 create_error_message(props.input_type, props.required, *is_valid)
                     .map(|error_message| {
