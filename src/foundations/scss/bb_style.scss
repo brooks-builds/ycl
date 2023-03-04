@@ -104,7 +104,9 @@
     --bs-link-hover-color: var(--color-link-hover);
     --bs-code-color: var(--color-);
     --bs-highlight-bg: var(--color-);
+
 }
+
 
 // Buttons
 
@@ -527,4 +529,9 @@ pre {
     background-image: linear-gradient(180deg, #eee 50%, #fff 50%);
     background-size: 100% 48px;
     background-position: 0 14px;
+}
+
+// form overrides
+.form-text {
+	color: var(--color-gray-7);
 }
