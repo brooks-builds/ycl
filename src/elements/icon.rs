@@ -20,7 +20,7 @@ pub fn component(props: &Props) -> Html {
     }
 }
 
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Clone, Copy, Eq, Debug)]
 pub enum BBIconType {
     Brand,
     Star,

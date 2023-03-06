@@ -22,6 +22,9 @@ pub fn component() -> Html {
 
             <BBTitle level={BBTitleLevel::Two}>{"Warning Banner"}</BBTitle>
             <BBBanner banner_type={BBBannerType::Error} text="There was a problem getting your course" icon={BBIconType::Warning} />
+
+            <BBTitle level={BBTitleLevel::Two}>{"Success Banner"}</BBTitle>
+            <BBBanner banner_type={BBBannerType::Success} text="Account created, you can now log in" icon={BBIconType::Heart} />
         </BBContainer>
     }
 }

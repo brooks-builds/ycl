@@ -16,12 +16,15 @@ pub struct Props {
     pub name: AttrValue,
     #[prop_or_default]
     pub message: AttrValue,
+    #[prop_or_default]
+    pub value: AttrValue,
 }
 
 #[styled_component(BBInput)]
 pub fn component(props: &Props) -> Html {
     let is_valid = use_state(|| true);
-    let value = use_state(|| String::new());
+    let prop_value = props.value.clone();
+    let value = use_state(move || prop_value);
 
     let onchange = {
         let is_valid = is_valid.clone();
@@ -30,7 +33,7 @@ pub fn component(props: &Props) -> Html {
         Callback::from(move |event: Event| {
             let input_element = event.target().unwrap().unchecked_into::<HtmlInputElement>();
             is_valid.set(input_element.check_validity());
-            value.set(input_element.value());
+            value.set(input_element.value().into());
         })
     };
 
