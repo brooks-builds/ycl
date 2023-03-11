@@ -1,5 +1,8 @@
 use super::navbar_link::BBNavbarLink;
-use crate::elements::icon::{BBIcon, BBIconType};
+use crate::elements::{
+    icon::{BBIcon, BBIconType},
+    text::BBText,
+};
 use ::yew::prelude::*;
 use yew_router::{prelude::Link, Routable};
 
@@ -9,10 +12,13 @@ where
     T: Routable + 'static,
 {
     pub links: Vec<BBNavbarLink<T>>,
-    pub is_authenticated: bool,
     pub login_route: T,
     pub create_account_route: T,
     pub show_brand: Option<bool>,
+    #[prop_or_default]
+    pub username: AttrValue,
+    #[prop_or_default]
+    pub is_authenticated: bool,
 }
 
 #[function_component(BBNavbar)]
@@ -47,7 +53,11 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                     {
                         if props.is_authenticated {
                             html! {
-
+                                <ul class="navbar-nav ml-0 mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <BBText>{format!("Welcome {}", &props.username)}</BBText>
+                                    </li>
+                                </ul>
                             }
                         } else {
                             html! {
