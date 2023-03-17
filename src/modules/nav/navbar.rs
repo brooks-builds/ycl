@@ -15,8 +15,7 @@ where
     pub login_route: T,
     pub create_account_route: T,
     pub show_brand: Option<bool>,
-    #[prop_or_default]
-    pub username: AttrValue,
+    pub username: Option<AttrValue>,
     #[prop_or_default]
     pub is_authenticated: bool,
 }
@@ -55,7 +54,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                             html! {
                                 <ul class="navbar-nav ml-0 mb-2 mb-lg-0">
                                     <li class="nav-item">
-                                        <BBText>{format!("Welcome {}", &props.username)}</BBText>
+                                        <BBText>{format!("Welcome {}", props.username.clone().unwrap_or_else(|| AttrValue::from("Learner")))}</BBText>
                                     </li>
                                 </ul>
                             }
