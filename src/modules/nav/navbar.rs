@@ -1,5 +1,6 @@
 use super::navbar_link::BBNavbarLink;
 use crate::elements::{
+    external_link::BBLink,
     icon::{BBIcon, BBIconType},
     text::BBText,
 };
@@ -18,6 +19,10 @@ where
     pub username: Option<AttrValue>,
     #[prop_or_default]
     pub is_authenticated: bool,
+    #[prop_or_default]
+    pub logout_url: AttrValue,
+    #[prop_or_default]
+    pub logout_onclick: Callback<()>,
 }
 
 #[function_component(BBNavbar)]
@@ -53,8 +58,11 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                         if props.is_authenticated {
                             html! {
                                 <ul class="navbar-nav ml-0 mb-2 mb-lg-0">
-                                    <li class="nav-item">
-                                        <BBText>{format!("Welcome {}", props.username.clone().unwrap_or_else(|| AttrValue::from("Learner")))}</BBText>
+                                    <li class="nav-item navbar-text">
+                                        <span>{format!("Welcome {}", props.username.clone().unwrap_or_else(|| AttrValue::from("Learner")))}</span>
+                                    </li>
+                                    <li class="nav-item mx-1">
+                                        <BBLink href={props.logout_url.clone()} button={true} classes="nav-link" onclick={props.logout_onclick.clone()} prevent_default={true}>{"logout"}</BBLink>
                                     </li>
                                 </ul>
                             }
