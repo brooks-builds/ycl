@@ -13,3 +13,4 @@ pub mod text;
 pub mod title;
 pub mod tooltip;
 pub mod youtube_video;
+pub mod pill;

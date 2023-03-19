@@ -1,9 +1,9 @@
 use super::navbar_link::BBNavbarLink;
-use crate::elements::{
+use crate::{elements::{
     external_link::BBLink,
     icon::{BBIcon, BBIconType},
-    text::BBText,
-};
+    text::BBText, pill::BBPill,
+}, foundations::{roles::BBRole, color::BBColor}};
 use ::yew::prelude::*;
 use yew_router::{prelude::Link, Routable};
 
@@ -23,6 +23,7 @@ where
     pub logout_url: AttrValue,
     #[prop_or_default]
     pub logout_onclick: Callback<()>,
+    pub role: Option<BBRole>,
 }
 
 #[function_component(BBNavbar)]
@@ -61,6 +62,13 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                                     <li class="nav-item navbar-text">
                                         <span>{format!("Welcome {}", props.username.clone().unwrap_or_else(|| AttrValue::from("Learner")))}</span>
                                     </li>
+                                    {
+                                        props.role.map(|role| html! {
+                                            <li class="nav-item navbar-text mx-1">
+                                                <BBPill color={BBColor::Success}>{role.to_string()}</BBPill>
+                                            </li>
+                                        })
+                                    }
                                     <li class="nav-item mx-1">
                                         <BBLink href={props.logout_url.clone()} button={true} classes="nav-link" onclick={props.logout_onclick.clone()} prevent_default={true}>{"logout"}</BBLink>
                                     </li>
