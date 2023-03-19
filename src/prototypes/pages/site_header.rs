@@ -27,6 +27,8 @@ pub fn component() -> Html {
         },
     ];
 
+    let roles = vec![BBRole::Learner, BBRole::Author];
+
     html! {
         <BBContainer>
             <BBTitle level={BBTitleLevel::One} align={AlignText::Center}>{"Navbars"}</BBTitle>
@@ -46,7 +48,7 @@ pub fn component() -> Html {
                 login_route={Route::Home}
                 show_brand={true}
                 username="Brooks"
-                role={BBRole::Author}
+                {roles}
             />
         </BBContainer>
     }

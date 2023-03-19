@@ -16,6 +16,7 @@ web-sys = { version = "0.3.61", features = ["Document", "Element", "HtmlElement"
 chrono = { version = "0.4.23", features = ["wasmbind"] }
 thiserror = "1.0.38"
 indoc = "2.0.0"
+serde = { version = "1.0.157", features = ["derive"] }
 
 [dev-dependencies]
 web-sys = "0.3.60"

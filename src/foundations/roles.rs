@@ -1,4 +1,6 @@
-#[derive(PartialEq, Clone, Copy, Eq, Debug)]
+use serde::{Deserialize, Serialize};
+
+#[derive(PartialEq, Clone, Copy, Eq, Debug, Deserialize, Serialize)]
 pub enum BBRole {
     Learner,
     Author,
@@ -13,12 +15,3 @@ impl ToString for BBRole {
     }
 }
 
-impl From<&str> for BBRole {
-    fn from(value: &str) -> Self {
-        match value.to_lowercase().as_str() {
-            "author" => Self::Author,
-            "learner" => Self::Learner,
-            _ => Self::Learner,
-        }
-    }
-}
