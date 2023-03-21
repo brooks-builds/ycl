@@ -1,7 +1,7 @@
 use crate::elements::icon::BBIconType;
 use crate::elements::title::BBTitleLevel;
 use crate::foundations::container::{BBContainer, BBContainerMargin};
-use crate::foundations::tags::Tags;
+use crate::foundations::tags::BBTag;
 use crate::modules::card::BBCardType;
 use crate::{
     modules::card_list::{BBCardDataBuilder, BBCardList},
@@ -19,19 +19,19 @@ pub fn component() -> Html {
     let featured_course_cards = vec![BBCardDataBuilder::new()
         .title("Node JS")
         .text("Learn how to build web api's and server side code using JavaScript on the backend.")
-        .tag(Tags::NodeJS)
+        .tag(BBTag::NodeJS)
         .link(Route::Home)
         .build(),
     BBCardDataBuilder::new()
         .title("Rust")
         .text("Learn how to program in Rust, all you need is some programming experience in any language.")
-        .tag(Tags::Rust)
+        .tag(BBTag::Rust)
         .link(Route::Home)
         .build(),
     BBCardDataBuilder::new()
         .title("Yew")
         .text("Learn how to build frontend applications using Rust and web Assembly.")
-        .tag(Tags::Yew)
+        .tag(BBTag::Yew)
         .link(Route::Home)
         .build(),
     ];
@@ -69,67 +69,67 @@ pub fn component() -> Html {
     BBCardDataBuilder::new()
         .title("Node JS")
         .text("Learn how to build web api's and server side code using JavaScript on the backend.")
-        .tag(Tags::NodeJS)
+        .tag(BBTag::NodeJS)
         .link(Route::Home)
         .build(),
     BBCardDataBuilder::new()
         .title("Rust")
         .text("Learn how to program in Rust, all you need is some programming experience in any language.")
-        .tag(Tags::Rust)
+        .tag(BBTag::Rust)
         .link(Route::Home)
         .build(),
     BBCardDataBuilder::new()
         .title("Yew")
         .text("Learn how to build frontend applications using Rust and web Assembly.")
-        .tag(Tags::Yew)
+        .tag(BBTag::Yew)
         .link(Route::Home)
         .build(),
     BBCardDataBuilder::new()
         .title("Node JS")
         .text("Learn how to build web api's and server side code using JavaScript on the backend.")
-        .tag(Tags::NodeJS)
+        .tag(BBTag::NodeJS)
         .link(Route::Home)
         .build(),
     BBCardDataBuilder::new()
         .title("Rust")
         .text("Learn how to program in Rust, all you need is some programming experience in any language.")
-        .tag(Tags::Rust)
+        .tag(BBTag::Rust)
         .link(Route::Home)
         .build(),
     BBCardDataBuilder::new()
         .title("Yew")
         .text("Learn how to build frontend applications using Rust and web Assembly.")
-        .tag(Tags::Yew)
+        .tag(BBTag::Yew)
         .link(Route::Home)
         .build(),
     BBCardDataBuilder::new()
         .title("Yew")
         .text("Learn how to build frontend applications using Rust and web Assembly.")
-        .tag(Tags::Yew)
+        .tag(BBTag::Yew)
         .link(Route::Home)
         .build(),
     BBCardDataBuilder::new()
         .title("Node JS")
         .text("Learn how to build web api's and server side code using JavaScript on the backend.")
-        .tag(Tags::NodeJS)
+        .tag(BBTag::NodeJS)
         .link(Route::Home)
         .build(),
     BBCardDataBuilder::new()
         .title("Rust")
         .text("Learn how to program in Rust, all you need is some programming experience in any language.")
-        .tag(Tags::Rust)
+        .tag(BBTag::Rust)
         .link(Route::Home)
         .build(),
     BBCardDataBuilder::new()
         .title("Yew")
         .text("Learn how to build frontend applications using Rust and web Assembly.")
-        .tag(Tags::Yew)
+        .tag(BBTag::Yew)
         .link(Route::Home)
         .build(),
     BBCardDataBuilder::new()
         .title("Yew")
         .text("Learn how to build frontend applications using Rust and web Assembly.")
-        .tag(Tags::Yew)
+        .tag(BBTag::Yew)
         .link(Route::Home)
         .build(),
     BBCardDataBuilder::new()

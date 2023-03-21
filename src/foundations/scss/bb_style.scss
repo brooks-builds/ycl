@@ -50,6 +50,8 @@
 
     --color-yew-green: #009A5B;
     --color-yew-green-dark: #00683b;
+    --color-axum: #009A5B;
+    --color-axum-dark: #00683b;
     --color-rust-red: #d66611;
     --color-rust-red-dark: #a04739;
     --color-javascript-yellow: #ead03a;
@@ -425,6 +427,11 @@ h6,
 
 .text-bg-yew {
     background-image: linear-gradient(45deg, var(--color-yew-green-dark) 0%, var(--color-yew-green) 80%) !important;
+    color: var(--color-light);
+}
+
+.text-bg-axum {
+    background-image: linear-gradient(45deg, var(--color-axum) 0%, var(--color-axum-dark) 80%) !important;
     color: var(--color-light);
 }
 

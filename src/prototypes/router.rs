@@ -1,6 +1,6 @@
 use super::pages::{
-    auth::Auth, banners::Banners, cards::Cards, content::Content, footers::Footers, heros::Heros,
-    home::Home, navs::Navs, site_header::SiteHeader, forms::PForms,
+    auth::Auth, banners::Banners, cards::Cards, content::Content, footers::Footers, forms::PForms,
+    heros::Heros, home::Home, navs::Navs, site_header::SiteHeader, tables::TablesPrototype,
 };
 use yew::prelude::*;
 use yew_router::prelude::*;
@@ -27,6 +27,8 @@ pub enum Route {
     Banners,
     #[at("/forms")]
     Forms,
+    #[at("/tables")]
+    Tables,
 }
 
 pub fn switch(routes: Route) -> Html {
@@ -41,5 +43,6 @@ pub fn switch(routes: Route) -> Html {
         Route::Auth => html! { <Auth /> },
         Route::Banners => html! { <Banners /> },
         Route::Forms => html! { <PForms /> },
+        Route::Tables => html! { <TablesPrototype /> },
     }
 }

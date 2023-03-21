@@ -1,4 +1,4 @@
-use crate::foundations::tags::Tags;
+use crate::foundations::tags::BBTag;
 use crate::{
     elements::{icon::BBIconType, title::BBTitleLevel},
     foundations::{container::BBContainer, row::BBRow},
@@ -115,16 +115,18 @@ where
     pub link: Option<T>,
     pub onclick: Option<Callback<()>>,
     pub card_type: BBCardType,
-    pub tag: Option<Tags>,
+    pub tag: Option<BBTag>,
     pub href: Option<AttrValue>,
     pub href_text: AttrValue,
 }
 
-pub fn tag_class(tag: Tags) -> &'static str {
+pub fn tag_class(tag: BBTag) -> &'static str {
     match tag {
-        Tags::NodeJS => "text-bg-node",
-        Tags::Yew => "text-bg-yew",
-        Tags::Rust => "text-bg-rust",
+        BBTag::NodeJS => "text-bg-node",
+        BBTag::Axum => "text-bg-axum",
+        BBTag::Yew => "text-bg-yew",
+        BBTag::Rust => "text-bg-rust",
+        BBTag::Unknown => "",
     }
 }
 
@@ -138,7 +140,7 @@ where
     pub link: Option<T>,
     pub onclick: Option<Callback<()>>,
     pub card_type: BBCardType,
-    pub tags: Option<Tags>,
+    pub tags: Option<BBTag>,
     pub href: Option<AttrValue>,
     pub href_text: AttrValue,
 }
@@ -182,7 +184,7 @@ impl<T: Routable> BBCardDataBuilder<T> {
         self
     }
 
-    pub fn tag(mut self, tag: Tags) -> Self {
+    pub fn tag(mut self, tag: BBTag) -> Self {
         self.tags = Some(tag);
         self
     }
