@@ -18,6 +18,8 @@ pub struct Props {
     pub message: AttrValue,
     #[prop_or_default]
     pub value: AttrValue,
+    #[prop_or_default]
+    pub onchange: Callback<AttrValue>,
 }
 
 #[styled_component(BBInput)]
@@ -29,11 +31,14 @@ pub fn component(props: &Props) -> Html {
     let onchange = {
         let is_valid = is_valid.clone();
         let value = value.clone();
+        let props_onchange = props.onchange.clone();
 
         Callback::from(move |event: Event| {
             let input_element = event.target().unwrap().unchecked_into::<HtmlInputElement>();
             is_valid.set(input_element.check_validity());
-            value.set(input_element.value().into());
+            let input_value: AttrValue = input_element.value().into();
+            value.set(input_value.clone());
+            props_onchange.emit(input_value)
         })
     };
 
