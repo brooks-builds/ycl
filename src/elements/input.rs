@@ -4,6 +4,7 @@ use stylist::{yew::styled_component, Style};
 use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
+use yew_hooks::{use_effect_update, use_latest};
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
@@ -41,6 +42,20 @@ pub fn component(props: &Props) -> Html {
             props_onchange.emit(input_value)
         })
     };
+
+    {
+        let prop_value = props.value.clone();
+        let value = value.clone();
+
+        use_effect_update(move || {
+            let state_value = value.deref().clone();
+            if state_value != prop_value {
+                value.set(prop_value);
+            }
+
+            || {}
+        });
+    }
 
     html! {
 
