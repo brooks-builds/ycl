@@ -32,10 +32,10 @@ pub fn component(props: &Props) -> Html {
                 <BBIcon icon_type={props.icon} size={BBIconSize::Tiny} />
                 {props.text.clone()}
             </span>
-            <button 
-                class="btn-close" 
-                type="button" 
-                data-bs-dismiss="alert" 
+            <button
+                class="btn-close"
+                type="button"
+                data-bs-dismiss="alert"
                 aria-label="Close"
                 onclick={props.close_onclick.clone()}></button>
         </div>

@@ -4,7 +4,7 @@ use yew::prelude::*;
 
 use crate::{
     elements::{
-        table::{BBTable, BBTableValue},
+        table::BBTable,
         title::{BBTitle, BBTitleLevel},
     },
     foundations::{

@@ -4,7 +4,7 @@ use stylist::{yew::styled_component, Style};
 use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
-use yew_hooks::{use_effect_update, use_latest};
+use yew_hooks::use_effect_update;
 
 #[derive(Properties, PartialEq)]
 pub struct Props {

@@ -1,6 +1,9 @@
 use yew::prelude::*;
 
-use crate::{elements::title::{BBTitleLevel, BBTitle}, foundations::align_text::AlignText};
+use crate::{
+    elements::title::{BBTitle, BBTitleLevel},
+    foundations::align_text::AlignText,
+};
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
@@ -14,8 +17,8 @@ pub struct Props {
 pub fn component(props: &Props) -> Html {
     html! {
       <div class="px-4 py-5 my-5 text-center">
-        <BBTitle 
-            classes="display-5 fw-bold" 
+        <BBTitle
+            classes="display-5 fw-bold"
             level={props.title_level.clone()}
             align={AlignText::Center}
         >

@@ -1,9 +1,12 @@
 use super::navbar_link::BBNavbarLink;
-use crate::{elements::{
-    external_link::BBLink,
-    icon::{BBIcon, BBIconType},
-    pill::BBPill,
-}, foundations::{roles::BBRole, color::BBColor}};
+use crate::{
+    elements::{
+        external_link::BBLink,
+        icon::{BBIcon, BBIconType},
+        pill::BBPill,
+    },
+    foundations::{color::BBColor, roles::BBRole},
+};
 use ::yew::prelude::*;
 use yew_router::{prelude::Link, Routable};
 
@@ -24,7 +27,7 @@ where
     #[prop_or_default]
     pub logout_onclick: Callback<()>,
     #[prop_or_default]
-    pub roles: Vec<BBRole>
+    pub roles: Vec<BBRole>,
 }
 
 #[function_component(BBNavbar)]

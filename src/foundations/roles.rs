@@ -11,7 +11,7 @@ impl ToString for BBRole {
         match self {
             Self::Author => "Author",
             Self::Learner => "Learner",
-        }.to_owned()
+        }
+        .to_owned()
     }
 }
-

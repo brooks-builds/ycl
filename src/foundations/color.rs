@@ -1,4 +1,4 @@
-use yew::{Classes, classes};
+use yew::{classes, Classes};
 
 #[derive(PartialEq)]
 pub enum BBColor {
