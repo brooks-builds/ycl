@@ -12,6 +12,7 @@ pub mod pill;
 pub mod route_or_not;
 pub mod table;
 pub mod text;
+pub mod text_area;
 pub mod title;
 pub mod tooltip;
 pub mod youtube_video;

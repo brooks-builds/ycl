@@ -112,6 +112,7 @@ pub enum BBInputType {
     Email,
     Password,
     Text,
+    Number,
 }
 
 impl Display for BBInputType {
@@ -120,6 +121,7 @@ impl Display for BBInputType {
             Self::Email => "email",
             Self::Password => "password",
             Self::Text => "text",
+            Self::Number => "number",
         })
     }
 }
