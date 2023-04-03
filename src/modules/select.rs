@@ -13,11 +13,11 @@ pub struct Props {
 pub fn component(props: &Props) -> Html {
     html! {
         <BBContainer>
-            <label for={props.id.clone()}>{&props.label}</label>
-            <select class="form-select" aria-label="Default select example" id={props.id.clone()} name={props.name.clone()} data-testid="select">
-                <option selected={true}></option>
+            <label for={props.id.clone()} class="form-label">{&props.label}</label>
+            <select class="form-select" id={props.id.clone()} name={props.name.clone()} data-testid="select">
+                <option value="">{"Choose Tag"}</option>
                 {
-                    props.options.iter().map(|option| html!{ <option value={option.value.clone()}>{option.label.clone()}</option>}).collect::<Html>()
+                 props.options.iter().map(|option| html!{ <option value={option.value.clone()}>{option.label.clone()}</option>}).collect::<Html>()
                 }
             </select>
         </BBContainer>
