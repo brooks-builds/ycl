@@ -9,4 +9,5 @@ pub mod icons_row;
 pub mod lms_promo;
 pub mod nav;
 pub mod section_header;
+pub mod select;
 pub mod site_footer;
