@@ -8,6 +8,7 @@ pub struct Props {
     pub label: AttrValue,
     #[prop_or_else(|| 3)]
     pub rows: u8,
+    pub name: AttrValue,
 }
 
 #[function_component(BBTextArea)]
@@ -15,7 +16,7 @@ pub fn component(props: &Props) -> Html {
     html! {
         <BBContainer>
             <label for={props.id.clone()} class="form-label">{&props.label}</label>
-            <textarea class="form-control" id={props.id.clone()} rows={props.rows.to_string()}></textarea>
+            <textarea class="form-control" id={props.id.clone()} rows={props.rows.to_string()} name={props.name.clone()}></textarea>
         </BBContainer>
     }
 }
