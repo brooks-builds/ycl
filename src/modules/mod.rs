@@ -6,6 +6,7 @@ pub mod card_list;
 pub mod course_content;
 pub mod hero;
 pub mod icons_row;
+pub mod lists;
 pub mod lms_promo;
 pub mod nav;
 pub mod section_header;
