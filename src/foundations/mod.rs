@@ -5,4 +5,5 @@ pub mod container;
 pub mod errors;
 pub mod roles;
 pub mod row;
+pub mod states;
 pub mod tags;
