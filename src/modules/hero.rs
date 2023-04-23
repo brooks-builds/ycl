@@ -35,7 +35,7 @@ pub fn component(props: &Props) -> Html {
                     props.media.render()
                 }
                 <BBCol width={props.media.main_width()} classes="my-auto">
-                    <BBContainer margin={BBContainerMargin::Normal}>
+                    <BBContainer margin={BBContainerMargin::Normal} classes={AlignText::Center.class()}>
                         <hgroup class={AlignText::Center.class()}>
                             <BBTitle level={props.title_level} align={AlignText::Center}>{props.title.clone()}</BBTitle>
                             {
