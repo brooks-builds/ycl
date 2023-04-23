@@ -6,6 +6,7 @@ pub mod form;
 pub mod icon;
 pub mod image;
 pub mod input;
+pub mod internal_link;
 pub mod nav;
 pub mod nav_link;
 pub mod pill;
