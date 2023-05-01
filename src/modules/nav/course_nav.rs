@@ -54,7 +54,7 @@ fn create_course_nav_item<R: Routable + 'static>(article: BBCourseNavArticle<R>)
     }
 }
 
-#[derive(PartialEq, Clone)]
+#[derive(PartialEq, Clone, Debug)]
 pub struct BBCourseNavArticle<R>
 where
     R: Routable + 'static,

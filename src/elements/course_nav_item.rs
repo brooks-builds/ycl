@@ -46,7 +46,7 @@ pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
     }
 }
 
-#[derive(PartialEq, Clone)]
+#[derive(PartialEq, Clone, Debug)]
 pub enum BBCourseNavItemState {
     Available,
     NotYetCreated,
