@@ -27,7 +27,7 @@ pub fn component() -> Html {
         },
     ];
 
-    let roles = vec![BBRole::Learner, BBRole::Author];
+    let role = BBRole::Learner;
 
     html! {
         <BBContainer>
@@ -48,7 +48,7 @@ pub fn component() -> Html {
                 login_route={Route::Home}
                 show_brand={true}
                 username="Brooks"
-                {roles}
+                {role}
             />
         </BBContainer>
     }
