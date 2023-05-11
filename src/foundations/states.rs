@@ -1,4 +1,4 @@
-#[derive(PartialEq, Debug, Default, Clone, Copy)]
+#[derive(PartialEq, Debug, Default, Clone)]
 pub enum BBLoadingState {
     #[default]
     Initialized,
