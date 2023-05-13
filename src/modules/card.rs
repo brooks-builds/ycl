@@ -58,7 +58,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     }
 }
 
-#[derive(PartialEq, Clone, Copy)]
+#[derive(PartialEq, Clone, Copy, Debug)]
 pub enum BBCardType {
     Simple,
     CallToAction,

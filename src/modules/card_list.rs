@@ -105,7 +105,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     }
 }
 
-#[derive(PartialEq, Clone)]
+#[derive(PartialEq, Clone, Debug)]
 pub struct BBCardData<T>
 where
     T: Routable + 'static,
@@ -130,7 +130,7 @@ pub fn tag_class(tag: BBTag) -> &'static str {
     }
 }
 
-#[derive(PartialEq, Clone)]
+#[derive(PartialEq, Clone, Debug)]
 pub struct BBCardDataBuilder<T>
 where
     T: Routable + 'static,
