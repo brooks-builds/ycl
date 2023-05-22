@@ -5,7 +5,7 @@ use std::ops::Deref;
 use stylist::yew::styled_component;
 use wasm_bindgen::{prelude::wasm_bindgen, JsCast};
 use web_sys::HtmlElement;
-use yew::{html, use_effect, use_state, AttrValue, Callback, Html, Properties};
+use yew::{html, use_effect, AttrValue, Callback, Html, Properties};
 
 #[wasm_bindgen]
 extern "C" {
@@ -28,28 +28,24 @@ pub struct Props {
 #[styled_component(BBCourseContent)]
 pub fn component(props: &Props) -> Html {
     let course = props.course.clone();
-    let mounted = use_state(|| false);
 
     use_effect(move || {
         let return_closure = || {};
 
-        if !mounted.deref() {
-            let document = gloo::utils::document();
+        let document = gloo::utils::document();
 
-            let element = if let Ok(element) = document.query_selector("#course-content") {
-                element
-            } else {
-                return return_closure;
-            };
+        let element = if let Ok(element) = document.query_selector("#course-content") {
+            element
+        } else {
+            return return_closure;
+        };
 
-            if let Some(element) = element {
-                let html_element = element.unchecked_into::<HtmlElement>();
+        if let Some(element) = element {
+            let html_element = element.unchecked_into::<HtmlElement>();
 
-                html_element.set_inner_html(&parse(course.deref()));
-                mounted.set(true);
+            html_element.set_inner_html(&parse(course.deref()));
 
-                highlight_all();
-            }
+            highlight_all();
         }
 
         return_closure
