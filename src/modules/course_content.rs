@@ -20,6 +20,8 @@ extern "C" {
 pub struct Props {
     #[prop_or_else(|| true)]
     pub have_access: bool,
+    #[prop_or_default]
+    pub logged_in: bool,
     pub course: AttrValue,
     #[prop_or_default]
     pub onclick_purchase: Callback<()>,
@@ -61,8 +63,13 @@ pub fn component(props: &Props) -> Html {
             <BBRow classes="ms-auto">
                 {
                     if !props.have_access {
+                        let message = if props.logged_in {
+                    "Purchase to access"
+                } else {
+                    "Log in to purchase"
+                };
                         Some(html! {
-                            <BBButton button_style={BBButtonStyle::PrimaryLight} {onclick}>{"Purchase to Access"}</BBButton>
+                            <BBButton button_style={BBButtonStyle::PrimaryLight} {onclick}>{message}</BBButton>
                         })
                     } else {
                         None
