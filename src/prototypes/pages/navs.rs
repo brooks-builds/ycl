@@ -1,4 +1,3 @@
-use crate::elements::course_nav_item::BBCourseNavItemState;
 use crate::foundations::container::{BBContainer, BBContainerMargin};
 use crate::foundations::errors::BBError;
 use crate::modules::nav::course_nav::{BBCourseNav, BBCourseNavArticle, BBCourseNavArticleBuilder};
@@ -55,7 +54,6 @@ fn course_nave_articles() -> Result<Vec<BBCourseNavArticle<Route>>, BBError> {
             .build()?,
         BBCourseNavArticleBuilder::new()
             .title("Context")
-            .state(BBCourseNavItemState::NeedToPurchase)
             .to(Route::Home)
             .build()?,
     ])

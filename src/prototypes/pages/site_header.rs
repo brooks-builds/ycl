@@ -44,7 +44,7 @@ pub fn component() -> Html {
             <BBNavbar<Route>
                 create_account_route={Route::Home}
                 is_authenticated={true}
-                links={navbar_links.clone()}
+                links={navbar_links}
                 login_route={Route::Home}
                 show_brand={true}
                 username="Brooks"

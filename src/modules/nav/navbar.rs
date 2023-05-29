@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use super::navbar_link::BBNavbarLink;
 use crate::{
     elements::{
@@ -35,7 +37,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
         <nav class="navbar navbar-expand-lg bg-body-tertiary" role="navigation">
             <div class="container-fluid">
                 {
-                    props.show_brand.clone().map(|_brand| {
+                    props.show_brand.map(|_brand| {
                         html! {
                             <BBIcon icon_type={BBIconType::Brand} />
                         }
@@ -66,7 +68,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                                         <span>{format!("Welcome {}", props.username.clone().unwrap_or_else(|| AttrValue::from("Learner")))}</span>
                                     </li>
                                     {
-                                        if let Some(role) = props.role.clone() {
+                                        if let Some(role) = props.role {
                                             html! {
                                                 <li class="nav-item navbar-text mx-1">
                                                     <BBPill color={BBColor::Success}>{role.to_string()}</BBPill>

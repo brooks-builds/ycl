@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use yew::prelude::*;
 
 use crate::{
@@ -28,7 +30,7 @@ pub fn component(props: &Props) -> Html {
         <header>
             <BBRow classes="align-items-center">
                 <BBCol>
-                    <BBTitle level={props.title_level.clone()}>
+                    <BBTitle level={props.title_level}>
                         {
                             if props.icon.is_some() {
                                 Some(html! {

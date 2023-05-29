@@ -44,7 +44,6 @@ pub fn component(props: &Props) -> Html {
             {
                 props
                     .action_icon
-                    .clone()
                     .map(|icon_type| {
                         html! {
                             <BBIcon

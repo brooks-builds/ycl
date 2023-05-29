@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use yew::prelude::*;
 
 use crate::{
@@ -19,7 +21,7 @@ pub fn component(props: &Props) -> Html {
       <div class="px-4 py-5 my-5 text-center">
         <BBTitle
             classes="display-5 fw-bold"
-            level={props.title_level.clone()}
+            level={props.title_level}
             align={AlignText::Center}
         >
             {props.title.clone()}

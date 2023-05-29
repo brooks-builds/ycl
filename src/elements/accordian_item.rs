@@ -1,3 +1,4 @@
+#![allow(non_camel_case_types)]
 use ::yew::prelude::*;
 
 use super::title::{BBTitle, BBTitleLevel};
@@ -16,7 +17,7 @@ pub fn component(props: &Props) -> Html {
     html! {
     <>
         <div class="accordion-item">
-            <BBTitle classes={classes!("accordion-header")} id={format!("{}-title", props.id.clone())} level={props.title_level.clone()}>
+            <BBTitle classes={classes!("accordion-header")} id={format!("{}-title", props.id.clone())} level={props.title_level}>
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={format!("#{}", &props.id)} aria-expanded="false" aria-controls={props.id.clone()}>
                     {props.title.clone()}
                 </button>

@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use crate::foundations::tags::BBTag;
 use crate::{
     elements::{icon::BBIconType, title::BBTitleLevel},
@@ -37,7 +39,7 @@ where
 
 #[function_component(BBCardList)]
 pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
-    let title_level = props.card_title_level.clone();
+    let title_level = props.card_title_level;
 
     let on_action = {
         let on_action = props.on_action.clone();
@@ -80,7 +82,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                             })
                         };
 
-                        let classes = classes!(card_data.tag.map(|tag| tag_class(tag)));
+                        let classes = classes!(card_data.tag.map(tag_class));
 
                         html! {
                             <BBCard<T>
@@ -210,5 +212,11 @@ impl<T: Routable> BBCardDataBuilder<T> {
             href: self.href,
             href_text: self.href_text,
         }
+    }
+}
+
+impl<T: Routable> Default for BBCardDataBuilder<T> {
+    fn default() -> Self {
+        Self::new()
     }
 }

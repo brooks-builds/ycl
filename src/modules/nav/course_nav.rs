@@ -1,8 +1,5 @@
 use crate::{
-    elements::{
-        course_nav_item::{BBCourseNavItem, BBCourseNavItemState},
-        route_or_not::BBRouteOrNot,
-    },
+    elements::{course_nav_item::BBCourseNavItem, route_or_not::BBRouteOrNot},
     foundations::errors::BBError,
 };
 use stylist::yew::styled_component;
@@ -32,7 +29,7 @@ pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
                     .into_iter()
                     .map(|article| {
                         html! {
-                            <BBRouteOrNot<R> to={article.get_to()}>
+                            <BBRouteOrNot<R> to={article.to.clone()}>
                                 {create_course_nav_item(article)}
                             </BBRouteOrNot<R>>
                         }
@@ -50,7 +47,9 @@ fn create_course_nav_item<R: Routable + 'static>(article: BBCourseNavArticle<R>)
             title={article.title}
             current={article.current}
             children={article.children}
-            state={article.state} />
+            to={article.to}
+            preview={article.preview}
+        />
     }
 }
 
@@ -63,8 +62,8 @@ where
     pub title: AttrValue,
     pub current: bool,
     pub children: Option<Vec<BBCourseNavArticle<R>>>,
-    pub state: BBCourseNavItemState,
-    pub to: R,
+    pub to: Option<R>,
+    pub preview: bool,
 }
 
 impl<R: Routable + 'static> BBCourseNavArticle<R> {
@@ -73,13 +72,6 @@ impl<R: Routable + 'static> BBCourseNavArticle<R> {
             Some("active")
         } else {
             None
-        }
-    }
-
-    pub fn get_to(&self) -> Option<R> {
-        match self.state {
-            BBCourseNavItemState::Available => Some(self.to.clone()),
-            _ => None,
         }
     }
 }
@@ -92,8 +84,8 @@ where
     title: Option<AttrValue>,
     current: bool,
     children: Option<Vec<BBCourseNavArticle<R>>>,
-    state: BBCourseNavItemState,
     to: Option<R>,
+    preview: bool,
 }
 
 impl<R: Routable + 'static> BBCourseNavArticleBuilder<R> {
@@ -103,8 +95,8 @@ impl<R: Routable + 'static> BBCourseNavArticleBuilder<R> {
             title: None,
             current: false,
             children: None,
-            state: BBCourseNavItemState::Available,
             to: None,
+            preview: false,
         }
     }
 
@@ -128,13 +120,13 @@ impl<R: Routable + 'static> BBCourseNavArticleBuilder<R> {
         self
     }
 
-    pub fn state(mut self, new_state: BBCourseNavItemState) -> Self {
-        self.state = new_state;
+    pub fn to(mut self, to: R) -> Self {
+        self.to = Some(to);
         self
     }
 
-    pub fn to(mut self, to: R) -> Self {
-        self.to = Some(to);
+    pub fn preview(mut self, preview: bool) -> Self {
+        self.preview = preview;
         self
     }
 
@@ -143,13 +135,17 @@ impl<R: Routable + 'static> BBCourseNavArticleBuilder<R> {
             completed: self.completed,
             title: self
                 .title
-                .ok_or_else(|| BBError::CourseNavItemArticleBuilder("missing title"))?,
+                .ok_or(BBError::CourseNavItemArticleBuilder("missing title"))?,
             current: self.current,
             children: self.children,
-            state: self.state,
-            to: self
-                .to
-                .ok_or_else(|| BBError::CourseNavItemArticleBuilder("missing link to"))?,
+            to: self.to,
+            preview: self.preview,
         })
+    }
+}
+
+impl<R: Routable + 'static> Default for BBCourseNavArticleBuilder<R> {
+    fn default() -> Self {
+        Self::new()
     }
 }

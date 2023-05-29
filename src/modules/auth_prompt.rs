@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use crate::{
     elements::{
         external_link::BBLink,
@@ -26,7 +28,7 @@ pub fn component(props: &Props) -> Html {
             <BBRow>
                 <BBCol>
                     <BBTitle
-                        level={props.title_level.clone()}
+                        level={props.title_level}
                         align={AlignText::Center}
                     >
                         {

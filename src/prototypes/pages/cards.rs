@@ -173,7 +173,7 @@ pub fn component() -> Html {
                 icon={BBIconType::Star}
                 title="Featured Courses"
                 more={true}
-                on_action={on_action.clone()}
+                {on_action}
                 action="Request Course"
             />
             <BBCardList<Route>

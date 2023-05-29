@@ -16,8 +16,8 @@ use crate::{
 
 #[function_component(PForms)]
 pub fn component() -> Html {
-    let email = use_state(|| String::new());
-    let password = use_state(|| String::new());
+    let email = use_state(String::new);
+    let password = use_state(String::new);
     let create_account_onsubmit = {
         let email_state = email.clone();
         let password_state = password.clone();

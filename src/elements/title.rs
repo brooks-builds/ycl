@@ -25,7 +25,7 @@ pub struct Props {
 #[function_component(BBTitle)]
 pub fn component(props: &Props) -> Html {
     let classes = classes!(
-        props.align.clone().unwrap_or_default().class(),
+        props.align.unwrap_or_default().class(),
         props.classes.clone()
     );
     match props.level {

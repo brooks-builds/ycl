@@ -62,3 +62,9 @@ impl<T: Routable + 'static> BBNavbarLinkBuilder<T> {
         self.to.map(move |to| BBNavbarLink { to, label, active })
     }
 }
+
+impl<T: Routable + 'static> Default for BBNavbarLinkBuilder<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}

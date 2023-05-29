@@ -14,7 +14,9 @@ where
     pub title: AttrValue,
     pub current: bool,
     pub children: Option<Vec<BBCourseNavArticle<R>>>,
-    pub state: BBCourseNavItemState,
+    #[prop_or_default]
+    pub preview: bool,
+    pub to: Option<R>,
 }
 
 #[styled_component(BBCourseNavItem)]
@@ -22,11 +24,20 @@ pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
     let class = classes!(
         "list-group-item",
         if props.current { Some("active") } else { None },
-        props.state.css(),
     );
+    let tooltip: AttrValue = if props.preview {
+        "This article is available as a preview".into()
+    } else {
+        "Purchase this course to have access".into()
+    };
+    let title = if props.preview {
+        format!("{} - (preview)", &props.title)
+    } else {
+        props.title.to_string()
+    };
 
     html! {
-        <BBTooltip title={props.state.title()}>
+        <BBTooltip title={tooltip}>
             <li {class}>
                 {
                     if props.completed {
@@ -35,7 +46,7 @@ pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
                         html! { <span class={classes!(BBIconSize::Tiny.css(), Style::new(css!("display: inline-block;")).unwrap())}></span>}
                     }
                 }
-                {&props.title}
+                {&title}
                 {
                     props.children.clone().map(|articles| {
                         html! { <BBCourseNav<R> {articles} classes={classes!("ms-4")} />}
@@ -43,29 +54,5 @@ pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
                 }
             </li>
         </BBTooltip>
-    }
-}
-
-#[derive(PartialEq, Clone, Debug)]
-pub enum BBCourseNavItemState {
-    Available,
-    NotYetCreated,
-    NeedToPurchase,
-}
-
-impl BBCourseNavItemState {
-    pub fn css(&self) -> Option<&'static str> {
-        match self {
-            Self::NotYetCreated | Self::NeedToPurchase => Some("disabled"),
-            _ => None,
-        }
-    }
-
-    pub fn title(&self) -> Option<&'static str> {
-        match self {
-            Self::NotYetCreated => Some("This article is not available yet"),
-            Self::NeedToPurchase => Some("Purchase this article to read"),
-            _ => None,
-        }
     }
 }
