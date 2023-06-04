@@ -113,6 +113,7 @@ pub enum BBInputType {
     Password,
     Text,
     Number,
+    Checkbox,
 }
 
 impl Display for BBInputType {
@@ -122,6 +123,7 @@ impl Display for BBInputType {
             Self::Password => "password",
             Self::Text => "text",
             Self::Number => "number",
+            BBInputType::Checkbox => "checkbox",
         })
     }
 }

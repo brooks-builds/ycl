@@ -4,6 +4,7 @@ use yew::prelude::*;
 use crate::{
     elements::{
         button::{BBButton, BBButtonType},
+        checkbox::BBCheckbox,
         form::BBForm,
         input::{BBInput, BBInputType},
         title::{BBTitle, BBTitleLevel},
@@ -18,16 +19,33 @@ use crate::{
 pub fn component() -> Html {
     let email = use_state(String::new);
     let password = use_state(String::new);
+    let checkbox = use_state(|| false);
+    let checked_checkbox = use_state(|| false);
     let create_account_onsubmit = {
         let email_state = email.clone();
         let password_state = password.clone();
+        let checkbox_state = checkbox.clone();
+        let checked_checkbox_state = checked_checkbox.clone();
 
         Callback::from(move |form_data: FormData| {
             let email = form_data.get("email").as_string().unwrap();
             let password = form_data.get("password").as_string().unwrap();
+            let checkbox = form_data.get("checkbox").as_string();
+            let checked_checkbox = form_data.get("checked_checkbox").as_string();
 
             email_state.set(email);
             password_state.set(password);
+
+            if let Some(_value) = checkbox {
+                checkbox_state.set(true);
+            } else {
+                checkbox_state.set(false);
+            };
+            if let Some(_value) = checked_checkbox {
+                checked_checkbox_state.set(true);
+            } else {
+                checked_checkbox_state.set(false);
+            }
         })
     };
 
@@ -46,7 +64,6 @@ pub fn component() -> Html {
                         label="Email"
                         id="email"
                         input_type={BBInputType::Email}
-                        required={true}
                         name="email"
                         message="what email address do you want to use?"
                     />
@@ -54,15 +71,31 @@ pub fn component() -> Html {
                         label="Password"
                         id="password"
                         input_type={BBInputType::Password}
-                        required={true}
                         name="password"
                         message="Password must have 8 characters, at least 2 special characters, and 1 number"
                     />
-                    <BBButton button_type={BBButtonType::Submit}>{"Create Account"}</BBButton>
+                    <BBCheckbox
+                        id="checkbox"
+                        label="checkbox"
+                        name="checkbox"
+                        value="checkbox checked"
+                    />
+                    <BBCheckbox
+                        checked={true}
+                        id="checked_checkbox"
+                        label="checked_checkbox"
+                        name="checked_checkbox"
+                        value="checked_checkbox checked"
+                    />
+                    <BBContainer>
+                        <BBButton button_type={BBButtonType::Submit}>{"Create Account"}</BBButton>
+                    </BBContainer>
                 </BBForm>
                 <BBContainer>
                     <p>{format!("email: {}", &*email)}</p>
                     <p>{format!("password: {}", &*password)}</p>
+                    <p>{format!("checkbox: {}", &*checkbox)}</p>
+                    <p>{format!("checked_checkbox: {}", &*checked_checkbox)}</p>
                 </BBContainer>
             </BBContainer>
         </BBContainer>
