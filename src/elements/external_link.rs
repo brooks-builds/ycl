@@ -38,6 +38,7 @@ pub fn component(props: &Props) -> Html {
             href={props.href.clone()}
             class={classes!(props.classes.clone(), button_classes)}
             {onclick}
+            target="_blank"
         >
             {props.children.clone()}
         </a>
