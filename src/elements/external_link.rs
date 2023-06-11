@@ -13,6 +13,8 @@ pub struct Props {
     pub prevent_default: bool,
     #[prop_or_default]
     pub onclick: Callback<()>,
+    #[prop_or_default]
+    pub target: BBLinkTarget,
 }
 
 #[styled_component(BBLink)]
@@ -32,15 +34,33 @@ pub fn component(props: &Props) -> Html {
 
         props_onclick.emit(());
     });
+    let target = props.target.to_string();
 
     html! {
         <a
             href={props.href.clone()}
             class={classes!(props.classes.clone(), button_classes)}
             {onclick}
-            target="_blank"
+            {target}
         >
             {props.children.clone()}
         </a>
+    }
+}
+
+#[derive(PartialEq, Clone, Default)]
+pub enum BBLinkTarget {
+    #[default]
+    Own,
+    Blank,
+}
+
+impl ToString for BBLinkTarget {
+    fn to_string(&self) -> String {
+        match self {
+            BBLinkTarget::Own => "_self",
+            BBLinkTarget::Blank => "_blank",
+        }
+        .into()
     }
 }
