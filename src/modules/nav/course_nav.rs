@@ -14,20 +14,27 @@ where
     pub articles: Vec<BBCourseNavArticle<R>>,
     #[prop_or_default]
     pub classes: Classes,
+    #[prop_or_default]
+    pub onclick: Callback<i64>,
 }
 
 #[styled_component(BBCourseNav)]
 pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
     let class = classes!(props.classes.clone(), "list-group", "course-nav");
+    let props_onclick = props.onclick.clone();
+    let onclick = Callback::from(|event: MouseEvent| {
+        let target = event.target();
+        gloo::console::log!("nav target", target);
+    });
 
     html! {
-        <ul {class}>
+        <ul {class} {onclick}>
             {
                 props
                     .articles
                     .clone()
                     .into_iter()
-                    .map(|article| {
+                    .map(move |article| {
                         html! {
                             <BBRouteOrNot<R> to={article.to.clone()}>
                                 {create_course_nav_item(article)}
