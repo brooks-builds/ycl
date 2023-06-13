@@ -17,6 +17,7 @@ where
     #[prop_or_default]
     pub preview: bool,
     pub to: Option<R>,
+    pub id: AttrValue,
 }
 
 #[styled_component(BBCourseNavItem)]
@@ -38,7 +39,7 @@ pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
 
     html! {
         <BBTooltip title={tooltip}>
-            <li {class}>
+            <li {class} data-id={props.id.clone()}>
                 {
                     if props.completed {
                         html! { <BBIcon icon_type={BBIconType::Check} size={BBIconSize::Tiny} /> }
