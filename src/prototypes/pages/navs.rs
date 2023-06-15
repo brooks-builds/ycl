@@ -24,6 +24,10 @@ pub fn component() -> Html {
         || {}
     });
 
+    let onclick = Callback::from(|id: AttrValue| {
+        gloo::console::log!("Article with id ", id.as_str(), "clicked");
+    });
+
     html! {
         <BBContainer margin={BBContainerMargin::Normal}>
             <BBTitle level={BBTitleLevel::One} align={AlignText::Center}>
@@ -32,6 +36,7 @@ pub fn component() -> Html {
             <BBTitle level={BBTitleLevel::Two}>{"Course Nav"}</BBTitle>
             <BBCourseNav<Route>
                 articles={course_nave_articles().unwrap()}
+                {onclick}
             />
         </BBContainer>
     }
@@ -42,19 +47,23 @@ fn course_nave_articles() -> Result<Vec<BBCourseNavArticle<Route>>, BBError> {
         BBCourseNavArticleBuilder::new()
             .title("Introdution")
             .completed(true)
-            .to(Route::Home)
+            .to(Route::Navs)
+            .id("1")
             .build()?,
         BBCourseNavArticleBuilder::new()
             .title("Routing")
             .children(vec![BBCourseNavArticleBuilder::new()
                 .title("Introduction to routing")
-                .to(Route::Home)
+                .to(Route::Navs)
+                .id("3")
                 .build()?])
-            .to(Route::Home)
+            .to(Route::Navs)
+            .id("2")
             .build()?,
         BBCourseNavArticleBuilder::new()
             .title("Context")
-            .to(Route::Home)
+            .to(Route::Navs)
+            .id("4")
             .build()?,
     ])
 }

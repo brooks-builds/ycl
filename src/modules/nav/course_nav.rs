@@ -3,6 +3,8 @@ use crate::{
     foundations::errors::BBError,
 };
 use stylist::yew::styled_component;
+use wasm_bindgen::JsCast;
+use web_sys::HtmlElement;
 use yew::prelude::*;
 use yew_router::prelude::*;
 
@@ -14,20 +16,30 @@ where
     pub articles: Vec<BBCourseNavArticle<R>>,
     #[prop_or_default]
     pub classes: Classes,
+    #[prop_or_default]
+    pub onclick: Callback<AttrValue>,
 }
 
 #[styled_component(BBCourseNav)]
 pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
     let class = classes!(props.classes.clone(), "list-group", "course-nav");
+    let props_onclick = props.onclick.clone();
+    let onclick = Callback::from(move |event: MouseEvent| {
+        let Some(target) = event.target() else { return };
+        let html_element = target.unchecked_into::<HtmlElement>();
+        let Some(id )= html_element.get_attribute("data-id") else { return };
+
+        props_onclick.emit(id.into());
+    });
 
     html! {
-        <ul {class}>
+        <ul {class} {onclick}>
             {
                 props
                     .articles
                     .clone()
                     .into_iter()
-                    .map(|article| {
+                    .map(move |article| {
                         html! {
                             <BBRouteOrNot<R> to={article.to.clone()}>
                                 {create_course_nav_item(article)}
@@ -49,6 +61,7 @@ fn create_course_nav_item<R: Routable + 'static>(article: BBCourseNavArticle<R>)
             children={article.children}
             to={article.to}
             preview={article.preview}
+            id={article.id}
         />
     }
 }
@@ -64,6 +77,7 @@ where
     pub children: Option<Vec<BBCourseNavArticle<R>>>,
     pub to: Option<R>,
     pub preview: bool,
+    pub id: AttrValue,
 }
 
 impl<R: Routable + 'static> BBCourseNavArticle<R> {
@@ -86,6 +100,7 @@ where
     children: Option<Vec<BBCourseNavArticle<R>>>,
     to: Option<R>,
     preview: bool,
+    id: Option<AttrValue>,
 }
 
 impl<R: Routable + 'static> BBCourseNavArticleBuilder<R> {
@@ -97,6 +112,7 @@ impl<R: Routable + 'static> BBCourseNavArticleBuilder<R> {
             children: None,
             to: None,
             preview: false,
+            id: None,
         }
     }
 
@@ -130,6 +146,11 @@ impl<R: Routable + 'static> BBCourseNavArticleBuilder<R> {
         self
     }
 
+    pub fn id(mut self, id: impl Into<AttrValue>) -> Self {
+        self.id = Some(id.into());
+        self
+    }
+
     pub fn build(self) -> Result<BBCourseNavArticle<R>, BBError> {
         Ok(BBCourseNavArticle {
             completed: self.completed,
@@ -140,6 +161,9 @@ impl<R: Routable + 'static> BBCourseNavArticleBuilder<R> {
             children: self.children,
             to: self.to,
             preview: self.preview,
+            id: self
+                .id
+                .ok_or(BBError::CourseNavItemArticleBuilder("missing id"))?,
         })
     }
 }
