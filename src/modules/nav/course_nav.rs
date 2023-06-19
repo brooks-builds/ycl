@@ -1,7 +1,4 @@
-use crate::{
-    elements::{course_nav_item::BBCourseNavItem, route_or_not::BBRouteOrNot},
-    foundations::errors::BBError,
-};
+use crate::{elements::course_nav_item::BBCourseNavItem, foundations::errors::BBError};
 use stylist::yew::styled_component;
 use wasm_bindgen::JsCast;
 use web_sys::HtmlElement;
@@ -40,11 +37,7 @@ pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
                     .clone()
                     .into_iter()
                     .map(move |article| {
-                        html! {
-                            <BBRouteOrNot<R> to={article.to.clone()}>
-                                {create_course_nav_item(article)}
-                            </BBRouteOrNot<R>>
-                        }
+                        create_course_nav_item(article)
                     })
                     .collect::<Html>()
             }
