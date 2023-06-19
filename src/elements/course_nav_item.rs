@@ -1,4 +1,5 @@
 use crate::elements::icon::{BBIcon, BBIconSize, BBIconType};
+use crate::elements::route_or_not::BBRouteOrNot;
 use crate::elements::tooltip::BBTooltip;
 use crate::modules::nav::course_nav::{BBCourseNav, BBCourseNavArticle};
 use stylist::{css, yew::styled_component, Style};
@@ -38,22 +39,24 @@ pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
     };
 
     html! {
-        <BBTooltip title={tooltip}>
-            <li {class} data-id={props.id.clone()}>
-                {
-                    if props.completed {
-                        html! { <BBIcon icon_type={BBIconType::Check} size={BBIconSize::Tiny} /> }
-                    } else {
-                        html! { <span class={classes!(BBIconSize::Tiny.css(), Style::new(css!("display: inline-block;")).unwrap())}></span>}
+        <li {class} data-id={props.id.clone()}>
+            <BBRouteOrNot<R> to={props.to.clone()}>
+                <BBTooltip title={tooltip}>
+                    {
+                        if props.completed {
+                            html! { <BBIcon icon_type={BBIconType::Check} size={BBIconSize::Tiny} /> }
+                        } else {
+                            html! { <span class={classes!(BBIconSize::Tiny.css(), Style::new(css!("display: inline-block;")).unwrap())}></span>}
+                        }
                     }
-                }
-                {&title}
-                {
-                    props.children.clone().map(|articles| {
-                        html! { <BBCourseNav<R> {articles} classes={classes!("ms-4")} />}
-                    })
-                }
-            </li>
-        </BBTooltip>
+                    {&title}
+                    {
+                        props.children.clone().map(|articles| {
+                            html! { <BBCourseNav<R> {articles} classes={classes!("ms-4")} />}
+                        })
+                    }
+                </BBTooltip>
+            </BBRouteOrNot<R>>
+        </li>
     }
 }
