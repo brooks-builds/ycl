@@ -21,6 +21,8 @@ pub struct Props {
     pub classes: Classes,
     #[prop_or_else(|| BBButtonType::Button)]
     pub button_type: BBButtonType,
+    #[prop_or_default]
+    pub disabled: bool,
 }
 
 #[function_component(BBButton)]
@@ -40,7 +42,7 @@ pub fn component(props: &Props) -> Html {
     };
 
     html! {
-        <button {class} {onclick} type={props.button_type.to_string()}>
+        <button {class} {onclick} type={props.button_type.to_string()} disabled={props.disabled}>
             {
                 props
                     .action_icon
