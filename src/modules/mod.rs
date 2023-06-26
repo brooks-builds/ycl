@@ -9,6 +9,7 @@ pub mod icons_row;
 pub mod lists;
 pub mod lms_promo;
 pub mod nav;
+pub mod password_strength;
 pub mod section_header;
 pub mod select;
 pub mod site_footer;

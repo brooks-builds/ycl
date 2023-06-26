@@ -11,6 +11,7 @@ pub mod internal_link;
 pub mod nav;
 pub mod nav_link;
 pub mod pill;
+pub mod progress_bar;
 pub mod route_or_not;
 pub mod table;
 pub mod text;
