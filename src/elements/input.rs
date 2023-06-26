@@ -27,6 +27,11 @@ pub struct Props {
     pub validation_debounce: u32,
     #[prop_or_default]
     pub is_valid: BBValidationState,
+    pub pattern: Option<AttrValue>,
+    #[prop_or_default]
+    pub oninput: Callback<AttrValue>,
+    pub min: Option<u32>,
+    pub max: Option<u32>,
 }
 
 #[styled_component(BBInput)]
@@ -45,16 +50,18 @@ pub fn component(props: &Props) -> Html {
     let oninput_value = value.clone();
     let props_onisvalid = props.onisvalid.clone();
     let debounce_time = props.validation_debounce;
+    let props_oninput = props.oninput.clone();
     let oninput = Callback::from(move |event: InputEvent| {
         let input_element = event.target().unwrap().unchecked_into::<HtmlInputElement>();
-        let input_value = input_element.value();
-        oninput_value.set(input_value.into());
+        let input_value = AttrValue::from(input_element.value());
+        oninput_value.set(input_value.clone());
         let props_onisvalid = props_onisvalid.clone();
         let timer = gloo::timers::callback::Timeout::new(debounce_time, move || {
             let is_valid = input_element.check_validity();
             props_onisvalid.emit(is_valid.into());
         });
         debounce.set(Some(timer));
+        props_oninput.emit(input_value);
     });
 
     html! {
@@ -68,6 +75,9 @@ pub fn component(props: &Props) -> Html {
                 value={value.deref().clone()}
                 name={props.name.clone()}
                 {oninput}
+                pattern={props.pattern.clone()}
+                minlength={props.min.map(|min| min.to_string())}
+                maxlength={props.max.map(|max| max.to_string())}
             />
             <div id={format!("{}-message", &props.id)} class="form-text">{props.message.clone()}</div>
             {
