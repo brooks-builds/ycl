@@ -10,7 +10,6 @@ pub mod input;
 pub mod internal_link;
 pub mod nav;
 pub mod nav_link;
-pub mod password_strength;
 pub mod pill;
 pub mod progress_bar;
 pub mod route_or_not;
