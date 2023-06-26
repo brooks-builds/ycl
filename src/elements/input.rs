@@ -67,7 +67,6 @@ pub fn component(props: &Props) -> Html {
                 required={props.required}
                 value={value.deref().clone()}
                 name={props.name.clone()}
-                pattern="abc"
                 {oninput}
             />
             <div id={format!("{}-message", &props.id)} class="form-text">{props.message.clone()}</div>
