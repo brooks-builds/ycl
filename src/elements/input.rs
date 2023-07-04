@@ -36,25 +36,14 @@ pub struct Props {
 
 #[styled_component(BBInput)]
 pub fn component(props: &Props) -> Html {
-    let prop_value = props.value.clone();
-    let value = use_state(move || AttrValue::from(""));
     let debounce = use_state(|| None);
 
-    let use_effect_value = value.clone();
-    use_effect_once(move || {
-        use_effect_value.set(prop_value);
-
-        || {}
-    });
-
-    let oninput_value = value.clone();
     let props_onisvalid = props.onisvalid.clone();
     let debounce_time = props.validation_debounce;
     let props_oninput = props.oninput.clone();
     let oninput = Callback::from(move |event: InputEvent| {
         let input_element = event.target().unwrap().unchecked_into::<HtmlInputElement>();
         let input_value = AttrValue::from(input_element.value());
-        oninput_value.set(input_value.clone());
         let props_onisvalid = props_onisvalid.clone();
         let timer = gloo::timers::callback::Timeout::new(debounce_time, move || {
             let is_valid = input_element.check_validity();
@@ -72,7 +61,7 @@ pub fn component(props: &Props) -> Html {
                 class="form-control"
                 id={props.id.clone()}
                 required={props.required}
-                value={value.deref().clone()}
+                value={props.value.clone()}
                 name={props.name.clone()}
                 {oninput}
                 pattern={props.pattern.clone()}
