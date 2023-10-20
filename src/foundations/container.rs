@@ -5,7 +5,7 @@ pub struct Props {
     pub children: Children,
     #[prop_or_default]
     pub classes: Classes,
-    #[prop_or_else(|| BBContainerMargin::None)]
+    #[prop_or_else(|| BBContainerMargin::Normal)]
     pub margin: BBContainerMargin,
 }
 
