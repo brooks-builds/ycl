@@ -1,5 +1,6 @@
 use crate::elements::button::{BBButton, BBButtonStyle};
-use crate::foundations::container::BBContainer;
+use crate::foundations::column::BBCol;
+use crate::foundations::container::{BBContainer, BBContainerMargin};
 use crate::foundations::row::BBRow;
 use std::ops::Deref;
 use stylist::yew::styled_component;
@@ -59,8 +60,8 @@ pub fn component(props: &Props) -> Html {
     });
 
     html! {
-        <BBContainer>
-            <BBRow classes="ms-auto">
+        <BBContainer margin={BBContainerMargin::None}>
+            <BBRow>
                 {
                     if !props.have_access {
                         let message = if props.logged_in {
@@ -69,7 +70,9 @@ pub fn component(props: &Props) -> Html {
                     "Log in to purchase"
                 };
                         Some(html! {
-                            <BBButton button_style={BBButtonStyle::PrimaryLight} {onclick}>{message}</BBButton>
+                            <BBCol>
+                                <BBButton button_style={BBButtonStyle::PrimaryLight} {onclick}>{message}</BBButton>
+                            </BBCol>
                         })
                     } else {
                         None
