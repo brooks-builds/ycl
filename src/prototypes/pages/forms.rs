@@ -1,12 +1,10 @@
-use web_sys::FormData;
-use yew::prelude::*;
-
 use crate::{
     elements::{
         button::{BBButton, BBButtonType},
         checkbox::BBCheckbox,
         form::BBForm,
         input::{BBInput, BBInputType},
+        text_area::BBTextArea,
         title::{BBTitle, BBTitleLevel},
     },
     foundations::{
@@ -14,6 +12,9 @@ use crate::{
         container::{BBContainer, BBContainerMargin},
     },
 };
+use std::ops::Deref;
+use web_sys::FormData;
+use yew::prelude::*;
 
 #[function_component(PForms)]
 pub fn component() -> Html {
@@ -46,6 +47,22 @@ pub fn component() -> Html {
             } else {
                 checked_checkbox_state.set(false);
             }
+        })
+    };
+
+    let textarea_state = use_state(|| AttrValue::from(""));
+    let textarea_oninput = {
+        let state = textarea_state.clone();
+
+        Callback::from(move |value: AttrValue| {
+            state.set(value);
+        })
+    };
+    let textarea_onsubmit = {
+        let textarea_value = textarea_state.clone();
+        Callback::from(move |formdata| {
+            gloo::console::log!(formdata);
+            textarea_value.set(AttrValue::from(""));
         })
     };
 
@@ -97,6 +114,21 @@ pub fn component() -> Html {
                     <p>{format!("checkbox: {}", &*checkbox)}</p>
                     <p>{format!("checked_checkbox: {}", &*checked_checkbox)}</p>
                 </BBContainer>
+            </BBContainer>
+
+            <BBContainer>
+                <BBForm onsubmit={textarea_onsubmit}>
+                    <BBTitle level={BBTitleLevel::Two}>{"Text Area"}</BBTitle>
+                    <BBTextArea
+                        id="text-area"
+                        label="Should empty on submit"
+                        name="textarea"
+                        value={textarea_state.deref().clone()}
+                        oninput={textarea_oninput}
+                    />
+
+                    <BBButton button_type={BBButtonType::Submit}>{"Submit"}</BBButton>
+                </BBForm>
             </BBContainer>
         </BBContainer>
     }
