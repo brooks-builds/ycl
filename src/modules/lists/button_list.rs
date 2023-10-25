@@ -8,6 +8,8 @@ pub struct Props {
     pub onclick: Callback<AttrValue>,
     #[prop_or_default()]
     pub draggable: bool,
+    #[prop_or_default()]
+    pub ondrop: Callback<BBButtonListMove>,
 }
 
 #[function_component(BBButtonList)]
@@ -22,13 +24,11 @@ pub fn component(props: &Props) -> Html {
     });
 
     let ondragstart = Callback::from(|event: DragEvent| {
-        gloo::console::log!("dragging", &event);
         let Some(target) = event.target() else {
             return;
         };
         let target = target.unchecked_into::<HtmlButtonElement>();
         let id = target.id();
-        gloo::console::log!("starting drag for id: ", &id);
         let Some(data) = event.data_transfer() else {
             gloo::console::error!("Error, data transfer object missing when dragging");
             return;
@@ -47,17 +47,46 @@ pub fn component(props: &Props) -> Html {
         event.prevent_default();
     });
 
-    let ondragover = Callback::from(|event: DragEvent| {
-        event.prevent_default();
-        let Some(target) = event.target() else {
-            gloo::console::error!("target missing");
-            return;
-        };
-        let target = target.unchecked_into::<Element>();
-        if let Err(error) = target.class_list().add_1("drop_target") {
-            gloo::console::error!("Error setting drop target", error);
-        }
-    });
+    let ondragover = {
+        let draggable = props.draggable;
+
+        Callback::from(move |event: DragEvent| {
+            event.prevent_default();
+            if !draggable {
+                return;
+            }
+
+            let Some(data) = event.data_transfer() else {
+                gloo::console::error!(
+                    "Error, data transfer object missing when dropping dragged object"
+                );
+                return;
+            };
+
+            let id = match data.get_data("text/plain") {
+                Ok(data) => data,
+                Err(error) => {
+                    gloo::console::error!("Error getting drag drop data:", error);
+                    return;
+                }
+            };
+
+            let Some(target) = event.target() else {
+                gloo::console::error!("target missing");
+                return;
+            };
+            let target = target.unchecked_into::<Element>();
+            let target_id = target.id();
+
+            if id == target_id {
+                return;
+            }
+
+            if let Err(error) = target.class_list().add_1("drop_target") {
+                gloo::console::error!("Error setting drop target", error);
+            }
+        })
+    };
 
     let ondragleave = Callback::from(|event: DragEvent| {
         let Some(target) = event.target() else {
@@ -70,35 +99,42 @@ pub fn component(props: &Props) -> Html {
         }
     });
 
-    let ondrop = Callback::from(|event: DragEvent| {
-        gloo::console::log!("drag drop:", &event);
+    let ondrop = {
+        let props_ondrop = props.ondrop.clone();
 
-        let Some(data) = event.data_transfer() else {
-            gloo::console::error!(
-                "Error, data transfer object missing when dropping dragged object"
-            );
-            return;
-        };
-
-        let id = match data.get_data("text/plain") {
-            Ok(data) => data,
-            Err(error) => {
-                gloo::console::error!("Error getting drag drop data:", error);
+        Callback::from(move |event: DragEvent| {
+            let Some(data) = event.data_transfer() else {
+                gloo::console::error!(
+                    "Error, data transfer object missing when dropping dragged object"
+                );
                 return;
+            };
+
+            let id = match data.get_data("text/plain") {
+                Ok(data) => data,
+                Err(error) => {
+                    gloo::console::error!("Error getting drag drop data:", error);
+                    return;
+                }
+            };
+
+            let Some(target) = event.target() else {
+                gloo::console::error!("target drop doesn't exist:");
+                return;
+            };
+
+            let target = target.unchecked_into::<Element>();
+
+            if let Err(error) = target.class_list().remove_1("drop_target") {
+                gloo::console::error!("Error removing drop target style", error);
             }
-        };
 
-        let Some(target) = event.target() else {
-            gloo::console::error!("target drop doesn't exist:");
-            return;
-        };
-
-        let target = target.unchecked_into::<Element>();
-
-        if let Err(error) = target.class_list().remove_1("drop_target") {
-            gloo::console::error!("Error removing drop target style", error);
-        }
-    });
+            props_ondrop.emit(BBButtonListMove {
+                moving_id: AttrValue::from(id),
+                target_id: AttrValue::from(target.id()),
+            });
+        })
+    };
 
     html! {
         <div
@@ -131,4 +167,10 @@ pub fn component(props: &Props) -> Html {
 pub struct BBButtonListItem {
     pub label: AttrValue,
     pub id: AttrValue,
+}
+
+#[derive(Debug)]
+pub struct BBButtonListMove {
+    pub moving_id: AttrValue,
+    pub target_id: AttrValue,
 }
