@@ -12,7 +12,7 @@ yew = { version = "0.20.0", features = ["csr"] }
 yew-router = "0.17.0"
 wasm-bindgen = "0.2.83"
 yew-hooks = "0.2.0"
-web-sys = { version = "0.3.61", features = ["Document", "Element", "HtmlElement", "HtmlInputElement", "HtmlFormElement", "FormData", "HtmlButtonElement"] }
+web-sys = { version = "0.3.61", features = ["Document", "Element", "HtmlElement", "HtmlInputElement", "HtmlFormElement", "FormData", "HtmlButtonElement", "DomRectList", "DomRect", "DomTokenList"] }
 chrono = { version = "0.4.23", features = ["wasmbind"] }
 thiserror = "1.0.38"
 indoc = "2.0.0"

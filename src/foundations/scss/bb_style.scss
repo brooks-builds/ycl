@@ -106,7 +106,6 @@
   --bs-link-hover-color: var(--color-link-hover);
   --bs-code-color: var(--color-);
   --bs-highlight-bg: var(--color-);
-
 }
 
 
@@ -545,4 +544,10 @@ pre {
 
 form>* {
   margin-bottom: 1rem;
+}
+
+// drag and drop
+
+.drop_target {
+  border-top: 15px solid aqua !important;
 }
