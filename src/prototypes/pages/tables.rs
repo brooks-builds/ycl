@@ -3,6 +3,7 @@ use std::collections::HashMap;
 use yew::prelude::*;
 
 use crate::{
+    components::data_table::BBDataTable,
     elements::{
         table::BBTable,
         title::{BBTitle, BBTitleLevel},
@@ -35,9 +36,16 @@ pub fn component() -> Html {
     html! {
         <BBContainer margin={BBContainerMargin::Normal}>
             <BBTitle level={BBTitleLevel::One} align={AlignText::Center}>{"Tables"}</BBTitle>
+            <BBTitle level={BBTitleLevel::Two}>{"Table"}</BBTitle>
             <BBTable
                 {titles}
                 {values}
+            />
+            <BBTitle level={BBTitleLevel::Two}>{"Data Table"}</BBTitle>
+            <BBDataTable
+                title="Course Articles"
+                title_level={BBTitleLevel::Three}
+                id="course-articles"
             />
         </BBContainer>
     }

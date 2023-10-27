@@ -1,3 +1,4 @@
+#![allow(non_camel_case_types)]
 use ::yew::prelude::*;
 use stylist::{css, yew::styled_component, Style};
 
@@ -8,15 +9,27 @@ pub struct Props {
     pub size: BBIconSize,
     #[prop_or_default]
     pub classes: Classes,
+    #[prop_or_else(|| true)]
+    pub outline: bool,
 }
 
 #[styled_component(BBIcon)]
 pub fn component(props: &Props) -> Html {
+    let class = classes!(
+        "img-fluid",
+        if props.outline {
+            Some("img-thumbnail")
+        } else {
+            None
+        },
+        props.icon_type.css(&props.size),
+        props.classes.clone()
+    );
     html! {
         <img
             src={props.icon_type.src()}
             alt={props.icon_type.alt()}
-            class={classes!("img-fluid", "img-thumbnail", props.icon_type.css(&props.size), props.classes.clone())} />
+            {class} />
     }
 }
 
@@ -34,6 +47,7 @@ pub enum BBIconType {
     Check,
     Discord,
     Warning,
+    Clear,
 }
 
 impl BBIconType {
@@ -50,6 +64,7 @@ impl BBIconType {
             BBIconType::Check => "/images/check.svg",
             BBIconType::Discord => "/images/discord_logo.svg",
             BBIconType::Warning => "/images/warning_icon.svg",
+            BBIconType::Clear => "/images/clear.svg",
         }
     }
 
@@ -66,9 +81,11 @@ impl BBIconType {
             BBIconType::Check => "Checkmark",
             BBIconType::Discord => "Discord logo",
             BBIconType::Warning => "Warning logo",
+            BBIconType::Clear => "Clear logo",
         }
     }
 
+    #[allow(non_upper_case_globals)]
     pub fn css(&self, size: &BBIconSize) -> Classes {
         let background = match self {
             Self::Star => Some(
@@ -117,6 +134,7 @@ impl BBIconType {
 
 #[derive(PartialEq, Clone, Copy)]
 pub enum BBIconSize {
+    Nano,
     Tiny,
     Smaller,
     Small,
@@ -124,9 +142,11 @@ pub enum BBIconSize {
     Large,
 }
 
+#[allow(non_upper_case_globals)]
 impl BBIconSize {
     pub fn css(&self) -> Style {
         let css = match self {
+            BBIconSize::Nano => css!("width: 15px;"),
             BBIconSize::Tiny => css!("width: 25px;"),
             BBIconSize::Smaller => css!("width: 35px;"),
             BBIconSize::Small => css!("width: 50px;"),
