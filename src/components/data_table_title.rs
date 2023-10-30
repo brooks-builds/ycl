@@ -30,15 +30,18 @@ pub fn component(props: &Props) -> Html {
 
         Callback::from(move |input_search_text: AttrValue| {
             search_text.set(input_search_text.clone());
-            onsearch.emit(input_search_text);
+            let lowercase_search_text = AttrValue::from(input_search_text.as_str().to_lowercase());
+            onsearch.emit(lowercase_search_text);
         })
     };
 
     let onclear = {
         let search_text = search_text.clone();
+        let onsearch = props.onsearch.clone();
 
         Callback::from(move |_event| {
             search_text.set(AttrValue::from(""));
+            onsearch.emit(AttrValue::from(""));
         })
     };
 
