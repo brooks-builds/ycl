@@ -3,10 +3,15 @@ use std::{collections::HashMap, ops::Deref};
 
 use crate::{
     components::data_table_title::BBDataTableTitle,
-    elements::{table::BBTable, title::BBTitleLevel},
+    elements::{
+        checkbox::BBCheckbox,
+        table::{BBTable, BBTableRow},
+        title::BBTitleLevel,
+    },
     foundations::container::BBContainer,
 };
-use yew::prelude::*;
+use gloo::console::log;
+use yew::{prelude::*, virtual_dom::VNode};
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
@@ -14,26 +19,30 @@ pub struct Props {
     #[prop_or_else(|| BBTitleLevel::Two)]
     pub title_level: BBTitleLevel,
     pub id: AttrValue,
-    pub data: BBDataTableData,
+    pub rows: Vec<BBTableRow>,
+    pub titles: Vec<AttrValue>,
+    #[prop_or_default()]
+    pub row_slots: Vec<VNode>,
 }
 
 #[function_component(BBDataTable)]
 pub fn component(props: &Props) -> Html {
-    let searched_values_state = {
-        let props_data_values = props.data.values.clone();
-        use_state(move || props_data_values)
+    let searched_rows_state = {
+        let props_rows = props.rows.clone();
+
+        use_state(move || props_rows)
     };
 
     let onsearch = {
-        let searched_values_state = searched_values_state.clone();
-        let props_values = props.data.values.clone();
+        let searched_rows_state = searched_rows_state.clone();
+        let props_rows = props.rows.clone();
 
         Callback::from(move |search_text: AttrValue| {
-            let searched_values = props_values
+            let searched_rows = props_rows
                 .clone()
                 .into_iter()
                 .filter(|prop_row| {
-                    for value in prop_row.values() {
+                    for value in prop_row.values.iter() {
                         if value.as_str().to_lowercase().contains(search_text.as_str()) {
                             return true;
                         }
@@ -41,11 +50,20 @@ pub fn component(props: &Props) -> Html {
 
                     return false;
                 })
-                .collect::<BBDataTableValues>();
+                .collect::<Vec<BBTableRow>>();
 
-            searched_values_state.set(searched_values);
+            searched_rows_state.set(searched_rows);
         })
     };
+
+    let searched_values_checkboxes = searched_rows_state
+        .iter()
+        .map(|row| {
+            html! {
+                <input type="checkbox" id={row.id.clone()} />
+            }
+        })
+        .collect::<Vec<Html>>();
 
     html! {
         <BBContainer>
@@ -57,21 +75,11 @@ pub fn component(props: &Props) -> Html {
                     {onsearch}
                 />
                 <BBTable
-                    titles={props.data.titles.clone()}
-                    values={searched_values_state.deref().clone()}
+                    titles={props.titles.clone()}
+                    rows={searched_rows_state.deref().clone()}
+                    row_slots={props.row_slots.clone()}
                 />
             </BBContainer>
         </BBContainer>
     }
-}
-
-pub type BBDataTableColumnTitle = AttrValue;
-pub type BBDataTableValue = AttrValue;
-pub type BBDataTableRow = HashMap<BBDataTableColumnTitle, BBDataTableValue>;
-pub type BBDataTableValues = Vec<BBDataTableRow>;
-
-#[derive(PartialEq)]
-pub struct BBDataTableData {
-    pub titles: Vec<BBDataTableColumnTitle>,
-    pub values: Vec<HashMap<BBDataTableColumnTitle, BBDataTableValue>>,
 }
