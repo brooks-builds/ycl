@@ -67,6 +67,7 @@ pub fn component() -> Html {
                 id="course-articles"
                 {rows}
                 titles={data_table_titles}
+                drag={true}
             />
         </BBContainer>
     }
