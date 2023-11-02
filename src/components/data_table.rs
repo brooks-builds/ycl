@@ -21,8 +21,6 @@ pub struct Props {
     pub id: AttrValue,
     pub rows: Vec<BBTableRow>,
     pub titles: Vec<AttrValue>,
-    #[prop_or_default()]
-    pub row_slots: Vec<VNode>,
 }
 
 #[function_component(BBDataTable)]
@@ -77,7 +75,6 @@ pub fn component(props: &Props) -> Html {
                 <BBTable
                     titles={props.titles.clone()}
                     rows={searched_rows_state.deref().clone()}
-                    row_slots={props.row_slots.clone()}
                 />
             </BBContainer>
         </BBContainer>

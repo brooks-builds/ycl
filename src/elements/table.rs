@@ -7,14 +7,11 @@ use yew::{prelude::*, virtual_dom::VNode};
 pub struct Props {
     pub titles: Vec<AttrValue>,
     pub rows: Vec<BBTableRow>,
-    #[prop_or_default]
-    pub row_slots: Vec<VNode>,
 }
 
 /// depracated
 #[function_component(BBTable)]
 pub fn component(props: &Props) -> Html {
-    log!(format!("{:?}", &props.row_slots));
     html! {
         <table class="table">
           <thead>
@@ -24,26 +21,17 @@ pub fn component(props: &Props) -> Html {
                         <th scope="col">{title.clone()}</th>
                     }).collect::<Vec<Html>>()
                 }
-                {
-                    if props.row_slots.len() > 0 {
-                        Some(html! {
-                            <th scope="col"></th>
-                        })
-                    } else {
-                        None
-                    }
-                }
             </tr>
           </thead>
           <tbody>
             {
-                props.rows.iter().enumerate().map(|(index, row)| html! {
+                props.rows.iter().map(|row| html! {
                     <tr>
                         {
                             row.values.iter().map(|value| {log!(format!("value: {:?}", &value)); html! { <td>{value}</td>}}).collect::<Html>()
                         }
                         {
-                            props.row_slots.get(index).cloned()
+                            row.slot.clone()
                         }
                     </tr>
                 }).collect::<Vec<Html>>()
@@ -57,4 +45,5 @@ pub fn component(props: &Props) -> Html {
 pub struct BBTableRow {
     pub id: AttrValue,
     pub values: Vec<AttrValue>,
+    pub slot: Option<VNode>,
 }

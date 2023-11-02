@@ -21,21 +21,6 @@ use crate::{
 pub fn component() -> Html {
     let titles = vec!["Tag Name".into(), "# Courses".into()];
     let data_table_titles = vec!["Tag Name".into(), "# Courses".into(), "preview".into()];
-    let rows = vec![
-        BBTableRow {
-            id: "1".into(),
-            values: vec!["Rust".into(), "10".into()],
-        },
-        BBTableRow {
-            id: "2".into(),
-            values: vec!["Axum".into(), "1".into()],
-        },
-        BBTableRow {
-            id: "3".into(),
-            values: vec!["SQLx".into(), "2".into()],
-        },
-    ];
-
     let preview_oninput = Callback::from(|event: InputEvent| {
         let input_element = event.target().unwrap().unchecked_into::<HtmlInputElement>();
         let value = input_element.value();
@@ -43,17 +28,29 @@ pub fn component() -> Html {
         log!(value, checked);
     });
 
-    let row_slots = {
-        let preview_oninput = preview_oninput.clone();
-
-        rows.iter()
-            .map(move |row| {
-                html! {
-                    <input type="checkbox" value={row.id.clone()} oninput={preview_oninput.clone()}/>
-                }
-            })
-            .collect::<Vec<Html>>()
-    };
+    let rows = vec![
+        BBTableRow {
+            id: "1".into(),
+            values: vec!["Rust".into(), "10".into()],
+            slot: Some(
+                html! { <input type="checkbox" value="1" oninput={preview_oninput.clone()} /> },
+            ),
+        },
+        BBTableRow {
+            id: "2".into(),
+            values: vec!["Axum".into(), "1".into()],
+            slot: Some(
+                html! { <input type="checkbox" value="2" oninput={preview_oninput.clone()} /> },
+            ),
+        },
+        BBTableRow {
+            id: "3".into(),
+            values: vec!["SQLx".into(), "2".into()],
+            slot: Some(
+                html! { <input type="checkbox" value="3" oninput={preview_oninput.clone()} /> },
+            ),
+        },
+    ];
 
     html! {
         <BBContainer margin={BBContainerMargin::Normal}>
@@ -70,7 +67,6 @@ pub fn component() -> Html {
                 id="course-articles"
                 {rows}
                 titles={data_table_titles}
-                {row_slots}
             />
         </BBContainer>
     }
