@@ -1,6 +1,6 @@
 use std::fmt::Display;
 
-use gloo::console::log;
+use gloo::console::info;
 use yew::prelude::*;
 
 use super::icon::{BBIcon, BBIconSize, BBIconType};
@@ -35,7 +35,7 @@ pub fn component(props: &Props) -> Html {
 
         Callback::from(move |_event: MouseEvent| {
             if debug {
-                log!(format!("Button {debug_name} clicked"));
+                info!(format!("Button {debug_name} clicked"));
             }
             prop_onclick.emit(());
         })

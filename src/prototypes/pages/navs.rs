@@ -25,7 +25,7 @@ pub fn component() -> Html {
     });
 
     let onclick = Callback::from(|id: AttrValue| {
-        gloo::console::log!("Article with id ", id.as_str(), "clicked");
+        gloo::console::info!("Article with id ", id.as_str(), "clicked");
     });
 
     html! {

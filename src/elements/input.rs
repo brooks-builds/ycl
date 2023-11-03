@@ -5,7 +5,10 @@ use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
 
-use crate::foundations::states::BBValidationState;
+use crate::{
+    components::button_icon::BBButtonIcon, elements::icon::BBIconType,
+    foundations::states::BBValidationState,
+};
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
@@ -31,6 +34,12 @@ pub struct Props {
     pub oninput: Callback<AttrValue>,
     pub min: Option<u32>,
     pub max: Option<u32>,
+    #[prop_or_default]
+    pub inline: bool,
+    #[prop_or_default]
+    pub show_clear: bool,
+    #[prop_or_default]
+    pub onclear: Callback<()>,
 }
 
 #[styled_component(BBInput)]
@@ -51,10 +60,32 @@ pub fn component(props: &Props) -> Html {
         debounce.set(Some(timer));
         props_oninput.emit(input_value);
     });
+    let label_classes = classes!(
+        "form-label",
+        if props.inline {
+            Some("visually-hidden")
+        } else {
+            None
+        },
+    );
+    let input_group_class = classes!(if props.inline {
+        Some("input-group")
+    } else {
+        None
+    },);
+
+    let onclear = {
+        let props_onclear = props.onclear.clone();
+
+        Callback::from(move |_event| props_onclear.emit(()))
+    };
 
     html! {
-        <div>
-            <label for={props.id.clone()} class="form-label">{create_label(props.label.clone(), props.required)}</label>
+        <div class={input_group_class}>
+            <label for={props.id.clone()} class={label_classes}>{create_label(props.label.clone(), props.required)}</label>
+            if props.inline {
+                <span class="input-group-text">{props.label.clone()}</span>
+            }
             <input
                 type={props.input_type.to_string()}
                 class="form-control"
@@ -67,6 +98,9 @@ pub fn component(props: &Props) -> Html {
                 minlength={props.min.map(|min| min.to_string())}
                 maxlength={props.max.map(|max| max.to_string())}
             />
+            if props.show_clear {
+                <BBButtonIcon icon_type={BBIconType::Clear} shift_left={true} onclick={onclear} label="Clear search" />
+        }
             <div id={format!("{}-message", &props.id)} class="form-text">{props.message.clone()}</div>
             {
                 create_error_message(props.input_type, props.required, &props.is_valid)

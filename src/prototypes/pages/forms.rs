@@ -61,7 +61,7 @@ pub fn component() -> Html {
     let textarea_onsubmit = {
         let textarea_value = textarea_state.clone();
         Callback::from(move |formdata| {
-            gloo::console::log!(formdata);
+            gloo::console::info!(formdata);
             textarea_value.set(AttrValue::from(""));
         })
     };
