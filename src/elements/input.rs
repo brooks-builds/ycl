@@ -6,11 +6,7 @@ use web_sys::HtmlInputElement;
 use yew::prelude::*;
 
 use crate::{
-    components::button_icon::BBButtonIcon,
-    elements::{
-        button::{BBButton, BBButtonStyle},
-        icon::{BBIcon, BBIconSize, BBIconType},
-    },
+    components::button_icon::BBButtonIcon, elements::icon::BBIconType,
     foundations::states::BBValidationState,
 };
 

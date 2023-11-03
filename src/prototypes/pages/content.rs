@@ -35,7 +35,7 @@ pub fn component() -> Html {
     "};
 
     let onclick_purchase = Callback::from(|_event| {
-        gloo::console::log!("the purchase button was clicked");
+        gloo::console::info!("the purchase button was clicked");
     });
 
     html! {

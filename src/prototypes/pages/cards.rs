@@ -7,13 +7,13 @@ use crate::{
     modules::card_list::{BBCardDataBuilder, BBCardList},
     prototypes::router::Route,
 };
-use gloo::console::log;
+use gloo::console::info;
 use yew::prelude::*;
 
 #[function_component(Cards)]
 pub fn component() -> Html {
     let on_action = Callback::from(|_event: ()| {
-        log!("The action button was pressed");
+        info!("The action button was pressed");
     });
 
     let featured_course_cards = vec![BBCardDataBuilder::new()

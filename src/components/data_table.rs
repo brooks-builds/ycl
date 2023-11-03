@@ -1,17 +1,15 @@
 #![allow(non_camel_case_types)]
-use std::{collections::HashMap, ops::Deref};
+use std::ops::Deref;
 
 use crate::{
     components::data_table_title::BBDataTableTitle,
     elements::{
-        checkbox::BBCheckbox,
-        table::{BBTable, BBTableRow},
+        table::{BBTable, BBTableDrop, BBTableRow},
         title::BBTitleLevel,
     },
     foundations::container::BBContainer,
 };
-use gloo::console::log;
-use yew::{prelude::*, virtual_dom::VNode};
+use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
 pub struct Props {
@@ -23,6 +21,8 @@ pub struct Props {
     pub titles: Vec<AttrValue>,
     #[prop_or_default]
     pub drag: bool,
+    #[prop_or_default]
+    pub ondrop: Callback<BBTableDrop>,
 }
 
 #[function_component(BBDataTable)]
@@ -56,15 +56,6 @@ pub fn component(props: &Props) -> Html {
         })
     };
 
-    let searched_values_checkboxes = searched_rows_state
-        .iter()
-        .map(|row| {
-            html! {
-                <input type="checkbox" id={row.id.clone()} />
-            }
-        })
-        .collect::<Vec<Html>>();
-
     html! {
         <BBContainer>
             <BBContainer>
@@ -78,6 +69,7 @@ pub fn component(props: &Props) -> Html {
                     titles={props.titles.clone()}
                     rows={searched_rows_state.deref().clone()}
                     drag={props.drag}
+                    ondrop={props.ondrop.clone()}
                 />
             </BBContainer>
         </BBContainer>

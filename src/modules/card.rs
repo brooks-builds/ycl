@@ -1,9 +1,11 @@
+#![allow(non_camel_case_types)]
+#![allow(non_upper_case_globals)]
 use crate::elements::{
     button::{BBButton, BBButtonStyle},
     text::BBText,
     title::{BBTitle, BBTitleLevel},
 };
-use gloo::console::log;
+use gloo::console::info;
 use stylist::{css, style, yew::styled_component, Style};
 use yew::{prelude::*, virtual_dom::VNode};
 use yew_router::prelude::*;
@@ -94,7 +96,7 @@ impl BBCardType {
 
             Callback::from(move |_: ()| {
                 if debug {
-                    log!(format!("Call to action clicked from {debug_name}"));
+                    info!(format!("Call to action clicked from {debug_name}"));
                 }
 
                 cb.emit(());

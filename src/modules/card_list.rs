@@ -6,7 +6,7 @@ use crate::{
     foundations::{container::BBContainer, row::BBRow},
     modules::{card::BBCard, section_header::BBSectionHeader},
 };
-use gloo::console::log;
+use gloo::console::info;
 use yew::prelude::*;
 use yew_router::Routable;
 
@@ -75,7 +75,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
 
                             Callback::from(move |_: ()| {
                                 if debug {
-                                    log!(format!("Card in card list clicked for {debug_name}"));
+                                    info!(format!("Card in card list clicked for {debug_name}"));
                                 }
 
                                 cb.emit(());

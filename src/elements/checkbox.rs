@@ -1,4 +1,3 @@
-use gloo::console::log;
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq, Debug)]
@@ -18,9 +17,8 @@ pub fn component(props: &Props) -> Html {
     let onchecked = {
         let props_onchecked = props.onchecked.clone();
 
-        Callback::from(move |event| {
+        Callback::from(move |_event| {
             props_onchecked.emit(());
-            log!(event);
         })
     };
 

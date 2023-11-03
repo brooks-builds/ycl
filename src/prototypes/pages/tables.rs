@@ -1,6 +1,4 @@
-use std::collections::HashMap;
-
-use gloo::console::log;
+use gloo::console::info;
 use wasm_bindgen::JsCast;
 use web_sys::HtmlInputElement;
 use yew::prelude::*;
@@ -8,7 +6,7 @@ use yew::prelude::*;
 use crate::{
     components::data_table::BBDataTable,
     elements::{
-        table::{BBTable, BBTableRow},
+        table::{BBTable, BBTableDrop, BBTableRow},
         title::{BBTitle, BBTitleLevel},
     },
     foundations::{
@@ -25,7 +23,7 @@ pub fn component() -> Html {
         let input_element = event.target().unwrap().unchecked_into::<HtmlInputElement>();
         let value = input_element.value();
         let checked = input_element.checked();
-        log!(value, checked);
+        info!(value, checked);
     });
 
     let rows = vec![
@@ -52,6 +50,10 @@ pub fn component() -> Html {
         },
     ];
 
+    let ondrop = Callback::from(|drop_data: BBTableDrop| {
+        info!("table row dropped:", format!("{drop_data:?}"))
+    });
+
     html! {
         <BBContainer margin={BBContainerMargin::Normal}>
             <BBTitle level={BBTitleLevel::One} align={AlignText::Center}>{"Tables"}</BBTitle>
@@ -68,6 +70,7 @@ pub fn component() -> Html {
                 {rows}
                 titles={data_table_titles}
                 drag={true}
+                {ondrop}
             />
         </BBContainer>
     }

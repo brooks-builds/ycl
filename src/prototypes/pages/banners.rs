@@ -11,7 +11,7 @@ use yew::prelude::*;
 #[function_component(Banners)]
 pub fn component() -> Html {
     let onclick = Callback::from(|_| {
-        gloo::console::log!("banner was clicked");
+        gloo::console::info!("banner was clicked");
     });
 
     html! {
