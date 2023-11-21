@@ -27,11 +27,19 @@ pub struct Props {
 
 #[function_component(BBDataTable)]
 pub fn component(props: &Props) -> Html {
-    let searched_rows_state = {
-        let props_rows = props.rows.clone();
+    let searched_rows_state = use_state(move || Vec::new());
 
-        use_state(move || props_rows)
-    };
+    {
+        let searched_rows_state = searched_rows_state.clone();
+
+        use_effect_with_deps(
+            move |props_rows| {
+                searched_rows_state.set(props_rows.to_owned());
+                || {}
+            },
+            props.rows.clone(),
+        );
+    }
 
     let onsearch = {
         let searched_rows_state = searched_rows_state.clone();
