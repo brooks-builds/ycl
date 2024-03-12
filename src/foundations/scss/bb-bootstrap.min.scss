@@ -2316,6 +2316,10 @@ progress {
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
 
+.form-control-medium {
+    width: 30rem;
+}
+
 @media (prefers-reduced-motion:reduce) {
     .form-control {
         transition: none

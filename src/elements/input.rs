@@ -40,6 +40,8 @@ pub struct Props {
     pub show_clear: bool,
     #[prop_or_default]
     pub onclear: Callback<()>,
+    #[prop_or_default]
+    pub classes: Classes,
 }
 
 #[styled_component(BBInput)]
@@ -80,6 +82,8 @@ pub fn component(props: &Props) -> Html {
         Callback::from(move |_event| props_onclear.emit(()))
     };
 
+    let input_classes = classes!(props.classes.clone(), "form-control");
+
     html! {
         <div class={input_group_class}>
             <label for={props.id.clone()} class={label_classes}>{create_label(props.label.clone(), props.required)}</label>
@@ -88,7 +92,7 @@ pub fn component(props: &Props) -> Html {
             }
             <input
                 type={props.input_type.to_string()}
-                class="form-control"
+                class={input_classes}
                 id={props.id.clone()}
                 required={props.required}
                 value={props.value.clone()}
@@ -117,7 +121,7 @@ pub fn component(props: &Props) -> Html {
 }
 
 fn create_label(label: AttrValue, required: bool) -> String {
-    let required_text = if required { "(required)" } else { "" };
+    let required_text = if required { "*" } else { "" };
 
     format!("{label} {required_text}")
 }
