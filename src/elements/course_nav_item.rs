@@ -39,8 +39,8 @@ pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
     };
 
     html! {
-        <li {class} data-id={props.id.clone()}>
-            <BBRouteOrNot<R> to={props.to.clone()}>
+        <BBRouteOrNot<R> to={props.to.clone()}>
+            <li {class} data-id={props.id.clone()}>
                 <BBTooltip title={tooltip}>
                     {
                         if props.completed {
@@ -56,7 +56,7 @@ pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
                         })
                     }
                 </BBTooltip>
-            </BBRouteOrNot<R>>
-        </li>
+            </li>
+        </BBRouteOrNot<R>>
     }
 }
