@@ -18,8 +18,6 @@ where
     T: Routable + 'static,
 {
     pub links: Vec<BBNavbarLink<T>>,
-    pub login_route: T,
-    pub create_account_route: T,
     pub show_brand: Option<bool>,
     pub username: Option<AttrValue>,
     #[prop_or_default]
@@ -29,10 +27,20 @@ where
     #[prop_or_default]
     pub logout_onclick: Callback<()>,
     pub role: Option<BBRole>,
+    #[prop_or_default]
+    pub onlogin_click: Callback<()>,
 }
 
 #[function_component(BBNavbar)]
 pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
+    let login_onclick = {
+        let onlogin_click = props.onlogin_click.clone();
+
+        Callback::from(move |event| {
+            onlogin_click.emit(());
+        })
+    };
+
     html! {
         <nav class="navbar navbar-expand-lg bg-body-tertiary" role="navigation">
             <div class="container-fluid">
@@ -84,12 +92,10 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                         } else {
                             html! {
                                 <ul class="navbar-nav ml-0 mb-2 mb-lg-0">
-                                    <li class="nav-item">
-                                        <Link<T> to={props.login_route.clone()} classes="nav-link">{"Login"}</Link<T>>
-                                    </li>
-                                    <li class="nav-item">
-                                        <Link<T> to={props.create_account_route.clone()} classes="nav-link btn btn-primary">{"Get Started"}</Link<T>>
-                                    </li>
+                                    <BBLink href={"/"} onclick={login_onclick} prevent_default={true}>{"Login or Signup"}</BBLink>
+                                    // <li class="nav-item">
+                                    //     <a href={props.login_uri.clone()} classes="nav-link" target="_self">{"Login or Create Account"}</a>
+                                    // </li>
                                 </ul>
                             }
                         }
