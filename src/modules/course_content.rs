@@ -67,7 +67,7 @@ pub fn component(props: &Props) -> Html {
                         let message = if props.logged_in {
                     "Purchase to access"
                 } else {
-                    "Log in to purchase"
+                    "Buy this course"
                 };
                         Some(html! {
                             <BBCol>

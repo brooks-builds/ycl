@@ -36,7 +36,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     let login_onclick = {
         let onlogin_click = props.onlogin_click.clone();
 
-        Callback::from(move |event| {
+        Callback::from(move |_event| {
             onlogin_click.emit(());
         })
     };

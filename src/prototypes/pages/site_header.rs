@@ -4,7 +4,7 @@ use crate::foundations::container::BBContainer;
 use crate::foundations::roles::BBRole;
 use crate::modules::nav::navbar::BBNavbar;
 use crate::modules::nav::navbar_link::BBNavbarLink;
-use crate::prototypes::router::{Route, HOME_ROUTE};
+use crate::prototypes::router::Route;
 use yew::prelude::*;
 
 #[function_component(SiteHeader)]
