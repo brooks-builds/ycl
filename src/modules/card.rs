@@ -19,7 +19,7 @@ where
 {
     pub title_level: BBTitleLevel,
     pub title: AttrValue,
-    pub text: Option<AttrValue>,
+    pub text: Vec<AttrValue>,
     pub internal_link: Option<T>,
     #[prop_or_else(|| BBCardType::Simple)]
     pub card_type: BBCardType,
@@ -88,7 +88,11 @@ impl BBCardType {
         html! {
             <div class="card-body mt-5 me-5">
                 <BBTitle level={props.title_level} classes={classes!("card-title")}>{props.title.clone()}</BBTitle>
-                <BBText classes="card-text">{props.text.clone()}</BBText>
+                {
+                    props.text.iter().map(|text| html!{
+                        <BBText classes="card-text">{text.clone()}</BBText>
+                    }).collect::<Html>()
+                }
                 {
                     props.href.clone().map(move |href| html! { <a {href} target="_blank">{href_text}</a>})
                 }

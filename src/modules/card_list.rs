@@ -3,7 +3,7 @@
 use crate::foundations::tags::BBTag;
 use crate::{
     elements::{icon::BBIconType, title::BBTitleLevel},
-    foundations::{container::BBContainer, row::BBRow},
+    foundations::container::BBContainer,
     modules::{card::BBCard, section_header::BBSectionHeader},
 };
 use gloo::console::info;
@@ -114,7 +114,7 @@ where
     T: Routable + 'static,
 {
     pub title: String,
-    pub text: Option<String>,
+    pub text: Vec<AttrValue>,
     pub link: Option<T>,
     pub onclick: Option<Callback<()>>,
     pub card_type: BBCardType,
@@ -140,7 +140,7 @@ where
     T: Routable + 'static,
 {
     pub title: String,
-    pub text: Option<String>,
+    pub text: Vec<AttrValue>,
     pub link: Option<T>,
     pub onclick: Option<Callback<()>>,
     pub card_type: BBCardType,
@@ -154,7 +154,7 @@ impl<T: Routable> BBCardDataBuilder<T> {
     pub fn new() -> Self {
         Self {
             title: String::new(),
-            text: None,
+            text: vec![],
             link: None,
             onclick: None,
             card_type: BBCardType::Simple,
@@ -170,8 +170,8 @@ impl<T: Routable> BBCardDataBuilder<T> {
         self
     }
 
-    pub fn text(mut self, text: impl Into<String>) -> Self {
-        self.text = Some(text.into());
+    pub fn add_text(mut self, text: impl Into<AttrValue>) -> Self {
+        self.text.push(text.into());
         self
     }
 
