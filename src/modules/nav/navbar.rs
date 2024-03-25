@@ -15,7 +15,7 @@ use yew_router::{prelude::Link, Routable};
 #[derive(Properties, PartialEq)]
 pub struct Props<T>
 where
-    T: Routable + 'static,
+    T: Routable + 'static + Default,
 {
     pub links: Vec<BBNavbarLink<T>>,
     pub show_brand: Option<bool>,
@@ -32,7 +32,7 @@ where
 }
 
 #[function_component(BBNavbar)]
-pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
+pub fn component<T: Routable + 'static + Default>(props: &Props<T>) -> Html {
     let login_onclick = {
         let onlogin_click = props.onlogin_click.clone();
 
@@ -47,7 +47,9 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                 {
                     props.show_brand.map(|_brand| {
                         html! {
-                            <BBIcon icon_type={BBIconType::Brand} />
+                            <Link<T> to={T::default()}>
+                                <BBIcon icon_type={BBIconType::Brand} />
+                            </Link<T>>
                         }
                     })
                 }

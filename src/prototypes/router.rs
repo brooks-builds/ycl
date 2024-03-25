@@ -5,8 +5,9 @@ use super::pages::{
 use yew::prelude::*;
 use yew_router::prelude::*;
 
-#[derive(Clone, Routable, PartialEq)]
+#[derive(Clone, Routable, PartialEq, Default)]
 pub enum Route {
+    #[default]
     #[at("/")]
     Home,
     #[at("/site_header")]
