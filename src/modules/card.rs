@@ -44,8 +44,18 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
         BBCardDataWidth::Small => Some(
             style!(
                 r#"
-            width: 18rem;
-        "#
+                    max-width: 18rem;
+                    min-width: 18rem;
+                "#
+            )
+            .unwrap(),
+        ),
+        BBCardDataWidth::Medium => Some(
+            style!(
+                r#"
+                    max-width: 24rem;
+                    min-width: 24rem;
+                "#
             )
             .unwrap(),
         ),

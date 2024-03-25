@@ -113,7 +113,7 @@ pub struct BBCardData<T>
 where
     T: Routable + 'static,
 {
-    pub title: String,
+    pub title: AttrValue,
     pub text: Vec<AttrValue>,
     pub link: Option<T>,
     pub onclick: Option<Callback<()>>,
@@ -139,7 +139,7 @@ pub struct BBCardDataBuilder<T>
 where
     T: Routable + 'static,
 {
-    pub title: String,
+    pub title: AttrValue,
     pub text: Vec<AttrValue>,
     pub link: Option<T>,
     pub onclick: Option<Callback<()>>,
@@ -153,7 +153,7 @@ where
 impl<T: Routable> BBCardDataBuilder<T> {
     pub fn new() -> Self {
         Self {
-            title: String::new(),
+            title: AttrValue::default(),
             text: vec![],
             link: None,
             onclick: None,
@@ -165,7 +165,7 @@ impl<T: Routable> BBCardDataBuilder<T> {
         }
     }
 
-    pub fn title(mut self, title: impl Into<String>) -> Self {
+    pub fn title(mut self, title: impl Into<AttrValue>) -> Self {
         self.title = title.into();
         self
     }
@@ -236,4 +236,5 @@ pub enum BBCardDataWidth {
     #[default]
     Auto,
     Small,
+    Medium,
 }
