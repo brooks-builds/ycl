@@ -26,6 +26,11 @@ pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
     let class = classes!(
         "list-group-item",
         if props.current { Some("active") } else { None },
+        if props.completed {
+            Some("article-completed")
+        } else {
+            None
+        },
     );
     let tooltip: AttrValue = if props.preview {
         "This article is available as a preview".into()
@@ -42,18 +47,18 @@ pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
         <BBRouteOrNot<R> to={props.to.clone()}>
             <li {class} data-id={props.id.clone()}>
                 <BBTooltip title={tooltip}>
+                    {&title}
+                    {
+                        props.children.clone().map(|articles| {
+                            html! { <BBCourseNav<R> {articles} classes={classes!("ms-4")} />}
+                        })
+                    }
                     {
                         if props.completed {
                             html! { <BBIcon icon_type={BBIconType::Check} size={BBIconSize::Tiny} /> }
                         } else {
                             html! { <span class={classes!(BBIconSize::Tiny.css(), Style::new(css!("display: inline-block;")).unwrap())}></span>}
                         }
-                    }
-                    {&title}
-                    {
-                        props.children.clone().map(|articles| {
-                            html! { <BBCourseNav<R> {articles} classes={classes!("ms-4")} />}
-                        })
                     }
                 </BBTooltip>
             </li>

@@ -40,6 +40,7 @@
   --color-orange: #fd7e14;
   --color-yellow: #ffdd41;
   --color-green: #198754;
+  --color-light-green: #5dbb63;
   --color-teal: #20c997;
   --color-cyan: #0dcaf0;
 
@@ -155,6 +156,10 @@
   a {
     text-decoration: none;
   }
+}
+
+.article-completed {
+  background-color: var(--color-light-green);
 }
 
 // Dark Mode
