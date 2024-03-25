@@ -65,7 +65,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                     None
                 }
             }
-            <BBRow classes="d-flex justify-content-evenly">
+            <section class="d-flex justify-content-evenly">
                 {
                     props.card_data.clone().into_iter().map(move |card_data| {
                         let onclick = {
@@ -97,12 +97,13 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                                 {classes}
                                 href={card_data.href}
                                 href_text={card_data.href_text}
+                                width={card_data.width}
                             />
                         }
                     })
                     .collect::<Html>()
                 }
-            </BBRow>
+            </section>
         </BBContainer>
     }
 }
@@ -120,6 +121,7 @@ where
     pub tag: Option<BBTag>,
     pub href: Option<AttrValue>,
     pub href_text: AttrValue,
+    pub width: BBCardDataWidth,
 }
 
 pub fn tag_class(tag: BBTag) -> &'static str {
@@ -145,6 +147,7 @@ where
     pub tags: Option<BBTag>,
     pub href: Option<AttrValue>,
     pub href_text: AttrValue,
+    pub width: BBCardDataWidth,
 }
 
 impl<T: Routable> BBCardDataBuilder<T> {
@@ -158,6 +161,7 @@ impl<T: Routable> BBCardDataBuilder<T> {
             tags: None,
             href: None,
             href_text: "".into(),
+            width: BBCardDataWidth::Auto,
         }
     }
 
@@ -201,6 +205,11 @@ impl<T: Routable> BBCardDataBuilder<T> {
         self
     }
 
+    pub fn width(mut self, width: BBCardDataWidth) -> Self {
+        self.width = width;
+        self
+    }
+
     pub fn build(self) -> BBCardData<T> {
         BBCardData {
             title: self.title,
@@ -211,6 +220,7 @@ impl<T: Routable> BBCardDataBuilder<T> {
             tag: self.tags,
             href: self.href,
             href_text: self.href_text,
+            width: self.width,
         }
     }
 }
@@ -219,4 +229,11 @@ impl<T: Routable> Default for BBCardDataBuilder<T> {
     fn default() -> Self {
         Self::new()
     }
+}
+
+#[derive(Default, PartialEq, Clone, Debug)]
+pub enum BBCardDataWidth {
+    #[default]
+    Auto,
+    Small,
 }

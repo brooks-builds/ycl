@@ -10,6 +10,8 @@ use stylist::{css, style, yew::styled_component, Style};
 use yew::{prelude::*, virtual_dom::VNode};
 use yew_router::prelude::*;
 
+use super::card_list::BBCardDataWidth;
+
 #[derive(Properties, PartialEq)]
 pub struct Props<T>
 where
@@ -32,16 +34,22 @@ where
     pub href: Option<AttrValue>,
     #[prop_or_else(|| "check it out".into())]
     pub href_text: AttrValue,
+    pub width: BBCardDataWidth,
 }
 
 #[styled_component(BBCard)]
 pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
-    let class = style!(
-        r#"
-        width: 18rem;
-    "#
-    )
-    .unwrap();
+    let width_style = match props.width {
+        BBCardDataWidth::Auto => None,
+        BBCardDataWidth::Small => Some(
+            style!(
+                r#"
+            width: 18rem;
+        "#
+            )
+            .unwrap(),
+        ),
+    };
     let card_type = props.card_type;
 
     html! {
@@ -49,7 +57,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
             wrap_in_link(
                 props.internal_link.clone(),
                 html! {
-                    <div class={classes!("card", class, "mx-1", "my-1", props.classes.clone())}>
+                    <div class={classes!("card", "mx-1", "my-1", props.classes.clone(), width_style)}>
                         {
                             card_type.render(props)
                         }
