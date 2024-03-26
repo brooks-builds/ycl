@@ -125,7 +125,8 @@ impl BBIconType {
                 ))
                 .unwrap(),
             ),
-            _ => None,
+            BBIconType::Brand => None,
+            BBIconType::Clear => None,
         };
 
         classes!(background, size.css())

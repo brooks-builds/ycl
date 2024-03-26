@@ -4,7 +4,7 @@ use super::navbar_link::BBNavbarLink;
 use crate::{
     elements::{
         external_link::BBLink,
-        icon::{BBIcon, BBIconType},
+        icon::{BBIcon, BBIconSize, BBIconType},
         pill::BBPill,
     },
     foundations::{color::BBColor, roles::BBRole},
@@ -48,7 +48,7 @@ pub fn component<T: Routable + 'static + Default>(props: &Props<T>) -> Html {
                     props.show_brand.map(|_brand| {
                         html! {
                             <Link<T> to={T::default()}>
-                                <BBIcon icon_type={BBIconType::Brand} />
+                                <BBIcon icon_type={BBIconType::Brand} size={BBIconSize::Large} />
                             </Link<T>>
                         }
                     })

@@ -8,6 +8,9 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;600;700&display=swap");
 
 // custom variables
+:root {
+  --base-font-size: 1.5rem;
+}
 
 :root {
   //  colors
@@ -87,9 +90,9 @@
     Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
   --bs-body-font-family: var(--bs-font-sans-serif);
-  --bs-body-font-size: 1rem;
+  --bs-body-font-size: var(--base-font-size);
   --bs-body-font-weight: 400;
-  --bs-body-line-height: 1.5;
+  --bs-body-line-height: var(--base-font-size + .5);
   --bs-body-color: var(--color-gray-8);
   --bs-body-bg: var(--color-light);
 
@@ -97,9 +100,9 @@
   --bs-border-style: solid;
   --bs-border-color: var(--color-gray-3);
   --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
-  --bs-button-font-size: 1rem;
+  --bs-button-font-size: var(--base-font-size);
   --bs-button-font-weight: 400;
-  --bs-button-line-height: 1.5;
+  --bs-button-line-height: var(--base-font-size + 0.5);
   --bs-button-color: var(--color-light);
   --bs-button-bg: var(--color-primary);
 
@@ -114,13 +117,12 @@
 }
 
 h2 {
-  font-size: 1.7rem;
+  font-size: 2rem;
 }
 
 h3 {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
-
 
 // Buttons
 
@@ -395,7 +397,11 @@ h6,
 }
 
 .flex-wrap {
-  flex-flow: wrap
+  flex-flow: wrap;
+}
+
+.inline-flex {
+  display: inline-flex;
 }
 
 // Icons
@@ -423,6 +429,10 @@ h6,
   a {
     color: currentcolor;
   }
+}
+
+.children-h-100 > * {
+  height: 100%;
 }
 
 // Footer Nav
@@ -581,4 +591,10 @@ form>* {
 
 .drop_target {
   border-top: 15px solid aqua !important;
+}
+
+// Course Content
+
+#course-content > iframe {
+  width: 100%;
 }

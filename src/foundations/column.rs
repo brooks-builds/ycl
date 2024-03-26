@@ -46,14 +46,14 @@ impl BBColWidth {
             BBColWidth::Three => "col-3",
             BBColWidth::Four => "col-4",
             BBColWidth::Five => "col-5",
-            BBColWidth::Six => "col-6",
+            BBColWidth::Six => "col-xm-6",
             BBColWidth::Seven => "col-7",
             BBColWidth::Eight => "col-8",
             BBColWidth::Nine => "col-9",
             BBColWidth::Ten => "col-10",
             BBColWidth::Eleven => "col-11",
             BBColWidth::Twelve => "col-12",
-            BBColWidth::None => "col",
+            BBColWidth::None => "col-sm",
         }
     }
 }

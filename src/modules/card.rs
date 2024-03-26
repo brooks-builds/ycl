@@ -147,7 +147,7 @@ impl BBCardType {
 fn wrap_in_link<T: Routable + 'static>(link: Option<T>, children: VNode) -> Html {
     if let Some(link) = link {
         html! {
-            <Link<T> to={link} classes={classes!("card-link", "no-gutter-x")}>
+            <Link<T> to={link} classes={classes!("card-link", "no-gutter-x", "inline-flex")}>
                 {children}
             </Link<T>>
         }

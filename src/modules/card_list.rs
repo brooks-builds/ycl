@@ -1,6 +1,8 @@
 #![allow(non_camel_case_types)]
 
+use crate::foundations::column::BBCol;
 use crate::foundations::container::BBContainerMargin;
+use crate::foundations::row::BBRow;
 use crate::foundations::tags::BBTag;
 use crate::{
     elements::{icon::BBIconType, title::BBTitleLevel},
@@ -54,22 +56,24 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
 
     html! {
         <BBContainer margin={BBContainerMargin::None}>
-            {
-                if props.title.is_some() {
-                    Some(html! {
-                        <BBSectionHeader
-                           icon={props.icon}
-                           title={props.title.clone().unwrap()}
-                           title_level={BBTitleLevel::Two}
-                           action={props.action.clone()}
-                           more={props.more}
-                           {on_action} />
-                    })
-                } else {
-                    None
+            <BBRow>
+                {
+                    if props.title.is_some() {
+                        Some(html! {
+                            <BBSectionHeader
+                               icon={props.icon}
+                               title={props.title.clone().unwrap()}
+                               title_level={BBTitleLevel::Two}
+                               action={props.action.clone()}
+                               more={props.more}
+                               {on_action} />
+                        })
+                    } else {
+                        None
+                    }
                 }
-            }
-            <section class={section_class}>
+            </BBRow>
+            <BBRow classes={section_class}>
                 {
                     props.card_data.clone().into_iter().map(move |card_data| {
                         let onclick = {
@@ -89,25 +93,27 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                         let classes = classes!(card_data.tag.map(tag_class));
 
                         html! {
-                            <BBCard<T>
-                                {title_level}
-                                title={card_data.title}
-                                text={card_data.text}
-                                internal_link={card_data.link}
-                                card_type={card_data.card_type}
-                                {onclick}
-                                debug={props.debug}
-                                debug_name={props.debug_name.clone()}
-                                {classes}
-                                href={card_data.href}
-                                href_text={card_data.href_text}
-                                width={card_data.width}
-                            />
+                            <BBCol classes="children-h-100">
+                                <BBCard<T>
+                                    {title_level}
+                                    title={card_data.title}
+                                    text={card_data.text}
+                                    internal_link={card_data.link}
+                                    card_type={card_data.card_type}
+                                    {onclick}
+                                    debug={props.debug}
+                                    debug_name={props.debug_name.clone()}
+                                    {classes}
+                                    href={card_data.href}
+                                    href_text={card_data.href_text}
+                                    width={card_data.width}
+                                />
+                            </BBCol>
                         }
                     })
                     .collect::<Html>()
                 }
-            </section>
+            </BBRow>
         </BBContainer>
     }
 }
