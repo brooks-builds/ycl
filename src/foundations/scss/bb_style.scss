@@ -113,6 +113,14 @@
   --bs-gutter-x: 0;
 }
 
+h2 {
+  font-size: 1.7rem;
+}
+
+h3 {
+  font-size: 1rem;
+}
+
 
 // Buttons
 
@@ -386,6 +394,10 @@ h6,
   direction: rtl;
 }
 
+.flex-wrap {
+  flex-flow: wrap
+}
+
 // Icons
 
 .icon {
@@ -430,6 +442,12 @@ h6,
 .card-link:hover {
   color: var(--color-dark);
 }
+
+.card {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
 
 // Course Cards
 

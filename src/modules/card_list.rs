@@ -1,5 +1,6 @@
 #![allow(non_camel_case_types)]
 
+use crate::foundations::container::BBContainerMargin;
 use crate::foundations::tags::BBTag;
 use crate::{
     elements::{icon::BBIconType, title::BBTitleLevel},
@@ -35,6 +36,8 @@ where
     pub debug: bool,
     #[prop_or_default]
     pub debug_name: AttrValue,
+    #[prop_or_default]
+    pub wrap: bool,
 }
 
 #[function_component(BBCardList)]
@@ -47,9 +50,10 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
             on_action.emit(());
         })
     };
+    let section_class = classes!("d-flex", if props.wrap { Some("flex-wrap") } else { None });
 
     html! {
-        <BBContainer>
+        <BBContainer margin={BBContainerMargin::None}>
             {
                 if props.title.is_some() {
                     Some(html! {
@@ -65,7 +69,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                     None
                 }
             }
-            <section class="d-flex justify-content-evenly">
+            <section class={section_class}>
                 {
                     props.card_data.clone().into_iter().map(move |card_data| {
                         let onclick = {

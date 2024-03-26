@@ -1,9 +1,12 @@
 #![allow(non_camel_case_types)]
 #![allow(non_upper_case_globals)]
-use crate::elements::{
-    button::{BBButton, BBButtonStyle},
-    text::BBText,
-    title::{BBTitle, BBTitleLevel},
+use crate::{
+    components::horizontal_rule::BBHr,
+    elements::{
+        button::{BBButton, BBButtonStyle},
+        text::BBText,
+        title::{BBTitle, BBTitleLevel},
+    },
 };
 use gloo::console::info;
 use stylist::{css, style, yew::styled_component, Style};
@@ -67,7 +70,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
             wrap_in_link(
                 props.internal_link.clone(),
                 html! {
-                    <div class={classes!("card", "mx-1", "my-1", props.classes.clone(), width_style)}>
+                    <div class={classes!("card", props.classes.clone(), width_style)}>
                         {
                             card_type.render(props)
                         }
@@ -96,8 +99,9 @@ impl BBCardType {
         let href_text = props.href_text.clone();
 
         html! {
-            <div class="card-body mt-5 me-5">
+            <div class="card-body">
                 <BBTitle level={props.title_level} classes={classes!("card-title")}>{props.title.clone()}</BBTitle>
+                <BBHr />
                 {
                     props.text.iter().map(|text| html!{
                         <BBText classes="card-text">{text.clone()}</BBText>
