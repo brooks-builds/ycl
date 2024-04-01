@@ -38,6 +38,7 @@ where
     #[prop_or_else(|| "check it out".into())]
     pub href_text: AttrValue,
     pub width: BBCardDataWidth,
+    pub call_to_action_internal_route: Option<T>,
 }
 
 #[styled_component(BBCard)]
@@ -145,16 +146,26 @@ impl BBCardType {
         };
 
         html! {
-            <div class="card-body text-center">
-                <div class={Style::new(css!("height: 4rem;")).unwrap()}></div>
+            <>
+                <div class="card-body">
+                    <BBTitle level={props.title_level} classes={classes!("card-title")}>{props.title.clone()}</BBTitle>
+                    <BBHr />
+                    {
+                        props.text.iter().map(|text| html!{
+                            <BBText classes="card-text">{text.clone()}</BBText>
+                        }).collect::<Html>()
+                    }
+                </div>
                 <BBButton
                     {onclick}
                     button_style={BBButtonStyle::PrimaryLight}
                     debug={props.debug}
-                    debug_name={props.debug_name.clone()} >
-                    {props.title.clone()}
+                    debug_name={props.debug_name.clone()}
+                    classes="mx-4 mb-2"
+                >
+                    {props.href_text.clone()}
                 </BBButton>
-            </div>
+            </>
         }
     }
 }
