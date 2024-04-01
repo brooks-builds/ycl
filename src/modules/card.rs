@@ -135,6 +135,7 @@ impl BBCardType {
             let debug = props.debug;
             let debug_name = props.debug_name.clone();
             let cb = props.onclick.clone();
+            let route = props.call_to_action_internal_route.clone();
 
             Callback::from(move |_: ()| {
                 if debug {
