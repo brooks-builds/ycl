@@ -1,4 +1,5 @@
 @import "https://assets.codepen.io/97621/bb-bootstrap.min.css";
+// @import "./bb-bootstrap.min.css"
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
 
 // sans-serif
@@ -122,6 +123,10 @@ h2 {
 
 h3 {
   font-size: 1.5rem;
+}
+
+.bb-text-start {
+  text-align: left;
 }
 
 // Buttons
@@ -597,4 +602,12 @@ form>* {
 
 #course-content > iframe {
   width: 100%;
+}
+
+// breakpoints
+
+@media screen and (max-width: 430px) {
+  h1, h2, h3, h4, h5, h6, .bb-text-start {
+    text-align: center;
+  }
 }

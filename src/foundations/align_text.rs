@@ -8,7 +8,7 @@ pub enum AlignText {
 impl AlignText {
     pub fn class(&self) -> &'static str {
         match self {
-            AlignText::Left => "text-start",
+            AlignText::Left => "bb-text-start",
             AlignText::Center => "text-center",
             AlignText::Right => "text-end",
         }
