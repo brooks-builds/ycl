@@ -9,6 +9,8 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;300;600;700&display=swap");
 
 // custom variables
+$mobile-phone-width: 540px;
+
 :root {
   --base-font-size: 1.5rem;
 }
@@ -606,7 +608,7 @@ form>* {
 
 // breakpoints
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: $mobile-phone-width) {
   h1, h2, h3, h4, h5, h6, .bb-text-start {
     text-align: center;
   }

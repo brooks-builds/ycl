@@ -49,6 +49,10 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                 r#"
                     max-width: 18rem;
                     min-width: 18rem;
+                    @media screen and (max-width: 430px) {
+                        max-width: 100%;
+                        width: 100%;
+                    }
                 "#
             )
             .unwrap(),
@@ -58,19 +62,30 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
                 r#"
                     max-width: 24rem;
                     min-width: 24rem;
+                    @media screen and (max-width: 430px) {
+                        max-width: 100%;
+                        width: 100%;
+                    }
                 "#
             )
             .unwrap(),
         ),
     };
     let card_type = props.card_type;
+    let phone_style = style!({
+        @media screen and (max-width: 430px) {
+            max-width: 100%;
+            width: 100%;
+        }
+    })
+    .unwrap();
 
     html! {
         {
             wrap_in_link(
                 props.internal_link.clone(),
                 html! {
-                    <div class={classes!("card", props.classes.clone(), width_style)}>
+                    <div class={classes!("card", props.classes.clone(), width_style, phone_style)}>
                         {
                             card_type.render(props)
                         }
