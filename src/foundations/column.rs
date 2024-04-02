@@ -41,19 +41,19 @@ pub enum BBColWidth {
 impl BBColWidth {
     pub fn class(&self) -> &'static str {
         match self {
-            BBColWidth::One => "col-1",
-            BBColWidth::Two => "col-2",
-            BBColWidth::Three => "col-3",
-            BBColWidth::Four => "col-4",
-            BBColWidth::Five => "col-5",
-            BBColWidth::Six => "col-xm-6",
-            BBColWidth::Seven => "col-7",
-            BBColWidth::Eight => "col-8",
-            BBColWidth::Nine => "col-9",
-            BBColWidth::Ten => "col-10",
-            BBColWidth::Eleven => "col-11",
-            BBColWidth::Twelve => "col-12",
-            BBColWidth::None => "col-sm",
+            BBColWidth::One => "col-lg-1 col-xs",
+            BBColWidth::Two => "col-lg-2 col-xs",
+            BBColWidth::Three => "col-lg-3 col-xs",
+            BBColWidth::Four => "col-lg-4 col-xs",
+            BBColWidth::Five => "col-lg-5 col-xs",
+            BBColWidth::Six => "col- collg-6-xs-xs",
+            BBColWidth::Seven => "col-lg-7 col-xs",
+            BBColWidth::Eight => "col-lg-8 col-xs",
+            BBColWidth::Nine => "col-lg-9 col-xs",
+            BBColWidth::Ten => "col-lg-10 col-xs",
+            BBColWidth::Eleven => "col-lg-11 col-xs",
+            BBColWidth::Twelve => "col-lg-12 col-xs",
+            BBColWidth::None => "col-lg",
         }
     }
 }

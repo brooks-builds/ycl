@@ -9,7 +9,7 @@ use crate::{
     },
 };
 use gloo::console::info;
-use stylist::{css, style, yew::styled_component, Style};
+use stylist::{style, yew::styled_component};
 use yew::{prelude::*, virtual_dom::VNode};
 use yew_router::prelude::*;
 
@@ -135,7 +135,6 @@ impl BBCardType {
             let debug = props.debug;
             let debug_name = props.debug_name.clone();
             let cb = props.onclick.clone();
-            let route = props.call_to_action_internal_route.clone();
 
             Callback::from(move |_: ()| {
                 if debug {
