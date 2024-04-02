@@ -49,6 +49,7 @@ $mobile-phone-width: 540px;
   --color-light-green: #5dbb63;
   --color-teal: #20c997;
   --color-cyan: #0dcaf0;
+  --color-black: #000;
 
   --color-success: --color-green;
   --color-info: --color-blue;
@@ -96,7 +97,7 @@ $mobile-phone-width: 540px;
   --bs-body-font-size: var(--base-font-size);
   --bs-body-font-weight: 400;
   --bs-body-line-height: var(--base-font-size + .5);
-  --bs-body-color: var(--color-gray-8);
+  --bs-body-color: var(--color-gray-7);
   --bs-body-bg: var(--color-light);
 
   --bs-border-width: 1px;
@@ -117,6 +118,14 @@ $mobile-phone-width: 540px;
 
 .no-gutter-x {
   --bs-gutter-x: 0;
+}
+
+h1 {
+  color: var(--color-gray-9);
+}
+
+h2, h3, h4, h5, h6 {
+  color: var(--color-gray-8);
 }
 
 h2 {
@@ -614,13 +623,4 @@ form>* {
   font-family: var(--font-sans-serif-poppins);
   text-align: center;
 }
-
-// breakpoints
-
-@media screen and (max-width: $mobile-phone-width) {
-  h1, h2, h3, h4, h5, h6, .bb-text-start {
-    text-align: center;
-  }
-}
-
 

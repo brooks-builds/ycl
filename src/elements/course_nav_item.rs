@@ -48,6 +48,7 @@ pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
             <li {class} data-id={props.id.clone()}>
                 <BBTooltip title={tooltip}>
                     {&title}
+                    <BBIcon icon_type={BBIconType::Open} size={BBIconSize::Tiny} />
                     {
                         props.children.clone().map(|articles| {
                             html! { <BBCourseNav<R> {articles} classes={classes!("ms-4")} />}

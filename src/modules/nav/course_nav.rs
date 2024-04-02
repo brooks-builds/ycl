@@ -1,4 +1,10 @@
-use crate::{elements::course_nav_item::BBCourseNavItem, foundations::errors::BBError};
+use crate::{
+    elements::{
+        course_nav_item::BBCourseNavItem,
+        title::{BBTitle, BBTitleLevel},
+    },
+    foundations::{align_text::AlignText, errors::BBError},
+};
 use stylist::yew::styled_component;
 use wasm_bindgen::JsCast;
 use web_sys::HtmlElement;
@@ -24,24 +30,31 @@ pub fn component<R: Routable + 'static>(props: &Props<R>) -> Html {
     let onclick = Callback::from(move |event: MouseEvent| {
         let Some(target) = event.target() else { return };
         let html_element = target.unchecked_into::<HtmlElement>();
-        let Some(id )= html_element.get_attribute("data-id") else { return };
+        let Some(id) = html_element.get_attribute("data-id") else {
+            return;
+        };
 
         props_onclick.emit(id.into());
     });
 
     html! {
-        <ul {class} {onclick}>
-            {
-                props
-                    .articles
-                    .clone()
-                    .into_iter()
-                    .map(move |article| {
-                        create_course_nav_item(article)
-                    })
-                    .collect::<Html>()
-            }
-        </ul>
+        <section>
+            <BBTitle level={BBTitleLevel::Three} align={AlignText::Center}>
+                {"Course Articles"}
+            </BBTitle>
+            <ul {class} {onclick}>
+                {
+                    props
+                        .articles
+                        .clone()
+                        .into_iter()
+                        .map(move |article| {
+                            create_course_nav_item(article)
+                        })
+                        .collect::<Html>()
+                }
+            </ul>
+        </section>
     }
 }
 

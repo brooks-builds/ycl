@@ -48,6 +48,7 @@ pub enum BBIconType {
     Discord,
     Warning,
     Clear,
+    Open,
 }
 
 impl BBIconType {
@@ -65,6 +66,7 @@ impl BBIconType {
             BBIconType::Discord => "/images/discord_logo.svg",
             BBIconType::Warning => "/images/warning_icon.svg",
             BBIconType::Clear => "/images/clear.svg",
+            BBIconType::Open => "/images/chevron_right.svg",
         }
     }
 
@@ -82,6 +84,7 @@ impl BBIconType {
             BBIconType::Discord => "Discord logo",
             BBIconType::Warning => "Warning logo",
             BBIconType::Clear => "Clear logo",
+            BBIconType::Open => "",
         }
     }
 
@@ -127,6 +130,7 @@ impl BBIconType {
             ),
             BBIconType::Brand => None,
             BBIconType::Clear => None,
+            BBIconType::Open => None,
         };
 
         classes!(background, size.css())
