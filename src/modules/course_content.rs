@@ -80,7 +80,7 @@ pub fn component(props: &Props) -> Html {
                 }
             </BBRow>
             <BBRow>
-                <div id="course-content"></div>
+                <div id="course-content" class="course-content"></div>
             </BBRow>
         </BBContainer>
     }
