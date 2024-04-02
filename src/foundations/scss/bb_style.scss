@@ -610,6 +610,11 @@ form>* {
   margin-top: 2rem;
 }
 
+.course-content > h1 {
+  font-family: var(--font-sans-serif-poppins);
+  text-align: center;
+}
+
 // breakpoints
 
 @media screen and (max-width: $mobile-phone-width) {
