@@ -40,6 +40,8 @@ where
     pub debug_name: AttrValue,
     #[prop_or_default]
     pub wrap: bool,
+    #[prop_or_default]
+    pub test_id: AttrValue,
 }
 
 #[function_component(BBCardList)]
@@ -55,7 +57,7 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     let section_class = classes!("d-flex", if props.wrap { Some("flex-wrap") } else { None });
 
     html! {
-        <BBContainer margin={BBContainerMargin::None}>
+        <BBContainer margin={BBContainerMargin::None} test_id={props.test_id.clone()}>
             <BBRow>
                 {
                     if props.title.is_some() {

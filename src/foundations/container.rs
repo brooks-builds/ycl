@@ -7,6 +7,8 @@ pub struct Props {
     pub classes: Classes,
     #[prop_or_else(|| BBContainerMargin::Normal)]
     pub margin: BBContainerMargin,
+    #[prop_or_default]
+    pub test_id: AttrValue,
 }
 
 #[function_component(BBContainer)]
@@ -20,7 +22,7 @@ pub fn component(props: &Props) -> Html {
     let class = classes!(container_class, props.classes.clone());
 
     html! {
-        <div {class}>
+        <div {class} data-test-id={props.test_id.clone()}>
             {props.children.clone()}
         </div>
     }
