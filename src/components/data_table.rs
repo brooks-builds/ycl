@@ -32,13 +32,10 @@ pub fn component(props: &Props) -> Html {
     {
         let searched_rows_state = searched_rows_state.clone();
 
-        use_effect_with_deps(
-            move |props_rows| {
-                searched_rows_state.set(props_rows.to_owned());
-                || {}
-            },
-            props.rows.clone(),
-        );
+        use_effect_with(props.rows.clone(), move |props_rows| {
+            searched_rows_state.set(props_rows.to_owned());
+            || {}
+        });
     }
 
     let onsearch = {

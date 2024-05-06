@@ -16,6 +16,7 @@ pub struct Props {
     pub debug: bool,
     #[prop_or_default]
     pub debug_name: AttrValue,
+    #[prop_or_default]
     pub action_icon: Option<BBIconType>,
     #[prop_or_default]
     pub classes: Classes,

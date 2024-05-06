@@ -62,26 +62,23 @@ pub fn component(props: &Props) -> Html {
     html! {
         <BBContainer margin={BBContainerMargin::None}>
             <BBRow>
-                {
-                    if !props.have_access {
-                        let message = if props.logged_in {
-                    "Purchase to access"
-                } else {
-                    "Buy this course"
-                };
-                        Some(html! {
-                            <BBCol>
-                                <BBButton button_style={BBButtonStyle::PrimaryLight} {onclick}>{message}</BBButton>
-                            </BBCol>
-                        })
-                    } else {
-                        None
-                    }
+                if !props.have_access {
+                    <BBCol>
+                        <BBButton button_style={BBButtonStyle::PrimaryLight} {onclick}>{generate_message(props.logged_in)}</BBButton>
+                    </BBCol>
                 }
             </BBRow>
             <BBRow>
                 <div id="course-content" class="course-content"></div>
             </BBRow>
         </BBContainer>
+    }
+}
+
+fn generate_message(logged_in: bool) -> &'static str {
+    if logged_in {
+        "Purchase to access"
+    } else {
+        "Buy this course"
     }
 }

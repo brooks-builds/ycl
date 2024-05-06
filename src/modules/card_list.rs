@@ -22,6 +22,7 @@ where
 {
     pub card_data: Vec<BBCardData<T>>,
     pub card_title_level: BBTitleLevel,
+    #[prop_or_default]
     pub title: Option<AttrValue>,
     #[prop_or_else(|| BBTitleLevel::Two)]
     pub title_level: BBTitleLevel,
@@ -31,6 +32,7 @@ where
     pub on_action: Callback<()>,
     #[prop_or_default]
     pub more: bool,
+    #[prop_or_default]
     pub icon: Option<BBIconType>,
     #[prop_or_default]
     pub onclick: Callback<()>,
@@ -59,21 +61,9 @@ pub fn component<T: Routable + 'static>(props: &Props<T>) -> Html {
     html! {
         <BBContainer margin={BBContainerMargin::None} test_id={props.test_id.clone()}>
             <BBRow>
-                {
-                    if props.title.is_some() {
-                        Some(html! {
-                            <BBSectionHeader
-                               icon={props.icon}
-                               title={props.title.clone().unwrap()}
-                               title_level={BBTitleLevel::Two}
-                               action={props.action.clone()}
-                               more={props.more}
-                               {on_action} />
-                        })
-                    } else {
-                        None
-                    }
-                }
+                if props.title.is_some() {
+                    <BBSectionHeader icon={props.icon} title={props.title.clone().unwrap()} title_level={BBTitleLevel::Two} action={props.action.clone()} more={props.more} {on_action}></BBSectionHeader>
+               }
             </BBRow>
             <BBRow classes={section_class}>
                 {

@@ -4,7 +4,6 @@ use yew::prelude::*;
 
 use crate::{
     elements::{
-        button::BBButton,
         icon::{BBIcon, BBIconSize, BBIconType},
         title::{BBTitle, BBTitleLevel},
     },
@@ -44,14 +43,9 @@ pub fn component(props: &Props) -> Html {
                     </BBTitle>
                 </BBCol>
                 <BBCol classes="align-right">
-                    {
-                        if props.more {
-                            Some(html! {
-                                <BBButton onclick={props.on_action.clone()}>{props.action.clone()}</BBButton>
-                            })
-                        } else {
-                            None
-                        }
+                    if props.more {
+                        // <BBButton onclick={props.on_action.clone()}>{props.action.clone()}</BBButton>
+                        <h1>{"Hello"}</h1>
                     }
                 </BBCol>
             </BBRow>

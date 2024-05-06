@@ -5,6 +5,7 @@ pub struct Props {
     pub children: Children,
     #[prop_or_default]
     pub classes: Classes,
+    #[prop_or_default]
     pub test_id: Option<AttrValue>,
 }
 
