@@ -18,7 +18,9 @@ where
     T: Routable + 'static + Default,
 {
     pub links: Vec<BBNavbarLink<T>>,
+    #[prop_or_default]
     pub show_brand: Option<bool>,
+    #[prop_or_default]
     pub username: Option<AttrValue>,
     #[prop_or_default]
     pub is_authenticated: bool,
@@ -26,6 +28,7 @@ where
     pub logout_url: AttrValue,
     #[prop_or_default]
     pub logout_onclick: Callback<()>,
+    #[prop_or_default]
     pub role: Option<BBRole>,
     #[prop_or_default]
     pub onlogin_click: Callback<()>,

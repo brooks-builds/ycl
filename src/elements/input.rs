@@ -29,10 +29,13 @@ pub struct Props {
     pub validation_debounce: u32,
     #[prop_or_default]
     pub is_valid: BBValidationState,
+    #[prop_or_default]
     pub pattern: Option<AttrValue>,
     #[prop_or_default]
     pub oninput: Callback<AttrValue>,
+    #[prop_or_default]
     pub min: Option<u32>,
+    #[prop_or_default]
     pub max: Option<u32>,
     #[prop_or_default]
     pub inline: bool,

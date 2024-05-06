@@ -15,6 +15,7 @@ where
     pub children: Children,
     #[prop_or_else(|| BBButtonStyle::PrimaryLight)]
     pub button_style: BBButtonStyle,
+    #[prop_or_default]
     pub classes: Option<Classes>,
     #[prop_or_default]
     pub disabled: bool,

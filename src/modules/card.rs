@@ -23,6 +23,7 @@ where
     pub title_level: BBTitleLevel,
     pub title: AttrValue,
     pub text: Vec<AttrValue>,
+    #[prop_or_default]
     pub internal_link: Option<T>,
     #[prop_or_else(|| BBCardType::Simple)]
     pub card_type: BBCardType,
@@ -34,10 +35,12 @@ where
     pub debug_name: AttrValue,
     #[prop_or_default]
     pub classes: Classes,
+    #[prop_or_default]
     pub href: Option<AttrValue>,
     #[prop_or_else(|| "check it out".into())]
     pub href_text: AttrValue,
     pub width: BBCardDataWidth,
+    #[prop_or_default]
     pub call_to_action_internal_route: Option<T>,
 }
 

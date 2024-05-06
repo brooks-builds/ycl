@@ -6,18 +6,18 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-gloo = "0.8.0"
-stylist = { version = "0.11.0", features = ["yew"] }
-yew = { version = "0.20.0", features = ["csr"] }
-yew-router = "0.17.0"
-wasm-bindgen = "0.2.83"
-yew-hooks = "0.2.0"
-web-sys = { version = "0.3.61", features = ["Document", "Element", "HtmlElement", "HtmlInputElement", "HtmlFormElement", "FormData", "HtmlButtonElement", "DomRectList", "DomRect", "DomTokenList"] }
-chrono = { version = "0.4.23", features = ["wasmbind"] }
-thiserror = "1.0.38"
-indoc = "2.0.0"
-serde = { version = "1.0.157", features = ["derive"] }
+gloo = "0.11.0"
+stylist = { version = "0.13.0", features = ["yew"] }
+yew = { version = "0.21.0", features = ["csr"] }
+yew-router = "0.18.0"
+wasm-bindgen = "0.2.92"
+yew-hooks = "0.3.1"
+web-sys = { version = "0.3.69", features = ["Document", "Element", "HtmlElement", "HtmlInputElement", "HtmlFormElement", "FormData", "HtmlButtonElement", "DomRectList", "DomRect", "DomTokenList"] }
+chrono = { version = "0.4.38", features = ["wasmbind"] }
+thiserror = "1.0.59"
+indoc = "2.0.5"
+serde = { version = "1.0.200", features = ["derive"] }
 zxcvbn = "2.2.2"
 
 [dev-dependencies]
-web-sys = "0.3.60"
+web-sys = "0.3.69"

@@ -14,6 +14,7 @@ use yew::prelude::*;
 #[derive(Properties, PartialEq)]
 pub struct Props {
     pub auth_icons: Vec<BBIconsRowList>,
+    #[prop_or_default]
     pub username_password: Option<AttrValue>,
     #[prop_or_else(|| BBTitleLevel::One)]
     pub title_level: BBTitleLevel,

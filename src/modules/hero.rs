@@ -23,6 +23,7 @@ pub struct Props {
     pub main: Children,
     #[prop_or_else(|| BBHeroLeftMedia::None)]
     pub media: BBHeroLeftMedia,
+    #[prop_or_default]
     pub subtitle: Option<AttrValue>,
 }
 

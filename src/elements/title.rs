@@ -16,9 +16,11 @@ pub enum BBTitleLevel {
 pub struct Props {
     pub level: BBTitleLevel,
     pub children: Children,
+    #[prop_or_default]
     pub align: Option<AlignText>,
     #[prop_or_default]
     pub classes: Classes,
+    #[prop_or_default]
     pub id: Option<String>,
 }
 
