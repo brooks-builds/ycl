@@ -48,6 +48,10 @@ pub fn component() -> Html {
             .title("Tables")
             .link(Route::Tables)
             .build(),
+        BBCardDataBuilder::new()
+            .title("Dual Lists")
+            .link(Route::DualList)
+            .build(),
     ];
     html! {
         <BBContainer margin={BBContainerMargin::Normal}>
