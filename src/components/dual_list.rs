@@ -1,6 +1,7 @@
 use yew::prelude::*;
 
 use crate::{
+    components::list::BBList,
     elements::title::{BBTitle, BBTitleLevel, _Props::level},
     foundations::{align_text::AlignText, column::BBCol, container::BBContainer, row::BBRow},
 };
@@ -22,6 +23,14 @@ pub fn BBDualList(props: &Props) -> Html {
                     >
                         {props.title.clone()}
                     </BBTitle>
+                </BBCol>
+            </BBRow>
+            <BBRow>
+                <BBCol>
+                    <BBList/>
+                </BBCol>
+                <BBCol>
+                    <BBList/>
                 </BBCol>
             </BBRow>
         </BBContainer>
